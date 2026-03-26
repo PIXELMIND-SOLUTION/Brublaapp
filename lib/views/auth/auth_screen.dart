@@ -1,3 +1,4 @@
+import 'package:brublaapp/views/navbar/navbar_screen.dart';
 import 'package:flutter/material.dart';
 
 enum AuthStep { requestOtp, verifyOtp, register }
@@ -20,12 +21,12 @@ class _AuthScreenState extends State<AuthScreen> {
       TextEditingController();
 
   String? _selectedCategory;
-  final List<String> _categories = [
-    'Male',
-    'Female',
-    'Kids',
-    'Unisex',
-  ];
+  final List<String> _categories = ['Male', 'Female', 'Kids', 'Unisex'];
+
+  static const Color _tan = Color(0xFFCFB896);
+  static const Color _border = Color(0xFFE0E0E0);
+  static const Color _hintGrey = Color(0xFFAAAAAA);
+  static const Color _errorFill = Color(0xFFFFF0F0);
 
   @override
   void dispose() {
@@ -37,49 +38,24 @@ class _AuthScreenState extends State<AuthScreen> {
     super.dispose();
   }
 
-  // ── shared colours ──────────────────────────────────────────────────────────
-  static const Color _tan = Color(0xFFCFB896);
-  static const Color _border = Color(0xFFE0E0E0);
-  static const Color _hintGrey = Color(0xFFAAAAAA);
-  static const Color _labelGrey = Color(0xFF555555);
-
-  // ── helpers ─────────────────────────────────────────────────────────────────
-
-  Widget _buildPhoneImage() {
-    return Center(
-      child: SizedBox(
-        height: 260,
-        child: Image.asset(
-          'assets/onboardingimage.png',
-          fit: BoxFit.contain,
-        ),
-      ),
-    );
-  }
-
-  InputDecoration _inputDecoration(String hint,
-      {bool isError = false, Widget? suffix}) {
+  InputDecoration _inputDecoration(String hint, {bool isError = false}) {
     return InputDecoration(
       hintText: hint,
       hintStyle: const TextStyle(color: _hintGrey, fontSize: 14),
       contentPadding:
           const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
-        borderSide: BorderSide(
-          color: isError ? const Color(0xFFE57373) : _border,
-        ),
+        borderRadius: BorderRadius.circular(8),
+        borderSide:
+            BorderSide(color: isError ? const Color(0xFFCFB896) : _border),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(
-          color: isError ? const Color(0xFFE57373) : _tan,
-          width: 1.5,
-        ),
+            color: isError ? const Color(0xFFCFB896) : _tan, width: 1.5),
       ),
-      filled: isError,
-      fillColor: isError ? const Color(0xFFFFF3F3) : null,
-      suffixIcon: suffix,
+      filled: true,
+      fillColor: isError ? _errorFill : Colors.white,
     );
   }
 
@@ -94,7 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: Text(
@@ -109,13 +85,27 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
+  Widget _dragHandle() {
+    return Center(
+      child: Container(
+        width: 40,
+        height: 4,
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(2),
+        ),
+      ),
+    );
+  }
+
   // ── Step 1: Request OTP ──────────────────────────────────────────────────────
-  Widget _buildRequestOtp() {
+  Widget _buildRequestOtpSheet() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildPhoneImage(),
-        const SizedBox(height: 28),
+        _dragHandle(),
         const Center(
           child: Text(
             'Happy Shopping',
@@ -126,13 +116,13 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 20),
         TextField(
           controller: _mobileController,
           keyboardType: TextInputType.phone,
           decoration: _inputDecoration('Mobile Number'),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 16),
         _primaryButton('Request OTP', () {
           setState(() => _currentStep = AuthStep.verifyOtp);
         }),
@@ -141,12 +131,12 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   // ── Step 2: Verify OTP ───────────────────────────────────────────────────────
-  Widget _buildVerifyOtp() {
+  Widget _buildVerifyOtpSheet() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildPhoneImage(),
-        const SizedBox(height: 28),
+        _dragHandle(),
         const Center(
           child: Text(
             'Happy Shopping',
@@ -157,44 +147,38 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 24),
-        // Pre-filled mobile (shown with error-style pink bg as in screenshot)
+        const SizedBox(height: 20),
         TextField(
           controller: _mobileController,
           keyboardType: TextInputType.phone,
-          decoration: _inputDecoration(
-            'Mobile Number',
-            isError: true,
+          decoration: _inputDecoration('Mobile Number'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _otpController,
+          keyboardType: TextInputType.number,
+          decoration: _inputDecoration('OTP'),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: const Text(
+              'Resend OTP',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ),
         const SizedBox(height: 12),
-        Stack(
-          alignment: Alignment.centerRight,
-          children: [
-            TextField(
-              controller: _otpController,
-              keyboardType: TextInputType.number,
-              decoration: _inputDecoration('OTP'),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: GestureDetector(
-                onTap: () {
-                  // resend OTP logic
-                },
-                child: const Text(
-                  'Resend OTP',
-                  style: TextStyle(
-                    color: _labelGrey,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
         _primaryButton('Verify', () {
           setState(() => _currentStep = AuthStep.register);
         }),
@@ -203,12 +187,12 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   // ── Step 3: Register ─────────────────────────────────────────────────────────
-  Widget _buildRegister() {
+  Widget _buildRegisterSheet() {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildPhoneImage(),
-        const SizedBox(height: 28),
+        _dragHandle(),
         const Center(
           child: Text(
             'Register',
@@ -219,11 +203,10 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
           ),
         ),
-        const SizedBox(height: 24),
-        // Name – error state as in screenshot
+        const SizedBox(height: 20),
         TextField(
           controller: _nameController,
-          decoration: _inputDecoration('Name', isError: true),
+          decoration: _inputDecoration('Name'),
         ),
         const SizedBox(height: 12),
         TextField(
@@ -238,7 +221,6 @@ class _AuthScreenState extends State<AuthScreen> {
           decoration: _inputDecoration('Email'),
         ),
         const SizedBox(height: 12),
-        // Category dropdown
         DropdownButtonFormField<String>(
           value: _selectedCategory,
           hint: const Text(
@@ -248,12 +230,14 @@ class _AuthScreenState extends State<AuthScreen> {
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            filled: true,
+            fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _border),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: _tan, width: 1.5),
             ),
           ),
@@ -268,36 +252,80 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         const SizedBox(height: 20),
         _primaryButton('Verify', () {
-          // handle registration submit
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => NavbarScreen()));
         }),
       ],
     );
   }
 
-  // ── build ────────────────────────────────────────────────────────────────────
+  Widget _currentSheetContent() {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 250),
+      transitionBuilder: (child, animation) =>
+          FadeTransition(opacity: animation, child: child),
+      child: KeyedSubtree(
+        key: ValueKey(_currentStep),
+        child: switch (_currentStep) {
+          AuthStep.requestOtp => _buildRequestOtpSheet(),
+          AuthStep.verifyOtp => _buildVerifyOtpSheet(),
+          AuthStep.register => _buildRegisterSheet(),
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // ── KEY FIX: Read keyboard height from viewInsets ──────────────────────────
+    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (child, animation) => FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
-            child: KeyedSubtree(
-              key: ValueKey(_currentStep),
-              child: switch (_currentStep) {
-                AuthStep.requestOtp => _buildRequestOtp(),
-                AuthStep.verifyOtp => _buildVerifyOtp(),
-                AuthStep.register => _buildRegister(),
-              },
+      // Keep false so the background image never resizes/jumps
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xFFF5F2EE),
+      body: Stack(
+        children: [
+          // ── Background image – always full screen, never moves ─────────────
+          Positioned.fill(
+            child: Image.asset(
+              'assets/onboardingimage.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.topCenter,
             ),
           ),
-        ),
+
+          // ── Bottom sheet panel – rises with the keyboard ───────────────────
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 150),
+            curve: Curves.easeOut,
+            left: 0,
+            right: 0,
+            // Push the sheet up by exactly the keyboard height
+            bottom: keyboardHeight,
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(24)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x18000000),
+                      blurRadius: 20,
+                      offset: Offset(0, -4),
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+                child: _currentSheetContent(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

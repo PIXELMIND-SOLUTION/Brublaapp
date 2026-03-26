@@ -424,104 +424,11 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _buildPhoneStatusBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            '11:39',
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A1A),
-            ),
-          ),
-          Row(
-            children: const [
-              Icon(Icons.signal_cellular_alt, size: 12, color: Color(0xFF1A1A1A)),
-              SizedBox(width: 3),
-              Icon(Icons.wifi, size: 12, color: Color(0xFF1A1A1A)),
-              SizedBox(width: 3),
-              Icon(Icons.battery_full, size: 12, color: Color(0xFF1A1A1A)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPhoneNavBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      color: Colors.white,
-      child: Row(
-        children: [
-          const Icon(Icons.arrow_back_ios, size: 12, color: Color(0xFF555555)),
-          const Expanded(
-            child: Text(
-              'Virtual try on',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF1A1A1A),
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFE0E0E0)),
-            ),
-            child: const Icon(Icons.person_outline, size: 10, color: Color(0xFF555555)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBadge() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.auto_awesome, size: 12, color: Color(0xFFC8A96E)),
-          SizedBox(width: 4),
-          Text(
-            'AI Powered',
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF555555),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildAnimatedButton() {
     return _PressableButton(
       onTap: () {
 
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthScreen()));
-        // Navigate to next screen
       },
       child: Container(
         width: double.infinity,
@@ -553,25 +460,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     );
   }
 
-  Widget _buildPageIndicators() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(3, (index) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          width: index == 0 ? 22 : 6,
-          height: 6,
-          decoration: BoxDecoration(
-            color: index == 0
-                ? const Color(0xFFC8A96E)
-                : const Color(0xFFDDD5C8),
-            borderRadius: BorderRadius.circular(3),
-          ),
-        );
-      }),
-    );
-  }
 }
 
 // Pressable button with scale feedback
