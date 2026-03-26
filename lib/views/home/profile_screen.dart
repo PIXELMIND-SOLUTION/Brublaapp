@@ -1,3 +1,4 @@
+import 'package:brublaapp/views/myorders/my_orders.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -88,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 28),
 
             // Grid Buttons
-            _buildButtonGrid(),
+            _buildButtonGrid(context),
 
             // const SizedBox(height: 20),
 
@@ -148,9 +149,17 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildButtonGrid() {
+  Widget _buildButtonGrid(BuildContext context) {
     final buttons = [
-      _ButtonData('Orders', null, const Color(0xFFF5F5F5), Colors.black),
+      // _ButtonData('Orders', null, const Color(0xFFF5F5F5), Colors.black),
+
+       _ButtonData('Orders', null, const Color(0xFFF5F5F5), Colors.black,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const MyOrders()),
+          );
+        }),
       _ButtonData('BMI', null, const Color(0xFFE8F0FB), Colors.black),
       _ButtonData('Help', null, const Color(0xFFF5F5F5), Colors.black),
       _ButtonData('Coupons', null, const Color(0xFFF5F5F5), Colors.black),
@@ -202,13 +211,25 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+// class _ButtonData {
+//   final String label;
+//   final IconData? icon;
+//   final Color bgColor;
+//   final Color textColor;
+
+//   _ButtonData(this.label, this.icon, this.bgColor, this.textColor);
+// }
+
+
+
 class _ButtonData {
   final String label;
   final IconData? icon;
   final Color bgColor;
   final Color textColor;
+  final VoidCallback? onTap; // add this
 
-  _ButtonData(this.label, this.icon, this.bgColor, this.textColor);
+  _ButtonData(this.label, this.icon, this.bgColor, this.textColor, {this.onTap});
 }
 
 class _ProfileButton extends StatelessWidget {
@@ -218,7 +239,7 @@ class _ProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+     onTap: data.onTap ?? () {},
       child: Container(
         decoration: BoxDecoration(
           color: data.bgColor,

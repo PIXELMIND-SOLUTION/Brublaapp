@@ -70,6 +70,10 @@ flutter:
     - assets\notificationimage.png
     - assets\shirtimage.png
     - assets\jeansimage.png
+    - assets\orderimage.png
+    - assets\planimage.png
+    - assets\wallet.png
+    - assets\detailscreenimage.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

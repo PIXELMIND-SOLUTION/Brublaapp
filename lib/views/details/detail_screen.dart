@@ -1,3 +1,4 @@
+import 'package:brublaapp/views/details/single_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -102,7 +103,11 @@ class DetailScreen extends StatelessWidget {
               ),
               itemCount: 6,
               itemBuilder: (context, index) {
-                return const ProductCard();
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SingleDetailScreen()));
+                  },
+                  child: const ProductCard());
               },
             ),
           ),

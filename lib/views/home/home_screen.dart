@@ -1,8 +1,11 @@
 // ignore_for_file: unused_field
 
+import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/category/category_screen.dart';
 import 'package:brublaapp/views/details/detail_screen.dart';
+import 'package:brublaapp/views/home/profile_screen.dart';
 import 'package:brublaapp/views/notifications/notification_screen.dart';
+import 'package:brublaapp/views/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -122,12 +125,6 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCategoryTabs(),
               _buildCategorySection(),
               _buildBannerCarousel(),
-
-              // _buildSectionWithGrid(
-              //   title: 'Latest Designs',
-              //   items: _latestDesigns,
-              //   showSelected: true,
-              // ),
               _buildSectionWithGrid(
                 title: 'Latest Designs',
                 items: _latestDesigns,
@@ -157,10 +154,15 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 22,
-            backgroundImage: const AssetImage('assets/profile.png'),
-            backgroundColor: Colors.grey.shade200,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+            },
+            child: CircleAvatar(
+              radius: 22,
+              backgroundImage: const AssetImage('assets/profile.png'),
+              backgroundColor: Colors.grey.shade200,
+            ),
           ),
           const SizedBox(width: 10),
           Column(
@@ -168,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               Text(
                 'Good Morning',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 25, 25, 25),fontWeight: FontWeight.bold),
               ),
               Text(
                 'PMS',
@@ -177,21 +179,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const Spacer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.credit_card, size: 16, color: Colors.grey.shade600),
-                const SizedBox(width: 4),
-                const Text(
-                  '1200',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                ),
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>WalletScreen()));
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.credit_card, size: 16, color: Colors.grey.shade600),
+                  const SizedBox(width: 4),
+                  const Text(
+                    '1200',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(width: 10),
@@ -265,7 +272,11 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(width: 10),
           _searchActionButton(Icons.favorite_border),
           const SizedBox(width: 8),
-          _searchActionButton(Icons.shopping_cart_outlined),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+            },
+            child: _searchActionButton(Icons.shopping_cart_outlined)),
         ],
       ),
     );
@@ -421,32 +432,6 @@ class _HomeScreenState extends State<HomeScreen> {
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) =>
                   Container(color: Colors.grey.shade200),
-            ),
-          ),
-          // Overlay text
-          Positioned(
-            left: 16,
-            top: 16,
-            bottom: 16,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  banner['title'] as String,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                    shadows: [Shadow(color: Colors.black45, blurRadius: 4)],
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  banner['subtitle'] as String,
-                  style: const TextStyle(fontSize: 11, color: Colors.white70),
-                ),
-              ],
             ),
           ),
           // GET IT NOW badge
@@ -696,37 +681,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  // Widget _brublaCard(Map<String, dynamic> item) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(horizontal: 4),
-  //     decoration: BoxDecoration(
-  //       color: item['color'] as Color,
-  //       borderRadius: BorderRadius.circular(12),
-  //     ),
-  //     padding: const EdgeInsets.all(10),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisAlignment: MainAxisAlignment.end,
-  //       children: [
-  //         Text(
-  //           item['title'] as String,
-  //           style: const TextStyle(
-  //             color: Colors.white,
-  //             fontSize: 11,
-  //             fontWeight: FontWeight.w900,
-  //             height: 1.1,
-  //           ),
-  //         ),
-  //         const SizedBox(height: 4),
-  //         Text(
-  //           item['subtitle'] as String,
-  //           style: const TextStyle(color: Colors.white70, fontSize: 8),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _brublaCard(Map<String, dynamic> item) {
     return Container(
