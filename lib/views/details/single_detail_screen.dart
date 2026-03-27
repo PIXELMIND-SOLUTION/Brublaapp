@@ -339,7 +339,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                 border: Border.all(color: Colors.grey.shade200),
               ),
               child: ClipOval(
-                child: Image.asset('assets/homecard.png', fit: BoxFit.cover),
+                child: Image.asset('assets/detailprofile.png', fit: BoxFit.cover),
               ),
             ),
             const SizedBox(width: 10),
