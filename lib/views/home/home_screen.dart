@@ -3,8 +3,8 @@
 import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/category/category_screen.dart';
 import 'package:brublaapp/views/details/detail_screen.dart';
-import 'package:brublaapp/views/home/profile_screen.dart';
 import 'package:brublaapp/views/notifications/notification_screen.dart';
+import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:brublaapp/views/wallet/wallet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';

@@ -62,9 +62,12 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, icon: Icon(Icons.arrow_back_ios)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         centerTitle: true,
         title: const Text(
           'Cart',
@@ -75,120 +78,154 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Cart Items
-              ...List.generate(cartItems.length, (index) {
-                final item = cartItems[index];
-                return _buildCartItem(item, index);
-              }),
-
-              const SizedBox(height: 8),
-
-              // Apply Coupon
-              Container(
+      body: cartItems.isEmpty
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/emptycart.png',
+                    width: 220,
+                    height: 220,
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Your cart is empty!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Looks like you haven\'t added anything yet.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : SingleChildScrollView(
+              child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Cart Items
+                    ...List.generate(cartItems.length, (index) {
+                      final item = cartItems[index];
+                      return _buildCartItem(item, index);
+                    }),
+
+                    const SizedBox(height: 8),
+
+                    // Apply Coupon
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          const Text(
+                            '%',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFFD4A96A),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          const Expanded(
+                            child: Text(
+                              'Apply Coupon',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: const Text(
+                              'Select',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFFD4A96A),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Order Payment Details
                     const Text(
-                      '%',
+                      'Order Payment Details',
                       style: TextStyle(
-                        fontSize: 18,
-                        color: Color(0xFFD4A96A),
                         fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black,
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        'Apply Coupon',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black87,
+                    const SizedBox(height: 12),
+                    _buildPaymentRow('Order Amount', '\$200', Colors.black),
+                    const SizedBox(height: 8),
+                    _buildPaymentRow('Order Saving', '- \$200', Colors.red),
+                    const SizedBox(height: 8),
+                    _buildPaymentRow('Delivery Fee', 'Free', Colors.green),
+                    const SizedBox(height: 8),
+                    _buildPaymentRow('Platform Fee', 'Free', Colors.green),
+                    const Divider(height: 24, thickness: 1),
+                    _buildPaymentRow('Order Total', '\$200', Colors.black,
+                        isBold: true),
+
+                    const SizedBox(height: 24),
+
+                    // Proceed Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text('Redirecting to payment!..'),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFD4A96A),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(13),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: const Text(
+                          'Proceed',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: const Text(
-                        'Select',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Color(0xFFD4A96A),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
-
-              const SizedBox(height: 16),
-
-              // Order Payment Details
-              const Text(
-                'Order Payment Details',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 12),
-              _buildPaymentRow('Order Amount', '\$200', Colors.black),
-              const SizedBox(height: 8),
-              _buildPaymentRow('Order Saving', '- \$200', Colors.red),
-              const SizedBox(height: 8),
-              _buildPaymentRow('Delivery Fee', 'Free', Colors.green),
-              const SizedBox(height: 8),
-              _buildPaymentRow('Platform Fee', 'Free', Colors.green),
-              const Divider(height: 24, thickness: 1),
-              _buildPaymentRow('Order Total', '\$200', Colors.black,
-                  isBold: true),
-
-              const SizedBox(height: 24),
-
-              // Proceed Button
-              SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      backgroundColor: Colors.green,
-                      content: Text('Redirecting to payment!..')));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFD4A96A),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(13),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: const Text(
-                    'Proceed',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 

@@ -301,11 +301,11 @@
 
 
 
+import 'package:brublaapp/views/history/history_screen.dart';
 import 'package:brublaapp/views/home/exclusive_screen.dart';
 import 'package:brublaapp/views/home/home_screen.dart';
-import 'package:brublaapp/views/home/profile_screen.dart';
-import 'package:brublaapp/views/home/search_screen.dart';
 import 'package:brublaapp/views/home/tailer_screen.dart';
+import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 // ─── Provider ────────────────────────────────────────────────────────────────
@@ -332,11 +332,12 @@ class _NavbarScreenState extends State<NavbarScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    HomeScreen(),      // index 0
-    SearchScreen(),    // index 1
-    ExclusiveScreen(), // index 2 (FAB)
-    TailerScreen(),    // index 3
-    ProfileScreen(),   // index 4
+    HomeScreen(),     
+    // SearchScreen(),    
+    HistoryScreen(),
+    ExclusiveScreen(),
+    TailerScreen(),    
+    ProfileScreen(),   
   ];
 
   @override

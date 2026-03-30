@@ -1,3 +1,6 @@
+import 'package:brublaapp/views/cart/cart_screen.dart';
+import 'package:brublaapp/views/guide/size_guide_screen.dart';
+import 'package:brublaapp/views/profile/designer_profile.dart';
 import 'package:flutter/material.dart';
 
 class SingleDetailScreen extends StatefulWidget {
@@ -302,7 +305,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           ],
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>SizeGuideScreen()));
+          },
           child: const Text(
             'Size Guide',
             style: TextStyle(color: Color(0xFFB8860B), fontSize: 13),
@@ -330,16 +335,21 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         const SizedBox(height: 8),
         Row(
           children: [
-            Container(
-              width: 38,
-              height: 38,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFFF5EFE6),
-                border: Border.all(color: Colors.grey.shade200),
-              ),
-              child: ClipOval(
-                child: Image.asset('assets/detailprofile.png', fit: BoxFit.cover),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DesignerProfile()));
+              },
+              child: Container(
+                width: 38,
+                height: 38,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: const Color(0xFFF5EFE6),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: ClipOval(
+                  child: Image.asset('assets/detailprofile.png', fit: BoxFit.cover),
+                ),
               ),
             ),
             const SizedBox(width: 10),
@@ -539,7 +549,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+              },
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
