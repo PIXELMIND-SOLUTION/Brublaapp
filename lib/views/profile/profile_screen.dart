@@ -1,7 +1,9 @@
 import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/auth/auth_screen.dart';
 import 'package:brublaapp/views/contact/contact_us.dart';
+import 'package:brublaapp/views/coupons/coupon_screen.dart';
 import 'package:brublaapp/views/help/help_screen.dart';
+import 'package:brublaapp/views/home/exclusive_screen.dart';
 import 'package:brublaapp/views/myorders/my_orders.dart';
 import 'package:brublaapp/views/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // close dialog
+              Navigator.pop(context); 
             },
             child: const Text(
               'Cancel',
@@ -42,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
               backgroundColor: Colors.redAccent,
             ),
             onPressed: () {
-              Navigator.pop(context); // close dialog
+              Navigator.pop(context); 
 
               // Navigate to Auth Screen
               Navigator.pushAndRemoveUntil(
@@ -250,7 +252,9 @@ class ProfileScreen extends StatelessWidget {
           );
         },
       ),
-      _ButtonData('Coupons', null, const Color(0xFFF5F5F5), Colors.black),
+      _ButtonData('Coupons', null, const Color(0xFFF5F5F5), Colors.black,onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>CouponScreen()));
+      },),
       _ButtonData('Address', null, const Color(0xFFFCEEEE), Colors.black,onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
       },),
@@ -263,6 +267,19 @@ class ProfileScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => WishlistScreen()),
+          );
+        },
+      ),
+
+      _ButtonData(
+        'Subscriptions',
+        null,
+        const Color(0xFFF5F5F5),
+        Colors.black,
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ExclusiveScreen()),
           );
         },
       ),

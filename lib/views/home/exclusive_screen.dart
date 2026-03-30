@@ -10,7 +10,10 @@ class ExclusiveScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        leading: IconButton(onPressed: (){
+          Navigator.of(context).pop();
+        }, icon: Icon(Icons.arrow_back_ios)),
+        // automaticallyImplyLeading: false,
         title: const Text(
           'Plan',
           style: TextStyle(

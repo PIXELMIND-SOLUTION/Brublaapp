@@ -1,9 +1,9 @@
 // ignore_for_file: unused_field
+
 import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/category/category_screen.dart';
-import 'package:brublaapp/views/details/detail_screen.dart';
-import 'package:brublaapp/views/home/search_screen.dart';
+import 'package:brublaapp/views/details/exclusive_details.dart';
 import 'package:brublaapp/views/notifications/notification_screen.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:brublaapp/views/wallet/wallet_screen.dart';
@@ -11,14 +11,14 @@ import 'package:brublaapp/views/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ExclusiveModule extends StatefulWidget {
+  const ExclusiveModule({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ExclusiveModule> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ExclusiveModule> {
   int _currentBannerIndex = 0;
   int _currentBrublaIndex = 0;
   final CarouselSliderController _bannerController = CarouselSliderController();
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -128,13 +128,14 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildCategorySection(),
               _buildBannerCarousel(),
               _buildSectionWithGrid(
-                title: 'Latest Designs',
+                title: 'Recently Viewed',
+                
                 items: _latestDesigns,
                 showSelected: true,
                 onViewAllTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => DetailScreen()),
+                    MaterialPageRoute(builder: (_) => ExclusiveDetails()),
                   );
                 },
               ),
@@ -172,11 +173,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               Text(
                 'Good Morning',
-                style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 25, 25, 25),fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold),
               ),
               Text(
                 'PMS',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
               ),
             ],
           ),
@@ -193,11 +194,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.credit_card, size: 16, color: Colors.grey.shade600),
+                  Icon(Icons.credit_card, size: 16, color: Color(0xFFF49B51)),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
                   ),
                 ],
               ),
@@ -208,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
             },
-            child: _iconButton(Icons.location_on_outlined)),
+            child: _iconButton(Icons.location_on_outlined,)),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
@@ -232,73 +233,65 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey.shade200),
       ),
-      child: Icon(icon, size: 18, color: Colors.black87),
+      child: Icon(icon, size: 18, color: const Color.fromARGB(221, 255, 255, 255)),
     );
   }
 
   Widget _buildSearchBar() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: Row(
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchScreen(),
-                ),
-              );
-            },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
             child: Container(
               height: 44,
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(12),
               ),
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                children: [
-                  Icon(
+              child: TextField(
+                textAlignVertical: TextAlignVertical.center,
+                style: const TextStyle(fontSize: 14),
+                decoration: InputDecoration(
+                  isCollapsed: true, // ⭐ KEY FIX
+                  hintText: 'Search for "Shirts"',
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey.shade500,
+                  ),
+                  prefixIcon: Icon(
                     Icons.search,
                     size: 20,
                     color: Colors.grey.shade500,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Search for "Shirts"',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade500,
-                    ),
+                  prefixIconConstraints: const BoxConstraints(
+                    minWidth: 40,
+                    minHeight: 40,
                   ),
-                ],
+                  border: InputBorder.none,
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: 12, // ⭐ balances text perfectly
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
-          },
-          child: _searchActionButton(Icons.favorite_border)),
-        const SizedBox(width: 8),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartScreen()),
-            );
-          },
-          child: _searchActionButton(Icons.shopping_cart_outlined),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
+            },
+            child: _searchActionButton(Icons.favorite_border)),
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+            },
+            child: _searchActionButton(Icons.shopping_cart_outlined)),
+        ],
+      ),
+    );
+  }
 
   Widget _searchActionButton(IconData icon) {
     return Container(
@@ -334,7 +327,7 @@ class _HomeScreenState extends State<HomeScreen> {
       style: TextStyle(
         fontSize: 14,
         fontWeight: active ? FontWeight.bold : FontWeight.normal,
-        color: active ? Colors.black : Colors.grey,
+        color: active ? Color(0xFFF49B51) : Colors.grey,
         decoration: active ? TextDecoration.none : TextDecoration.none,
       ),
     );
@@ -376,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           width: 64,
           height: 64,
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12), // spacing inside box
           decoration: BoxDecoration(
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(12),
@@ -510,7 +503,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()),
+                  MaterialPageRoute(builder: (context) => ExclusiveDetails()),
                 );
               },
               child: _productCard(
@@ -640,7 +633,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Column(
         children: [
-          _sectionHeader('Recommended'),
+          _sectionHeader('Designers in the spot'),
           const SizedBox(height: 12),
           SizedBox(
             height: 160,
@@ -672,11 +665,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Colors.black,
               ),
               children: [
-                TextSpan(text: 'Explore The '),
+                TextSpan(text: 'Explore The ',style: TextStyle(color: Colors.white)),
                 TextSpan(
                   text: 'Brublaverse',
                   style: TextStyle(
                     decorationThickness: 2,
+                    color: Colors.white
                   ),
                 ),
               ],
@@ -811,7 +805,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
         children: [
-          _sectionHeader('Most Sales'),
+          _sectionHeader('Designers on Discount'),
           const SizedBox(height: 12),
           Row(
             children: _mostSales
@@ -839,13 +833,13 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xFFF49B51)),
         ),
         GestureDetector(
           onTap: onTap, // 👈 dynamic action
           child: const Text(
             'View all >>',
-            style: TextStyle(fontSize: 12, color: Colors.black),
+            style: TextStyle(fontSize: 12, color: Color(0xFFF49B51)),
           ),
         ),
       ],
