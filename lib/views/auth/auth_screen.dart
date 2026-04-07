@@ -21,7 +21,7 @@ class _AuthScreenState extends State<AuthScreen> {
       TextEditingController();
 
   String? _selectedCategory;
-  final List<String> _categories = ['Male', 'Female', 'Kids', 'Unisex'];
+  final List<String> _categories = ['Tailor', 'Designer', 'User', 'Stylist'];
 
   static const Color _tan = Color(0xFFCFB896);
   static const Color _border = Color(0xFFE0E0E0);

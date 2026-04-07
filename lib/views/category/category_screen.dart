@@ -80,7 +80,7 @@ class CategoryScreen extends StatelessWidget {
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFEFE7DC), // light beige
+                          color: const Color(0xFF754D1B), // light beige
                           shape: BoxShape.circle,
                         ),
                         child: Padding(
@@ -89,6 +89,7 @@ class CategoryScreen extends StatelessWidget {
                             'assets/shirtimage.png',
                             fit: BoxFit.contain,
                           ),
+                          
                         ),
                       ),
 

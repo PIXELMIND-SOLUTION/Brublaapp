@@ -158,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
             },
             child: CircleAvatar(
               radius: 22,
@@ -172,7 +175,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               Text(
                 'Good Morning',
-                style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 25, 25, 25),fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color.fromARGB(255, 25, 25, 25),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 'PMS',
@@ -183,7 +190,10 @@ class _HomeScreenState extends State<HomeScreen> {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>WalletScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WalletScreen()),
+              );
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -193,7 +203,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.credit_card, size: 16, color: Colors.grey.shade600),
+                  Icon(
+                    Icons.credit_card,
+                    size: 16,
+                    color: Colors.grey.shade600,
+                  ),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
@@ -206,9 +220,13 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddressScreen()),
+              );
             },
-            child: _iconButton(Icons.location_on_outlined)),
+            child: _iconButton(Icons.location_on_outlined),
+          ),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
@@ -237,68 +255,66 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSearchBar() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: Row(
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchScreen(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                );
+              },
+              child: Container(
+                height: 44,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              );
-            },
-            child: Container(
-              height: 44,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.grey.shade500,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Search for "Shirts"',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade500,
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: [
+                    Icon(Icons.search, size: 20, color: Colors.grey.shade500),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Search for "Shirts"',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey.shade500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
-          },
-          child: _searchActionButton(Icons.favorite_border)),
-        const SizedBox(width: 8),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartScreen()),
-            );
-          },
-          child: _searchActionButton(Icons.shopping_cart_outlined),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WishlistScreen()),
+              );
+            },
+            child: _searchActionButton(Icons.favorite_border),
+          ),
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },
+            child: _searchActionButton(Icons.shopping_cart_outlined),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _searchActionButton(IconData icon) {
     return Container(
@@ -378,7 +394,7 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 64,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Color(0xFF754D1B),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey.shade200),
           ),
@@ -544,6 +560,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(color: Colors.grey.shade200),
             ),
           ),
+
+          Positioned(
+            top: 8,
+            right: 8,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  item['wishlisted'] = !(item['wishlisted'] as bool? ?? false);
+                });
+              },
+              child: Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.85),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  (item['wishlisted'] as bool? ?? false)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  size: 16,
+                  color: (item['wishlisted'] as bool? ?? false)
+                      ? Colors.red
+                      : Colors.grey.shade600,
+                ),
+              ),
+            ),
+          ),
           // Discount badge if present
           if (item['discount'] != null)
             Positioned(
@@ -675,9 +720,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextSpan(text: 'Explore The '),
                 TextSpan(
                   text: 'Brublaverse',
-                  style: TextStyle(
-                    decorationThickness: 2,
-                  ),
+                  style: TextStyle(decorationThickness: 2),
                 ),
               ],
             ),

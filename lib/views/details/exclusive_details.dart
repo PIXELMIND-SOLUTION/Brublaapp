@@ -1,4 +1,4 @@
-import 'package:brublaapp/views/details/single_detail_screen.dart';
+import 'package:brublaapp/views/details/exclusive_single_detail.dart';
 import 'package:flutter/material.dart';
 
 class ExclusiveDetails extends StatelessWidget {
@@ -105,7 +105,7 @@ class ExclusiveDetails extends StatelessWidget {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>SingleDetailScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ExclusiveSingleDetail()));
                   },
                   child: const ProductCard());
               },
