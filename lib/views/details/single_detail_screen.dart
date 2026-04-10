@@ -1,5 +1,6 @@
 import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/guide/size_guide_screen.dart';
+import 'package:brublaapp/views/home/exclusive_screen.dart';
 import 'package:brublaapp/views/profile/designer_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -306,7 +307,10 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         ),
         TextButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>SizeGuideScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SizeGuideScreen()),
+            );
           },
           child: const Text(
             'Size Guide',
@@ -337,7 +341,10 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>DesignerProfile()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DesignerProfile()),
+                );
               },
               child: Container(
                 width: 38,
@@ -348,7 +355,10 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
                   border: Border.all(color: Colors.grey.shade200),
                 ),
                 child: ClipOval(
-                  child: Image.asset('assets/detailprofile.png', fit: BoxFit.cover),
+                  child: Image.asset(
+                    'assets/detailprofile.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -380,49 +390,57 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   //  Free Delivery Banner
   // ─────────────────────────────────────────────
   Widget _buildDeliveryBanner() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFFFF3CD), Color(0xFFFFE082)],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ExclusiveScreen()),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFF3CD), Color(0xFFFFE082)],
+          ),
+          borderRadius: BorderRadius.circular(10),
         ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Subscribe Now To Get A Free Delivery',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF5D4037),
+        child: Row(
+          children: [
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Subscribe Now To Get A Free Delivery',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF5D4037),
+                    ),
                   ),
-                ),
-                Text(
-                  'For Next Five Orders',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF795548)),
-                ),
-              ],
+                  Text(
+                    'For Next Five Orders',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF795548)),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(6),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                size: 13,
+                color: Color(0xFF5D4037),
+              ),
             ),
-            child: const Icon(
-              Icons.arrow_forward_ios,
-              size: 13,
-              color: Color(0xFF5D4037),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -550,7 +568,10 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartScreen()),
+                );
               },
               child: Container(
                 height: 48,

@@ -1,5 +1,8 @@
+import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/cart/exclusive_cart_screen.dart';
 import 'package:brublaapp/views/guide/exclusive_guide_screen.dart';
+import 'package:brublaapp/views/home/exclusive_screen.dart';
+import 'package:brublaapp/views/home/tailer_screen.dart';
 import 'package:brublaapp/views/profile/exclusive_designer_profile.dart';
 import 'package:flutter/material.dart';
 
@@ -394,53 +397,58 @@ class _SingleDetailScreenState extends State<ExclusiveSingleDetail> {
   //  Free Delivery Banner
   // ─────────────────────────────────────────────
   Widget _buildDeliveryBanner() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          // colors: [Color(0xFFFFF3CD), Color(0xFFFFE082)],
-          colors: [
-            Color.fromARGB(255, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 254),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>ExclusiveScreen()));
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            // colors: [Color(0xFFFFF3CD), Color(0xFFFFE082)],
+            colors: [
+              Color.fromARGB(255, 255, 255, 255),
+              Color.fromARGB(255, 255, 255, 254),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Subscribe Now To Get A Free Delivery',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF5D4037),
+                    ),
+                  ),
+                  Text(
+                    'For Next Five Orders',
+                    style: TextStyle(fontSize: 11, color: Color(0xFF795548)),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Icon(
+                Icons.arrow_forward_ios,
+                size: 13,
+                color: Color(0xFF5D4037),
+              ),
+            ),
           ],
         ),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Subscribe Now To Get A Free Delivery',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF5D4037),
-                  ),
-                ),
-                Text(
-                  'For Next Five Orders',
-                  style: TextStyle(fontSize: 11, color: Color(0xFF795548)),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.5),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const Icon(
-              Icons.arrow_forward_ios,
-              size: 13,
-              color: Color(0xFF5D4037),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -510,93 +518,91 @@ class _SingleDetailScreenState extends State<ExclusiveSingleDetail> {
   //   );
   // }
 
-
-
-
   Widget _buildDeliveryDetails() {
-  return Container(
-    padding: const EdgeInsets.all(12),
-    margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(12),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.05),
-          blurRadius: 6,
-          offset: const Offset(0, 2),
-        ),
-      ],
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Delivery Details',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
+    return Container(
+      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
           ),
-        ),
-        const SizedBox(height: 8),
-
-        /// Address Row
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Icon(
-              Icons.location_on_outlined,
-              size: 16,
-              color: Color(0xFFB8860B),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Delivery Details',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
-            const SizedBox(width: 6),
-            Expanded(
-              child: Text(
-                'Hyderabad, Telangana, Kukatpally, KPHB Colony, 500072.\nDelivery on 25th August',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey.shade700,
-                  height: 1.4,
+          ),
+          const SizedBox(height: 8),
+
+          /// Address Row
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(
+                Icons.location_on_outlined,
+                size: 16,
+                color: Color(0xFFB8860B),
+              ),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  'Hyderabad, Telangana, Kukatpally, KPHB Colony, 500072.\nDelivery on 25th August',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade700,
+                    height: 1.4,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
 
-        const SizedBox(height: 10),
+          const SizedBox(height: 10),
 
-        /// Bottom Row
-        Row(
-          children: [
-            const Icon(
-              Icons.add,
-              size: 16,
-              color: Colors.red,
-            ),
-            const SizedBox(width: 4),
-            const Text(
-              'ADD NEW ADDRESS',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Colors.red,
+          /// Bottom Row
+          Row(
+            children: [
+              const Icon(Icons.add, size: 16, color: Colors.red),
+              const SizedBox(width: 4),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddressScreen()),
+                  );
+                },
+                child: const Text(
+                  'ADD NEW ADDRESS',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.red,
+                  ),
+                ),
               ),
-            ),
-            const Spacer(),
-            Text(
-              'View All >>',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade600,
+              const Spacer(),
+              Text(
+                'View All >>',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
               ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildDescriptionTabs() {
     return Row(
@@ -610,10 +616,51 @@ class _SingleDetailScreenState extends State<ExclusiveSingleDetail> {
     );
   }
 
+  // Widget _tabItem(String label, int index) {
+  //   final isActive = _selectedTab == index;
+  //   return GestureDetector(
+  //     onTap: () => setState(() => _selectedTab = index),
+  //     child: Column(
+  //       children: [
+  //         Text(
+  //           label,
+  //           style: TextStyle(
+  //             fontSize: 13,
+  //             fontWeight: isActive ? FontWeight.bold : FontWeight.w400,
+  //             color: isActive
+  //                 ? const Color.fromARGB(221, 255, 255, 255)
+  //                 : Colors.grey.shade500,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 4),
+  //         if (isActive)
+  //           Container(
+  //             height: 2,
+  //             width: label.length * 7.5,
+  //             decoration: BoxDecoration(
+  //               color: Colors.black87,
+  //               borderRadius: BorderRadius.circular(1),
+  //             ),
+  //           ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
   Widget _tabItem(String label, int index) {
     final isActive = _selectedTab == index;
+
     return GestureDetector(
-      onTap: () => setState(() => _selectedTab = index),
+      onTap: () {
+        if (index == 2) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const TailerScreen()),
+          );
+        } else {
+          setState(() => _selectedTab = index);
+        }
+      },
       child: Column(
         children: [
           Text(
