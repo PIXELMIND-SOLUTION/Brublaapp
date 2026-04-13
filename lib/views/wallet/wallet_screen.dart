@@ -6,9 +6,9 @@ class WalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         leading: Container(
           margin: const EdgeInsets.all(8),
@@ -18,13 +18,13 @@ class WalletScreen extends StatelessWidget {
           ),
           child: IconButton(onPressed: (){
             Navigator.of(context).pop();
-          }, icon: Icon(Icons.chevron_left)),
+          }, icon: Icon(Icons.chevron_left,color: Colors.white,)),
           // child: const Icon(Icons.chevron_left, color: Colors.black),
         ),
         title: const Text(
           'Wallet',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
