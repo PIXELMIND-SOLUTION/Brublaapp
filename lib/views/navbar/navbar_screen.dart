@@ -30,9 +30,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),     
-    // SearchScreen(),    
     HistoryScreen(),
-    // ExclusiveScreen(),
     ExclusiveModule(),
     TailerScreen(),    
     ProfileScreen(),   

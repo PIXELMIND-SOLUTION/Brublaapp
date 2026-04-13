@@ -91,7 +91,7 @@ class _AddressScreenState extends State<AddressScreen>
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: _bg,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         body: FadeTransition(
           opacity: _fadeAnimation,
           child: CustomScrollView(
@@ -172,7 +172,7 @@ class _AddressScreenState extends State<AddressScreen>
         padding: const EdgeInsets.only(left: 8),
         child: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          color: _ink,
+          color: const Color.fromARGB(255, 255, 252, 250),
           onPressed: () => Navigator.of(context).maybePop(),
         ),
       ),
@@ -182,13 +182,13 @@ class _AddressScreenState extends State<AddressScreen>
           'Delivery Address',
           style: TextStyle(
             fontFamily: 'Georgia',
-            color: _ink,
+            color: const Color.fromARGB(255, 255, 253, 251),
             fontSize: 22,
             fontWeight: FontWeight.bold,
             letterSpacing: -0.5,
           ),
         ),
-        background: Container(color: _bg),
+        background: Container(color: const Color.fromARGB(255, 0, 0, 0)),
       ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),

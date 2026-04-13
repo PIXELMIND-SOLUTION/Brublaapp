@@ -58,21 +58,25 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF7F4),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
+      // backgroundColor: const Color(0xFFFAF7F4),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
+                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
         ),
         centerTitle: true,
         title: const Text(
           'Cart',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -437,7 +441,9 @@ class _CartScreenState extends State<CartScreen> {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.black87,
+            // color: Colors.black87,
+                        color: const Color.fromARGB(221, 255, 255, 255),
+
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),
         ),

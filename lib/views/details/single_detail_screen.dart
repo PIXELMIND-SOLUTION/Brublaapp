@@ -26,7 +26,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -222,7 +224,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.black87,
+            color: Color.fromARGB(221, 255, 255, 255),
           ),
         ),
         Column(
@@ -233,7 +235,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
               style: TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Color.fromARGB(221, 255, 255, 255),
               ),
             ),
             Text(

@@ -116,7 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -177,13 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Good Morning',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Color.fromARGB(255, 25, 25, 25),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 'PMS',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
               ),
             ],
           ),
@@ -206,12 +208,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icon(
                     Icons.credit_card,
                     size: 16,
-                    color: Colors.grey.shade600,
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
                   ),
                 ],
               ),
@@ -225,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (context) => AddressScreen()),
               );
             },
-            child: _iconButton(Icons.location_on_outlined),
+            child: _iconButton(Icons.location_on_outlined,),
           ),
           const SizedBox(width: 8),
           GestureDetector(
@@ -250,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey.shade200),
       ),
-      child: Icon(icon, size: 18, color: Colors.black87),
+      child: Icon(icon, size: 18, color: const Color.fromARGB(221, 255, 255, 255)),
     );
   }
 
@@ -882,13 +884,15 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
         ),
         GestureDetector(
           onTap: onTap, // 👈 dynamic action
           child: const Text(
             'View all >>',
-            style: TextStyle(fontSize: 12, color: Colors.black),
+            // style: TextStyle(fontSize: 12, color: Colors.black),
+                        style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
+
           ),
         ),
       ],

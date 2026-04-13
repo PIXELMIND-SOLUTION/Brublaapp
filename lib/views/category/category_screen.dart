@@ -6,20 +6,24 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      // backgroundColor: Colors.grey.shade100,
+            backgroundColor: Colors.black,
+
 
       // ─── APP BAR ─────────────────────────────
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade100,
+        // backgroundColor: Colors.grey.shade100,
+                backgroundColor: Colors.black,
+
         elevation: 0,
         leading:  IconButton(onPressed: (){
           Navigator.of(context).pop();
-        }, icon: Icon(Icons.arrow_back_ios)),
+        }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
         centerTitle: true,
         title: const Text(
           'Categories',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -100,6 +104,7 @@ class CategoryScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
+                          color: Colors.white
                         ),
                       ),
                     ],

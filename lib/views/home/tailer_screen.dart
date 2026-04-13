@@ -52,9 +52,9 @@ class _TailerScreenState extends State<TailerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8F5),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFAF8F5),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -62,7 +62,7 @@ class _TailerScreenState extends State<TailerScreen> {
         title: const Text(
           'Tailor',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),

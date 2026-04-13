@@ -197,7 +197,8 @@ class _SplashScreenState extends State<SplashScreen>
       ]),
       builder: (context, _) {
         return Scaffold(
-          backgroundColor: _bgColorAnim.value ?? const Color(0xFFF0EBE3),
+          // backgroundColor: _bgColorAnim.value ?? const Color(0xFFF0EBE3),
+            backgroundColor: Colors.black,
           body: Stack(
             children: [
               // Soft radial glow background

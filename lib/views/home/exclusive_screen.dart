@@ -6,18 +6,18 @@ class ExclusiveScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         leading: IconButton(onPressed: (){
           Navigator.of(context).pop();
-        }, icon: Icon(Icons.arrow_back_ios)),
+        }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
         // automaticallyImplyLeading: false,
         title: const Text(
           'Plan',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -46,7 +46,7 @@ class ExclusiveScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
 
@@ -56,7 +56,7 @@ class ExclusiveScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
 
@@ -67,7 +67,7 @@ class ExclusiveScreen extends StatelessWidget {
               'Membership Till 10 November 2024',
               style: TextStyle(
                 fontSize: 15,
-                color: Colors.black87,
+                color: Color.fromARGB(221, 250, 250, 250),
                 fontWeight: FontWeight.bold
               ),
             ),

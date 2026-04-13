@@ -150,7 +150,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -223,7 +225,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF1A1A1A),
+                          color: Color.fromARGB(255, 248, 248, 248),
                           letterSpacing: -0.5,
                           height: 1.2,
                         ),
@@ -250,7 +252,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         style: TextStyle(
                           fontSize: 14.5,
                           fontWeight: FontWeight.w400,
-                          color: Color(0xFF8A8A8A),
+                          color: Color.fromARGB(255, 255, 255, 255),
                           height: 1.6,
                           letterSpacing: 0.1,
                         ),

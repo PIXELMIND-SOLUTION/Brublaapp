@@ -285,7 +285,9 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       // Keep false so the background image never resizes/jumps
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFF5F2EE),
+      // backgroundColor: const Color(0xFFF5F2EE),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       body: Stack(
         children: [
           // ── Background image – always full screen, never moves ─────────────

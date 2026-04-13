@@ -64,19 +64,23 @@ class _TailerScreenState extends State<StylistScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF8F5),
+      // backgroundColor: const Color(0xFFFAF8F5),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFAF8F5),
+        // backgroundColor: const Color(0xFFFAF8F5),
+                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
         elevation: 0,
         centerTitle: true,
         leading: IconButton(onPressed: (){
           Navigator.of(context).pop();
-        }, icon: Icon(Icons.arrow_back_ios)),
+        }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
         // automaticallyImplyLeading: false,
         title: const Text(
           'Stylist',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),

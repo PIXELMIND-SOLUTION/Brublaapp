@@ -123,7 +123,9 @@ class _WishlistScreenState extends State<WishlistScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _bg,
+      // backgroundColor: _bg,
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -148,21 +150,21 @@ class _WishlistScreenState extends State<WishlistScreen>
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: _ink),
+        icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color.fromARGB(255, 255, 255, 255)),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.share_outlined, size: 20, color: _ink),
+          icon: const Icon(Icons.share_outlined, size: 20, color: Color.fromARGB(255, 255, 255, 255)),
           onPressed: () {},
         ),
         const SizedBox(width: 4),
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
-          color: _bg,
+          color: const Color.fromARGB(255, 0, 0, 0),
           padding: const EdgeInsets.fromLTRB(20, 80, 20, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +182,7 @@ class _WishlistScreenState extends State<WishlistScreen>
                     style: TextStyle(
                       fontSize: 11,
                       letterSpacing: 4,
-                      color: _accent,
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -192,7 +194,7 @@ class _WishlistScreenState extends State<WishlistScreen>
                 style: TextStyle(
                   fontSize: 34,
                   fontFamily: 'Georgia',
-                  color: _ink,
+                  color: Color.fromARGB(255, 255, 255, 255),
                   fontWeight: FontWeight.w400,
                   height: 1.1,
                 ),

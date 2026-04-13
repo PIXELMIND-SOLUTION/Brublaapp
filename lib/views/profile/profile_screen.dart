@@ -61,15 +61,15 @@ class ProfileScreen extends StatelessWidget {
   );
 }
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         automaticallyImplyLeading: false,
         title: const Text(
           'Profile',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 236, 236, 236),
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),
@@ -123,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                       ),
                       SizedBox(height: 4),
@@ -317,7 +317,9 @@ class ProfileScreen extends StatelessWidget {
         label,
         style: TextStyle(
           fontSize: 14,
-          color: labelColor,
+          // color: labelColor,
+                    color: Colors.white,
+
           fontWeight: FontWeight.w500,
         ),
       ),

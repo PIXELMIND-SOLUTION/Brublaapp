@@ -300,10 +300,14 @@ class _HistoryScreenState extends State<HistoryScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F6),
+      // backgroundColor: const Color(0xFFF8F8F6),
+            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
+                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+
         elevation: 0,
         centerTitle: false,
         title: const Column(
@@ -315,7 +319,7 @@ class _HistoryScreenState extends State<HistoryScreen>
                 fontFamily: 'Georgia',
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
             ),
             Text(

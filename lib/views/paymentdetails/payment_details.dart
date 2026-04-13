@@ -6,20 +6,20 @@ class PaymentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
         ),
         title: const Text(
           'Payment Details',
           style: TextStyle(
-            color: Colors.black,
+            color: Color.fromARGB(255, 255, 255, 255),
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -49,13 +49,13 @@ class PaymentDetails extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                     const SizedBox(height: 4),
                     const Text(
                       '9666317749',
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                      style: TextStyle(fontSize: 14, color: Color.fromARGB(221, 255, 255, 255)),
                     ),
                   ],
                 ),
@@ -220,18 +220,18 @@ class PaymentDetails extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
-              color: Colors.black87,
+              color: const Color.fromARGB(221, 255, 255, 255),
             ),
           ),
         ),
-        const Text(': ', style: TextStyle(fontSize: 14, color: Colors.black87)),
+        const Text(': ', style: TextStyle(fontSize: 14, color: Color.fromARGB(221, 255, 255, 255))),
         Expanded(
           child: Text(
             value,
             style: TextStyle(
               fontSize: 14,
               fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
-              color: Colors.black87,
+              color: const Color.fromARGB(221, 255, 255, 255),
             ),
           ),
         ),
@@ -253,7 +253,7 @@ class PaymentDetails extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: Colors.black87,
+            color: const Color.fromARGB(221, 255, 255, 255),
             fontWeight: labelBold ? FontWeight.bold : FontWeight.normal,
           ),
         ),
