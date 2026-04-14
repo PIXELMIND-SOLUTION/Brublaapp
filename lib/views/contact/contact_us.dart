@@ -163,7 +163,7 @@ class _ContactUsState extends State<ContactUs> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8FC),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: CustomScrollView(
@@ -200,7 +200,7 @@ class _ContactUsState extends State<ContactUs> with TickerProviderStateMixin {
     return SliverAppBar(
       expandedHeight: 180,
       pinned: true,
-      backgroundColor: const Color(0xFF1A1A2E),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back_ios_new_rounded,
@@ -215,7 +215,7 @@ class _ContactUsState extends State<ContactUs> with TickerProviderStateMixin {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [Color(0xFF1A1A2E), Color(0xFF16213E)],
+              colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 0, 0, 0)],
             ),
           ),
           child: Stack(
@@ -354,7 +354,7 @@ class _ContactUsState extends State<ContactUs> with TickerProviderStateMixin {
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w700,
-        color: Color(0xFF1A1A2E),
+        color: Color.fromARGB(255, 255, 255, 255),
         letterSpacing: -0.3,
       ),
     );

@@ -1,5 +1,8 @@
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
 import 'package:brublaapp/views/navbar/navbar_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum AuthStep { requestOtp, verifyOtp, register }
 
@@ -37,6 +40,63 @@ class _AuthScreenState extends State<AuthScreen> {
     _registerMobileController.dispose();
     super.dispose();
   }
+
+
+
+
+//   Future<void> _launchCategoryApp(String? category) async {
+//   if (category == 'Tailor') {
+//     final uri = Uri.parse('brubla-tailor://');
+
+//     if (await canLaunchUrl(uri)) {
+//       await launchUrl(uri);
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text('Tailor app is not installed')),
+//       );
+//     }
+//   } else {
+//     // For other categories, go to NavbarScreen as before
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (_) => NavbarScreen()),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+Future<void> _launchCategoryApp(String? category) async {
+  if (category == 'Tailor') {
+    try {
+      final intent = AndroidIntent(
+        action: 'android.intent.action.MAIN',
+        package: 'com.example.brubla_tailor',  // exact package name
+        componentName: 'com.example.brubla_tailor.MainActivity',
+        flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+      );
+      await intent.launch();
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not open Tailor app: $e')),
+      );
+    }
+  } else {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => NavbarScreen()),
+    );
+  }
+}
 
   InputDecoration _inputDecoration(String hint, {bool isError = false}) {
     return InputDecoration(
@@ -251,12 +311,17 @@ class _AuthScreenState extends State<AuthScreen> {
           onChanged: (val) => setState(() => _selectedCategory = val),
         ),
         const SizedBox(height: 20),
+
+
         _primaryButton('Verify', () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => NavbarScreen()));
-        }),
+  _launchCategoryApp(_selectedCategory);
+}),
+        // _primaryButton('Verify', () {
+        //   Navigator.push(
+        //       context,
+        //       MaterialPageRoute(
+        //           builder: (context) => NavbarScreen()));
+        // }),
       ],
     );
   }
