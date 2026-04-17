@@ -300,13 +300,13 @@ class _HistoryScreenState extends State<HistoryScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xFFF8F8F6),
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color(0xFFF8F8F6),
+            // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // backgroundColor: Colors.white,
-                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Colors.white,
+                // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
         elevation: 0,
         centerTitle: false,
@@ -319,14 +319,14 @@ class _HistoryScreenState extends State<HistoryScreen>
                 fontFamily: 'Georgia',
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
             Text(
               'Brubla Store',
               style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFFF97316),
+                color: Color.fromARGB(255, 0, 0, 0),
                 fontWeight: FontWeight.w500,
                 letterSpacing: 0.5,
               ),
@@ -347,7 +347,7 @@ class _HistoryScreenState extends State<HistoryScreen>
           preferredSize: const Size.fromHeight(50),
           child: TabBar(
             controller: _tabController,
-            labelColor: const Color(0xFFF97316),
+            labelColor: const Color.fromARGB(255, 0, 0, 0),
             unselectedLabelColor: const Color(0xFF6B7280),
             indicatorColor: const Color(0xFFF97316),
             indicatorWeight: 3,
@@ -654,7 +654,7 @@ class _OrderCard extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFFF97316), Color(0xFFEA580C)],
+                        colors: [Color.fromARGB(255, 0, 0, 0), Color.fromARGB(255, 0, 0, 0)],
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [

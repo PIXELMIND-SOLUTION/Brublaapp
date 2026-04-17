@@ -212,7 +212,7 @@ class BrublaBottomNavBar extends StatelessWidget {
                       width: fabSize,
                       height: fabSize,
                       decoration: BoxDecoration(
-                        color: activeColor,
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -265,7 +265,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? const Color(0xFFCCA882) : const Color(0xFF9E9E9E);
+    final color = isActive ? const Color.fromARGB(255, 0, 0, 0) : const Color(0xFF9E9E9E);
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,

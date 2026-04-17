@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   final List<Map<String, dynamic>> _categories = [
-    {'image': 'assets/shirtimage.png', 'label': 'Shirts'},
-    {'image': 'assets/jeansimage.png', 'label': 'Jeans for men'},
+    {'image': 'assets/whiteshirt.png', 'label': 'Shirts'},
+    {'image': 'assets/whitepant.png', 'label': 'Jeans for men'},
   ];
 
   final List<Map<String, dynamic>> _banners = [
@@ -116,8 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Colors.white,
+      // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -179,13 +179,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Good Morning',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 'PMS',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 0, 0, 0)),
               ),
             ],
           ),
@@ -208,12 +208,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icon(
                     Icons.credit_card,
                     size: 16,
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Color.fromARGB(255, 0, 0, 0)),
                   ),
                 ],
               ),
@@ -250,9 +250,9 @@ class _HomeScreenState extends State<HomeScreen> {
       height: 36,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: const Color.fromARGB(255, 0, 0, 0)),
       ),
-      child: Icon(icon, size: 18, color: const Color.fromARGB(221, 255, 255, 255)),
+      child: Icon(icon, size: 18, color: const Color.fromARGB(221, 0, 0, 0)),
     );
   }
 
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
       style: TextStyle(
         fontSize: 14,
         fontWeight: active ? FontWeight.bold : FontWeight.normal,
-        color: active ? Colors.black : Colors.grey,
+        color: active ? const Color.fromARGB(255, 0, 0, 0) : Colors.grey,
         decoration: active ? TextDecoration.none : TextDecoration.none,
       ),
     );
@@ -396,11 +396,11 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 64,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Color(0xFF754D1B),
+            color: Color.fromARGB(255, 0, 0, 0),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey.shade200),
           ),
-          child: Image.asset(cat['image'], fit: BoxFit.contain),
+          child: Image.asset(cat['image'], fit: BoxFit.contain,color: Colors.white,),
         ),
         const SizedBox(height: 6),
         Text(
@@ -488,7 +488,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'GET IT\nNOW',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 9,
                     fontWeight: FontWeight.bold,
                   ),
@@ -547,7 +547,7 @@ class _HomeScreenState extends State<HomeScreen> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: showBorder
-            ? Border.all(color: Colors.orange, width: 2)
+            ? Border.all(color: const Color.fromARGB(255, 0, 0, 0), width: 2)
             : Border.all(color: Colors.grey.shade200),
       ),
       clipBehavior: Clip.hardEdge,
@@ -605,7 +605,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text(
                   item['discount'] as String,
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
@@ -798,17 +798,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text(
-                        'GRAND\nOPENING\nFASHION STORE',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(color: Colors.black54, blurRadius: 4),
-                          ],
-                        ),
-                      ),
+                      // Text(
+                      //   'GRAND\nOPENING\nFASHION STORE',
+                      //   style: TextStyle(
+                      //     fontSize: 14,
+                      //     fontWeight: FontWeight.w900,
+                      //     color: Colors.white,
+                      //     shadows: [
+                      //       Shadow(color: Colors.black54, blurRadius: 4),
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(height: 4),
                       Text(
                         'DISCOVER THE LATEST MEN\'S FASHION TRENDS',
@@ -884,14 +884,14 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 0, 0, 0)),
         ),
         GestureDetector(
           onTap: onTap, // 👈 dynamic action
           child: const Text(
             'View all >>',
             // style: TextStyle(fontSize: 12, color: Colors.black),
-                        style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
+                        style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 0, 0, 0)),
 
           ),
         ),

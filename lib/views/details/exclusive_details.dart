@@ -20,7 +20,7 @@ class ExclusiveDetails extends StatelessWidget {
         title: const Text(
           'Latest Designs',
           style: TextStyle(
-            color: Color(0xFFFCB47E),
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 19,
             fontWeight: FontWeight.bold,
           ),

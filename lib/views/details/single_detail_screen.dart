@@ -26,8 +26,8 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Colors.white,
+            // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
       body: SafeArea(
         child: SingleChildScrollView(
@@ -578,7 +578,7 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2C2C2C),
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -601,14 +601,15 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFB8860B),
+                  border: Border.all(),
+                  color: const Color.fromARGB(255, 255, 255, 255),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
                   child: Text(
                     'Buy',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),

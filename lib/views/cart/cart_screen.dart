@@ -58,25 +58,25 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+            // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
-      // backgroundColor: const Color(0xFFFAF7F4),
+      backgroundColor: const Color(0xFFFAF7F4),
       appBar: AppBar(
-        // backgroundColor: Colors.white,
-                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Colors.white,
+                // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
+          icon: const Icon(Icons.arrow_back_ios,color: Color.fromARGB(255, 0, 0, 0),),
         ),
         centerTitle: true,
         title: const Text(
           'Cart',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -132,7 +132,7 @@ class _CartScreenState extends State<CartScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 14),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color.fromARGB(255, 0, 0, 0),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
@@ -141,7 +141,7 @@ class _CartScreenState extends State<CartScreen> {
                             '%',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(0xFFD4A96A),
+                              color: Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -151,7 +151,7 @@ class _CartScreenState extends State<CartScreen> {
                               'Apply Coupon',
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.black87,
+                                color: Color.fromARGB(221, 255, 255, 255),
                               ),
                             ),
                           ),
@@ -161,7 +161,7 @@ class _CartScreenState extends State<CartScreen> {
                               'Select',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: Color(0xFFD4A96A),
+                                color: Color.fromARGB(255, 255, 255, 255),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -209,7 +209,7 @@ class _CartScreenState extends State<CartScreen> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFD4A96A),
+                          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(13),
                           ),
@@ -385,7 +385,7 @@ class _CartScreenState extends State<CartScreen> {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFD4A96A),
+                      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
@@ -442,7 +442,7 @@ class _CartScreenState extends State<CartScreen> {
           style: TextStyle(
             fontSize: 14,
             // color: Colors.black87,
-                        color: const Color.fromARGB(221, 255, 255, 255),
+                        color: const Color.fromARGB(221, 0, 0, 0),
 
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),

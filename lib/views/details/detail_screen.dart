@@ -7,12 +7,12 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+            // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
       appBar: AppBar(
-        // backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-                backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
         elevation: 0,
         leading: IconButton(
@@ -24,7 +24,7 @@ class DetailScreen extends StatelessWidget {
         title: const Text(
           'Latest Designs',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 19,
             fontWeight: FontWeight.bold,
           ),

@@ -6,9 +6,9 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -18,7 +18,7 @@ class NotificationScreen extends StatelessWidget {
         ),
         title: const Text(
           "Notifications",
-          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.w600),
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         actions: const [

@@ -91,7 +91,7 @@ class _AddressScreenState extends State<AddressScreen>
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: FadeTransition(
           opacity: _fadeAnimation,
           child: CustomScrollView(
@@ -164,7 +164,7 @@ class _AddressScreenState extends State<AddressScreen>
   Widget _buildAppBar() {
     return SliverAppBar(
       backgroundColor: _bg,
-      surfaceTintColor: Colors.transparent,
+      surfaceTintColor: const Color.fromARGB(0, 255, 255, 255),
       elevation: 0,
       pinned: true,
       expandedHeight: 100,

@@ -194,7 +194,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.credit_card, size: 16, color: Color(0xFFF49B51)),
+                  Icon(Icons.credit_card, size: 16, color: Color.fromARGB(255, 255, 255, 255)),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
@@ -327,7 +327,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
       style: TextStyle(
         fontSize: 14,
         fontWeight: active ? FontWeight.bold : FontWeight.normal,
-        color: active ? Color(0xFFF49B51) : Colors.grey,
+        color: active ? Color.fromARGB(255, 255, 255, 255) : Colors.grey,
         decoration: active ? TextDecoration.none : TextDecoration.none,
       ),
     );
@@ -833,13 +833,13 @@ class _HomeScreenState extends State<ExclusiveModule> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color(0xFFF49B51)),
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
         ),
         GestureDetector(
           onTap: onTap, // 👈 dynamic action
           child: const Text(
             'View all >>',
-            style: TextStyle(fontSize: 12, color: Color(0xFFF49B51)),
+            style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
           ),
         ),
       ],

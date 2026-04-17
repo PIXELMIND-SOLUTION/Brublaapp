@@ -9,9 +9,9 @@ class MyOrders extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           elevation: 0,
           leading: Container(
             margin: const EdgeInsets.all(8),
@@ -21,12 +21,12 @@ class MyOrders extends StatelessWidget {
             ),
             child: IconButton(onPressed: (){
               Navigator.of(context).pop();
-            }, icon: Icon(Icons.arrow_back_ios,size: 15,color: Colors.white,)),
+            }, icon: Icon(Icons.arrow_back_ios,size: 15,color: const Color.fromARGB(255, 0, 0, 0),)),
           ),
           title: const Text(
             'My Orders',
             style: TextStyle(
-              color: Color.fromARGB(255, 253, 156, 156),
+              color: Color.fromARGB(255, 0, 0, 0),
               fontWeight: FontWeight.w600,
               fontSize: 18,
             ),

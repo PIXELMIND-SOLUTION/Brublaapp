@@ -7,13 +7,13 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.grey.shade100,
-            backgroundColor: Colors.black,
+            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
 
 
       // ─── APP BAR ─────────────────────────────
       appBar: AppBar(
         // backgroundColor: Colors.grey.shade100,
-                backgroundColor: Colors.black,
+                backgroundColor: const Color.fromARGB(255, 255, 255, 255),
 
         elevation: 0,
         leading:  IconButton(onPressed: (){
@@ -23,7 +23,7 @@ class CategoryScreen extends StatelessWidget {
         title: const Text(
           'Categories',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -84,13 +84,13 @@ class CategoryScreen extends StatelessWidget {
                         height: 80,
                         width: 80,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF754D1B), // light beige
+                          color: const Color.fromARGB(255, 0, 0, 0), // light beige
                           shape: BoxShape.circle,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(18),
                           child: Image.asset(
-                            'assets/shirtimage.png',
+                            'assets/whiteshirt.png',
                             fit: BoxFit.contain,
                           ),
                           

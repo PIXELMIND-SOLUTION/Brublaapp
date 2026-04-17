@@ -6,20 +6,20 @@ class PaymentDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
+          icon: Icon(Icons.arrow_back_ios,color: const Color.fromARGB(255, 0, 0, 0),),
         ),
         title: const Text(
           'Payment Details',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -49,13 +49,13 @@ class PaymentDetails extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                     const SizedBox(height: 4),
                     const Text(
                       '9666317749',
-                      style: TextStyle(fontSize: 14, color: Color.fromARGB(221, 255, 255, 255)),
+                      style: TextStyle(fontSize: 14, color: Color.fromARGB(221, 0, 0, 0)),
                     ),
                   ],
                 ),
@@ -220,7 +220,7 @@ class PaymentDetails extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
-              color: const Color.fromARGB(221, 255, 255, 255),
+              color: const Color.fromARGB(221, 0, 0, 0),
             ),
           ),
         ),
@@ -231,7 +231,7 @@ class PaymentDetails extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: isBold ? FontWeight.w600 : FontWeight.normal,
-              color: const Color.fromARGB(221, 255, 255, 255),
+              color: const Color.fromARGB(221, 0, 0, 0),
             ),
           ),
         ),
@@ -253,7 +253,7 @@ class PaymentDetails extends StatelessWidget {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: const Color.fromARGB(221, 255, 255, 255),
+            color: const Color.fromARGB(221, 0, 0, 0),
             fontWeight: labelBold ? FontWeight.bold : FontWeight.normal,
           ),
         ),

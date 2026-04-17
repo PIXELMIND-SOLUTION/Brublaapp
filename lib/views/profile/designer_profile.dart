@@ -6,20 +6,20 @@ class DesignerProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
+          icon: Icon(Icons.arrow_back_ios,color: const Color.fromARGB(255, 0, 0, 0),),
         ),
         title: const Text(
           'Designer Profile',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -49,7 +49,7 @@ class DesignerProfile extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 0, 0, 0),
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -117,7 +117,7 @@ class DesignerProfile extends StatelessWidget {
                 'Each piece is thoughtfully crafted to ensure premium quality, durability, and a perfect fit for every customer.',
                 style: TextStyle(
                   fontSize: 13,
-                  color: Color.fromARGB(137, 255, 255, 255),
+                  color: Color.fromARGB(136, 0, 0, 0),
                   height: 1.5,
                 ),
               ),

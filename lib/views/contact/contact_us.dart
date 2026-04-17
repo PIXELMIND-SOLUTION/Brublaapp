@@ -163,7 +163,7 @@ class _ContactUsState extends State<ContactUs> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: CustomScrollView(

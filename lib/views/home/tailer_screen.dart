@@ -52,9 +52,9 @@ class _TailerScreenState extends State<TailerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         centerTitle: true,
         automaticallyImplyLeading: false,
@@ -62,7 +62,7 @@ class _TailerScreenState extends State<TailerScreen> {
         title: const Text(
           'Tailor',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.w600,
           ),
@@ -146,7 +146,7 @@ class _TailerScreenState extends State<TailerScreen> {
                   // );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFD4A96A),
+                  backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                   foregroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
