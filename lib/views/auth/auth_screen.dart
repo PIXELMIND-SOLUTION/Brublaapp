@@ -1,70 +1,68 @@
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:android_intent_plus/flag.dart';
-import 'package:brublaapp/views/navbar/navbar_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// // import 'package:android_intent_plus/android_intent.dart';
+// // import 'package:android_intent_plus/flag.dart';
+// // import 'package:brublaapp/views/navbar/navbar_screen.dart';
+// // import 'package:flutter/material.dart';
+// // import 'package:url_launcher/url_launcher.dart';
 
-enum AuthStep { requestOtp, verifyOtp, register }
+// // enum AuthStep { requestOtp, verifyOtp, register }
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
+// // class AuthScreen extends StatefulWidget {
+// //   const AuthScreen({super.key});
 
-  @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
+// //   @override
+// //   State<AuthScreen> createState() => _AuthScreenState();
+// // }
 
-class _AuthScreenState extends State<AuthScreen> {
-  AuthStep _currentStep = AuthStep.requestOtp;
+// // class _AuthScreenState extends State<AuthScreen> {
+// //   AuthStep _currentStep = AuthStep.requestOtp;
 
-  final TextEditingController _mobileController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _registerMobileController =
-      TextEditingController();
+// //   final TextEditingController _mobileController = TextEditingController();
+// //   final TextEditingController _otpController = TextEditingController();
+// //   final TextEditingController _nameController = TextEditingController();
+// //   final TextEditingController _emailController = TextEditingController();
+// //   final TextEditingController _registerMobileController =
+// //       TextEditingController();
 
-  String? _selectedCategory;
-  final List<String> _categories = ['Tailor', 'Designer', 'User', 'Stylist'];
+// //   String? _selectedCategory;
+// //   final List<String> _categories = ['Tailor', 'Designer', 'User', 'Stylist'];
 
-  static const Color _tan = Color(0xFFCFB896);
-  static const Color _border = Color(0xFFE0E0E0);
-  static const Color _hintGrey = Color(0xFFAAAAAA);
-  static const Color _errorFill = Color(0xFFFFF0F0);
+// //   static const Color _tan = Color(0xFFCFB896);
+// //   static const Color _border = Color(0xFFE0E0E0);
+// //   static const Color _hintGrey = Color(0xFFAAAAAA);
+// //   static const Color _errorFill = Color(0xFFFFF0F0);
 
-  @override
-  void dispose() {
-    _mobileController.dispose();
-    _otpController.dispose();
-    _nameController.dispose();
-    _emailController.dispose();
-    _registerMobileController.dispose();
-    super.dispose();
-  }
-
-
+// //   @override
+// //   void dispose() {
+// //     _mobileController.dispose();
+// //     _otpController.dispose();
+// //     _nameController.dispose();
+// //     _emailController.dispose();
+// //     _registerMobileController.dispose();
+// //     super.dispose();
+// //   }
 
 
-//   Future<void> _launchCategoryApp(String? category) async {
-//   if (category == 'Tailor') {
-//     final uri = Uri.parse('brubla-tailor://');
-
-//     if (await canLaunchUrl(uri)) {
-//       await launchUrl(uri);
-//     } else {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Tailor app is not installed')),
-//       );
-//     }
-//   } else {
-//     // For other categories, go to NavbarScreen as before
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(builder: (_) => NavbarScreen()),
-//     );
-//   }
-// }
 
 
+// // //   Future<void> _launchCategoryApp(String? category) async {
+// // //   if (category == 'Tailor') {
+// // //     final uri = Uri.parse('brubla-tailor://');
+
+// // //     if (await canLaunchUrl(uri)) {
+// // //       await launchUrl(uri);
+// // //     } else {
+// // //       ScaffoldMessenger.of(context).showSnackBar(
+// // //         const SnackBar(content: Text('Tailor app is not installed')),
+// // //       );
+// // //     }
+// // //   } else {
+// // //     // For other categories, go to NavbarScreen as before
+// // //     Navigator.push(
+// // //       context,
+// // //       MaterialPageRoute(builder: (_) => NavbarScreen()),
+// // //     );
+// // //   }
+// // // }
 
 
 
@@ -75,369 +73,371 @@ class _AuthScreenState extends State<AuthScreen> {
 
 
 
-// Future<void> _launchCategoryApp(String? category) async {
-//   if (category == 'Tailor') {
-//     try {
-//       final intent = AndroidIntent(
-//         action: 'android.intent.action.MAIN',
-//         package: 'com.example.brubla_tailor',  // exact package name
-//         componentName: 'com.example.brubla_tailor.MainActivity',
-//         flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
-//       );
-//       await intent.launch();
-//     } catch (e) {
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(content: Text('Could not open Tailor app: $e')),
-//       );
-//     }
-//   } else {
-//     Navigator.push(
-//       context,
-//       MaterialPageRoute(builder: (_) => NavbarScreen()),
-//     );
-//   }
-// }
+
+
+// // // Future<void> _launchCategoryApp(String? category) async {
+// // //   if (category == 'Tailor') {
+// // //     try {
+// // //       final intent = AndroidIntent(
+// // //         action: 'android.intent.action.MAIN',
+// // //         package: 'com.example.brubla_tailor',  // exact package name
+// // //         componentName: 'com.example.brubla_tailor.MainActivity',
+// // //         flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+// // //       );
+// // //       await intent.launch();
+// // //     } catch (e) {
+// // //       ScaffoldMessenger.of(context).showSnackBar(
+// // //         SnackBar(content: Text('Could not open Tailor app: $e')),
+// // //       );
+// // //     }
+// // //   } else {
+// // //     Navigator.push(
+// // //       context,
+// // //       MaterialPageRoute(builder: (_) => NavbarScreen()),
+// // //     );
+// // //   }
+// // // }
 
 
 
 
 
-Future<void> _launchCategoryApp(String? category) async {
-  if (category == 'Tailor') {
-    try {
-      final intent = AndroidIntent(
-        action: 'android.intent.action.MAIN',
-        package: 'com.example.brubla_tailor',
-        componentName: 'com.example.brubla_tailor.MainActivity',
-        flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
-      );
-      await intent.launch();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not open Tailor app: $e')),
-      );
-    }
-  } else if (category == 'Stylist') {
-    try {
-      final intent = AndroidIntent(
-        action: 'android.intent.action.MAIN',
-        package: 'com.example.brubla_stylist',
-        componentName: 'com.example.brubla_stylist.MainActivity',
-        flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
-      );
-      await intent.launch();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not open Stylist app: $e')),
-      );
-    }
-  } else {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => NavbarScreen()),
-    );
-  }
-}
+// // Future<void> _launchCategoryApp(String? category) async {
+// //   if (category == 'Tailor') {
+// //     try {
+// //       final intent = AndroidIntent(
+// //         action: 'android.intent.action.MAIN',
+// //         package: 'com.example.brubla_tailor',
+// //         componentName: 'com.example.brubla_tailor.MainActivity',
+// //         flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+// //       );
+// //       await intent.launch();
+// //     } catch (e) {
+// //       ScaffoldMessenger.of(context).showSnackBar(
+// //         SnackBar(content: Text('Could not open Tailor app: $e')),
+// //       );
+// //     }
+// //   } else if (category == 'Stylist') {
+// //     try {
+// //       final intent = AndroidIntent(
+// //         action: 'android.intent.action.MAIN',
+// //         package: 'com.example.brubla_stylist',
+// //         componentName: 'com.example.brubla_stylist.MainActivity',
+// //         flags: <int>[Flag.FLAG_ACTIVITY_NEW_TASK],
+// //       );
+// //       await intent.launch();
+// //     } catch (e) {
+// //       ScaffoldMessenger.of(context).showSnackBar(
+// //         SnackBar(content: Text('Could not open Stylist app: $e')),
+// //       );
+// //     }
+// //   } else {
+// //     Navigator.push(
+// //       context,
+// //       MaterialPageRoute(builder: (_) => NavbarScreen()),
+// //     );
+// //   }
+// // }
 
-  InputDecoration _inputDecoration(String hint, {bool isError = false}) {
-    return InputDecoration(
-      hintText: hint,
-      hintStyle: const TextStyle(color: _hintGrey, fontSize: 14),
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide:
-            BorderSide(color: isError ? const Color(0xFFCFB896) : _border),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-            color: isError ? const Color(0xFFCFB896) : _tan, width: 1.5),
-      ),
-      filled: true,
-      fillColor: isError ? _errorFill : Colors.white,
-    );
-  }
+// //   InputDecoration _inputDecoration(String hint, {bool isError = false}) {
+// //     return InputDecoration(
+// //       hintText: hint,
+// //       hintStyle: const TextStyle(color: _hintGrey, fontSize: 14),
+// //       contentPadding:
+// //           const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+// //       enabledBorder: OutlineInputBorder(
+// //         borderRadius: BorderRadius.circular(8),
+// //         borderSide:
+// //             BorderSide(color: isError ? const Color(0xFFCFB896) : _border),
+// //       ),
+// //       focusedBorder: OutlineInputBorder(
+// //         borderRadius: BorderRadius.circular(8),
+// //         borderSide: BorderSide(
+// //             color: isError ? const Color(0xFFCFB896) : _tan, width: 1.5),
+// //       ),
+// //       filled: true,
+// //       fillColor: isError ? _errorFill : Colors.white,
+// //     );
+// //   }
 
-  Widget _primaryButton(String label, VoidCallback onTap) {
-    return SizedBox(
-      width: double.infinity,
-      height: 52,
-      child: ElevatedButton(
-        onPressed: onTap,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: _tan,
-          foregroundColor: Colors.white,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.3,
-          ),
-        ),
-      ),
-    );
-  }
+// //   Widget _primaryButton(String label, VoidCallback onTap) {
+// //     return SizedBox(
+// //       width: double.infinity,
+// //       height: 52,
+// //       child: ElevatedButton(
+// //         onPressed: onTap,
+// //         style: ElevatedButton.styleFrom(
+// //           backgroundColor: _tan,
+// //           foregroundColor: Colors.white,
+// //           elevation: 0,
+// //           shape: RoundedRectangleBorder(
+// //             borderRadius: BorderRadius.circular(10),
+// //           ),
+// //         ),
+// //         child: Text(
+// //           label,
+// //           style: const TextStyle(
+// //             fontSize: 16,
+// //             fontWeight: FontWeight.w600,
+// //             letterSpacing: 0.3,
+// //           ),
+// //         ),
+// //       ),
+// //     );
+// //   }
 
-  Widget _dragHandle() {
-    return Center(
-      child: Container(
-        width: 40,
-        height: 4,
-        margin: const EdgeInsets.only(bottom: 20),
-        decoration: BoxDecoration(
-          color: Colors.grey[300],
-          borderRadius: BorderRadius.circular(2),
-        ),
-      ),
-    );
-  }
+// //   Widget _dragHandle() {
+// //     return Center(
+// //       child: Container(
+// //         width: 40,
+// //         height: 4,
+// //         margin: const EdgeInsets.only(bottom: 20),
+// //         decoration: BoxDecoration(
+// //           color: Colors.grey[300],
+// //           borderRadius: BorderRadius.circular(2),
+// //         ),
+// //       ),
+// //     );
+// //   }
 
-  // ── Step 1: Request OTP ──────────────────────────────────────────────────────
-  Widget _buildRequestOtpSheet() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _dragHandle(),
-        const Center(
-          child: Text(
-            'Happy Shopping',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        TextField(
-          controller: _mobileController,
-          keyboardType: TextInputType.phone,
-          decoration: _inputDecoration('Mobile Number'),
-        ),
-        const SizedBox(height: 16),
-        _primaryButton('Request OTP', () {
-          setState(() => _currentStep = AuthStep.verifyOtp);
-        }),
-      ],
-    );
-  }
+// //   // ── Step 1: Request OTP ──────────────────────────────────────────────────────
+// //   Widget _buildRequestOtpSheet() {
+// //     return Column(
+// //       mainAxisSize: MainAxisSize.min,
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         _dragHandle(),
+// //         const Center(
+// //           child: Text(
+// //             'Happy Shopping',
+// //             style: TextStyle(
+// //               fontSize: 22,
+// //               fontWeight: FontWeight.w700,
+// //               color: Color(0xFF1A1A1A),
+// //             ),
+// //           ),
+// //         ),
+// //         const SizedBox(height: 20),
+// //         TextField(
+// //           controller: _mobileController,
+// //           keyboardType: TextInputType.phone,
+// //           decoration: _inputDecoration('Mobile Number'),
+// //         ),
+// //         const SizedBox(height: 16),
+// //         _primaryButton('Request OTP', () {
+// //           setState(() => _currentStep = AuthStep.verifyOtp);
+// //         }),
+// //       ],
+// //     );
+// //   }
 
-  // ── Step 2: Verify OTP ───────────────────────────────────────────────────────
-  Widget _buildVerifyOtpSheet() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _dragHandle(),
-        const Center(
-          child: Text(
-            'Happy Shopping',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        TextField(
-          controller: _mobileController,
-          keyboardType: TextInputType.phone,
-          decoration: _inputDecoration('Mobile Number'),
-        ),
-        const SizedBox(height: 12),
-        TextField(
-          controller: _otpController,
-          keyboardType: TextInputType.number,
-          decoration: _inputDecoration('OTP'),
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: () {},
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              minimumSize: Size.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: const Text(
-              'Resend OTP',
-              style: TextStyle(
-                color: Color(0xFF555555),
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        _primaryButton('Verify', () {
-          setState(() => _currentStep = AuthStep.register);
-        }),
-      ],
-    );
-  }
+// //   // ── Step 2: Verify OTP ───────────────────────────────────────────────────────
+// //   Widget _buildVerifyOtpSheet() {
+// //     return Column(
+// //       mainAxisSize: MainAxisSize.min,
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         _dragHandle(),
+// //         const Center(
+// //           child: Text(
+// //             'Happy Shopping',
+// //             style: TextStyle(
+// //               fontSize: 22,
+// //               fontWeight: FontWeight.w700,
+// //               color: Color(0xFF1A1A1A),
+// //             ),
+// //           ),
+// //         ),
+// //         const SizedBox(height: 20),
+// //         TextField(
+// //           controller: _mobileController,
+// //           keyboardType: TextInputType.phone,
+// //           decoration: _inputDecoration('Mobile Number'),
+// //         ),
+// //         const SizedBox(height: 12),
+// //         TextField(
+// //           controller: _otpController,
+// //           keyboardType: TextInputType.number,
+// //           decoration: _inputDecoration('OTP'),
+// //         ),
+// //         Align(
+// //           alignment: Alignment.centerRight,
+// //           child: TextButton(
+// //             onPressed: () {},
+// //             style: TextButton.styleFrom(
+// //               padding: EdgeInsets.zero,
+// //               minimumSize: Size.zero,
+// //               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+// //             ),
+// //             child: const Text(
+// //               'Resend OTP',
+// //               style: TextStyle(
+// //                 color: Color(0xFF555555),
+// //                 fontSize: 13,
+// //                 fontWeight: FontWeight.w500,
+// //               ),
+// //             ),
+// //           ),
+// //         ),
+// //         const SizedBox(height: 12),
+// //         _primaryButton('Verify', () {
+// //           setState(() => _currentStep = AuthStep.register);
+// //         }),
+// //       ],
+// //     );
+// //   }
 
-  // ── Step 3: Register ─────────────────────────────────────────────────────────
-  Widget _buildRegisterSheet() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _dragHandle(),
-        const Center(
-          child: Text(
-            'Register',
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1A1A),
-            ),
-          ),
-        ),
-        const SizedBox(height: 20),
-        TextField(
-          controller: _nameController,
-          decoration: _inputDecoration('Name'),
-        ),
-        const SizedBox(height: 12),
-        TextField(
-          controller: _registerMobileController,
-          keyboardType: TextInputType.phone,
-          decoration: _inputDecoration('Mobile Number'),
-        ),
-        const SizedBox(height: 12),
-        TextField(
-          controller: _emailController,
-          keyboardType: TextInputType.emailAddress,
-          decoration: _inputDecoration('Email'),
-        ),
-        const SizedBox(height: 12),
-        DropdownButtonFormField<String>(
-          value: _selectedCategory,
-          hint: const Text(
-            'Category',
-            style: TextStyle(color: _hintGrey, fontSize: 14),
-          ),
-          decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            filled: true,
-            fillColor: Colors.white,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: _border),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: _tan, width: 1.5),
-            ),
-          ),
-          icon: const Icon(Icons.keyboard_arrow_down_rounded, color: _hintGrey),
-          items: _categories.map((c) {
-            return DropdownMenuItem(
-              value: c,
-              child: Text(c, style: const TextStyle(fontSize: 14)),
-            );
-          }).toList(),
-          onChanged: (val) => setState(() => _selectedCategory = val),
-        ),
-        const SizedBox(height: 20),
+// //   // ── Step 3: Register ─────────────────────────────────────────────────────────
+// //   Widget _buildRegisterSheet() {
+// //     return Column(
+// //       mainAxisSize: MainAxisSize.min,
+// //       crossAxisAlignment: CrossAxisAlignment.start,
+// //       children: [
+// //         _dragHandle(),
+// //         const Center(
+// //           child: Text(
+// //             'Register',
+// //             style: TextStyle(
+// //               fontSize: 22,
+// //               fontWeight: FontWeight.w700,
+// //               color: Color(0xFF1A1A1A),
+// //             ),
+// //           ),
+// //         ),
+// //         const SizedBox(height: 20),
+// //         TextField(
+// //           controller: _nameController,
+// //           decoration: _inputDecoration('Name'),
+// //         ),
+// //         const SizedBox(height: 12),
+// //         TextField(
+// //           controller: _registerMobileController,
+// //           keyboardType: TextInputType.phone,
+// //           decoration: _inputDecoration('Mobile Number'),
+// //         ),
+// //         const SizedBox(height: 12),
+// //         TextField(
+// //           controller: _emailController,
+// //           keyboardType: TextInputType.emailAddress,
+// //           decoration: _inputDecoration('Email'),
+// //         ),
+// //         const SizedBox(height: 12),
+// //         DropdownButtonFormField<String>(
+// //           value: _selectedCategory,
+// //           hint: const Text(
+// //             'Category',
+// //             style: TextStyle(color: _hintGrey, fontSize: 14),
+// //           ),
+// //           decoration: InputDecoration(
+// //             contentPadding:
+// //                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+// //             filled: true,
+// //             fillColor: Colors.white,
+// //             enabledBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(8),
+// //               borderSide: const BorderSide(color: _border),
+// //             ),
+// //             focusedBorder: OutlineInputBorder(
+// //               borderRadius: BorderRadius.circular(8),
+// //               borderSide: const BorderSide(color: _tan, width: 1.5),
+// //             ),
+// //           ),
+// //           icon: const Icon(Icons.keyboard_arrow_down_rounded, color: _hintGrey),
+// //           items: _categories.map((c) {
+// //             return DropdownMenuItem(
+// //               value: c,
+// //               child: Text(c, style: const TextStyle(fontSize: 14)),
+// //             );
+// //           }).toList(),
+// //           onChanged: (val) => setState(() => _selectedCategory = val),
+// //         ),
+// //         const SizedBox(height: 20),
 
 
-        _primaryButton('Verify', () {
-  _launchCategoryApp(_selectedCategory);
-}),
-        // _primaryButton('Verify', () {
-        //   Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //           builder: (context) => NavbarScreen()));
-        // }),
-      ],
-    );
-  }
+// //         _primaryButton('Verify', () {
+// //   _launchCategoryApp(_selectedCategory);
+// // }),
+// //         // _primaryButton('Verify', () {
+// //         //   Navigator.push(
+// //         //       context,
+// //         //       MaterialPageRoute(
+// //         //           builder: (context) => NavbarScreen()));
+// //         // }),
+// //       ],
+// //     );
+// //   }
 
-  Widget _currentSheetContent() {
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 250),
-      transitionBuilder: (child, animation) =>
-          FadeTransition(opacity: animation, child: child),
-      child: KeyedSubtree(
-        key: ValueKey(_currentStep),
-        child: switch (_currentStep) {
-          AuthStep.requestOtp => _buildRequestOtpSheet(),
-          AuthStep.verifyOtp => _buildVerifyOtpSheet(),
-          AuthStep.register => _buildRegisterSheet(),
-        },
-      ),
-    );
-  }
+// //   Widget _currentSheetContent() {
+// //     return AnimatedSwitcher(
+// //       duration: const Duration(milliseconds: 250),
+// //       transitionBuilder: (child, animation) =>
+// //           FadeTransition(opacity: animation, child: child),
+// //       child: KeyedSubtree(
+// //         key: ValueKey(_currentStep),
+// //         child: switch (_currentStep) {
+// //           AuthStep.requestOtp => _buildRequestOtpSheet(),
+// //           AuthStep.verifyOtp => _buildVerifyOtpSheet(),
+// //           AuthStep.register => _buildRegisterSheet(),
+// //         },
+// //       ),
+// //     );
+// //   }
 
-  @override
-  Widget build(BuildContext context) {
-    // ── KEY FIX: Read keyboard height from viewInsets ──────────────────────────
-    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     // ── KEY FIX: Read keyboard height from viewInsets ──────────────────────────
+// //     final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
-    return Scaffold(
-      // Keep false so the background image never resizes/jumps
-      resizeToAvoidBottomInset: false,
-      // backgroundColor: const Color(0xFFF5F2EE),
-            backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+// //     return Scaffold(
+// //       // Keep false so the background image never resizes/jumps
+// //       resizeToAvoidBottomInset: false,
+// //       // backgroundColor: const Color(0xFFF5F2EE),
+// //             backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
-      body: Stack(
-        children: [
-          // ── Background image – always full screen, never moves ─────────────
-          Positioned.fill(
-            child: Image.asset(
-              'assets/onboardingimage.png',
-              fit: BoxFit.contain,
-              alignment: Alignment.topCenter,
-            ),
-          ),
+// //       body: Stack(
+// //         children: [
+// //           // ── Background image – always full screen, never moves ─────────────
+// //           Positioned.fill(
+// //             child: Image.asset(
+// //               'assets/onboardingimage.png',
+// //               fit: BoxFit.contain,
+// //               alignment: Alignment.topCenter,
+// //             ),
+// //           ),
 
-          // ── Bottom sheet panel – rises with the keyboard ───────────────────
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 150),
-            curve: Curves.easeOut,
-            left: 0,
-            right: 0,
-            // Push the sheet up by exactly the keyboard height
-            bottom: keyboardHeight,
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(24)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0x18000000),
-                      blurRadius: 20,
-                      offset: Offset(0, -4),
-                    ),
-                  ],
-                ),
-                padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
-                child: _currentSheetContent(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+// //           // ── Bottom sheet panel – rises with the keyboard ───────────────────
+// //           AnimatedPositioned(
+// //             duration: const Duration(milliseconds: 150),
+// //             curve: Curves.easeOut,
+// //             left: 0,
+// //             right: 0,
+// //             // Push the sheet up by exactly the keyboard height
+// //             bottom: keyboardHeight,
+// //             child: Material(
+// //               color: Colors.transparent,
+// //               child: Container(
+// //                 decoration: const BoxDecoration(
+// //                   color: Colors.white,
+// //                   borderRadius:
+// //                       BorderRadius.vertical(top: Radius.circular(24)),
+// //                   boxShadow: [
+// //                     BoxShadow(
+// //                       color: Color(0x18000000),
+// //                       blurRadius: 20,
+// //                       offset: Offset(0, -4),
+// //                     ),
+// //                   ],
+// //                 ),
+// //                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+// //                 child: _currentSheetContent(),
+// //               ),
+// //             ),
+// //           ),
+// //         ],
+// //       ),
+// //     );
+// //   }
+// // }
 
 
 
@@ -812,3 +812,400 @@ Future<void> _launchCategoryApp(String? category) async {
 //     );
 //   }
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// lib/views/auth/auth_screen.dart
+
+import 'package:brublaapp/provider/dessigner/designer_provider.dart';
+import 'package:brublaapp/provider/navbar/navbar_provider.dart';
+import 'package:brublaapp/provider/navbar/tailor/tailor_navbar_provider.dart';
+import 'package:brublaapp/provider/stylist/stylist_navbar_provider.dart';
+import 'package:brublaapp/views/Stylistmodule/navbar/navbar_screen.dart';
+import 'package:brublaapp/views/Tailormodule/navbar/navbar_screen.dart';
+import 'package:brublaapp/views/navbar/navbar_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+enum AuthStep { requestOtp, verifyOtp, register }
+
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  AuthStep _currentStep = AuthStep.requestOtp;
+
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _registerMobileController =
+      TextEditingController();
+
+  String? _selectedCategory;
+  final List<String> _categories = ['Tailor', 'Designer', 'User', 'Stylist'];
+
+  static const Color _tan = Color(0xFFCFB896);
+  static const Color _border = Color(0xFFE0E0E0);
+  static const Color _hintGrey = Color(0xFFAAAAAA);
+  static const Color _errorFill = Color(0xFFFFF0F0);
+
+  @override
+  void dispose() {
+    _mobileController.dispose();
+    _otpController.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _registerMobileController.dispose();
+    super.dispose();
+  }
+
+  void _navigateByCategory(String? category) {
+    if (category == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a category')),
+      );
+      return;
+    }
+
+    Widget destination;
+
+    switch (category) {
+      case 'Tailor':
+        destination = ChangeNotifierProvider(
+          create: (_) => TailorNavbarProvider(),
+          child: const TailorNavbarScreen(),
+        );
+        break;
+      case 'Designer':
+        destination = ChangeNotifierProvider(
+          create: (_) => DesignerNavbarProvider(),
+          // child: const DesignerNavbarScreen(),
+                    child: const TailorNavbarScreen(),
+
+        );
+        break;
+      case 'Stylist':
+        destination = ChangeNotifierProvider(
+          create: (_) => StylistNavbarProvider(),
+          child: const StylistNavbarScreen(),
+        );
+        break;
+      case 'User':
+      default:
+        destination = ChangeNotifierProvider(
+          create: (_) => UserNavbarProvider(),
+          child: NavbarScreen(),
+        );
+        break;
+    }
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => destination),
+    );
+  }
+
+  InputDecoration _inputDecoration(String hint, {bool isError = false}) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: const TextStyle(color: _hintGrey, fontSize: 14),
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide:
+            BorderSide(color: isError ? const Color(0xFFCFB896) : _border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(
+            color: isError ? const Color(0xFFCFB896) : _tan, width: 1.5),
+      ),
+      filled: true,
+      fillColor: isError ? _errorFill : Colors.white,
+    );
+  }
+
+  Widget _primaryButton(String label, VoidCallback onTap) {
+    return SizedBox(
+      width: double.infinity,
+      height: 52,
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _tan,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.3,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _dragHandle() {
+    return Center(
+      child: Container(
+        width: 40,
+        height: 4,
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(2),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRequestOtpSheet() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _dragHandle(),
+        const Center(
+          child: Text(
+            'Happy Shopping',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        TextField(
+          controller: _mobileController,
+          keyboardType: TextInputType.phone,
+          decoration: _inputDecoration('Mobile Number'),
+        ),
+        const SizedBox(height: 16),
+        _primaryButton('Request OTP', () {
+          setState(() => _currentStep = AuthStep.verifyOtp);
+        }),
+      ],
+    );
+  }
+
+  Widget _buildVerifyOtpSheet() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _dragHandle(),
+        const Center(
+          child: Text(
+            'Happy Shopping',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        TextField(
+          controller: _mobileController,
+          keyboardType: TextInputType.phone,
+          decoration: _inputDecoration('Mobile Number'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _otpController,
+          keyboardType: TextInputType.number,
+          decoration: _inputDecoration('OTP'),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.zero,
+              minimumSize: Size.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: const Text(
+              'Resend OTP',
+              style: TextStyle(
+                color: Color(0xFF555555),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        _primaryButton('Verify', () {
+          setState(() => _currentStep = AuthStep.register);
+        }),
+      ],
+    );
+  }
+
+  Widget _buildRegisterSheet() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _dragHandle(),
+        const Center(
+          child: Text(
+            'Register',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        TextField(
+          controller: _nameController,
+          decoration: _inputDecoration('Name'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _registerMobileController,
+          keyboardType: TextInputType.phone,
+          decoration: _inputDecoration('Mobile Number'),
+        ),
+        const SizedBox(height: 12),
+        TextField(
+          controller: _emailController,
+          keyboardType: TextInputType.emailAddress,
+          decoration: _inputDecoration('Email'),
+        ),
+        const SizedBox(height: 12),
+        DropdownButtonFormField<String>(
+          value: _selectedCategory,
+          hint: const Text(
+            'Category',
+            style: TextStyle(color: _hintGrey, fontSize: 14),
+          ),
+          decoration: InputDecoration(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            filled: true,
+            fillColor: Colors.white,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: _border),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: _tan, width: 1.5),
+            ),
+          ),
+          icon: const Icon(Icons.keyboard_arrow_down_rounded, color: _hintGrey),
+          items: _categories.map((c) {
+            return DropdownMenuItem(
+              value: c,
+              child: Text(c, style: const TextStyle(fontSize: 14)),
+            );
+          }).toList(),
+          onChanged: (val) => setState(() => _selectedCategory = val),
+        ),
+        const SizedBox(height: 20),
+        _primaryButton('Register', () {
+          _navigateByCategory(_selectedCategory);
+        }),
+      ],
+    );
+  }
+
+  Widget _currentSheetContent() {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 250),
+      transitionBuilder: (child, animation) =>
+          FadeTransition(opacity: animation, child: child),
+      child: KeyedSubtree(
+        key: ValueKey(_currentStep),
+        child: switch (_currentStep) {
+          AuthStep.requestOtp => _buildRequestOtpSheet(),
+          AuthStep.verifyOtp => _buildVerifyOtpSheet(),
+          AuthStep.register => _buildRegisterSheet(),
+        },
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/onboardingimage.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.topCenter,
+            ),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 150),
+            curve: Curves.easeOut,
+            left: 0,
+            right: 0,
+            bottom: keyboardHeight,
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(24)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x18000000),
+                      blurRadius: 20,
+                      offset: Offset(0, -4),
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
+                child: _currentSheetContent(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

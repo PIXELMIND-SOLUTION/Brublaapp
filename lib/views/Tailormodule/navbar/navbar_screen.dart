@@ -1,88 +1,10 @@
-// import 'package:brubla_tailor/provider/navbar/navbar_provider.dart';
-// import 'package:brubla_tailor/views/home/history_screen.dart';
-// import 'package:brubla_tailor/views/home/profile_screen.dart';
-// import 'package:flutter/material.dart';
-// import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-// import 'package:provider/provider.dart';
-// import 'package:brubla_tailor/views/home/home_screen.dart';
 
+// lib/views/Tailormodule/navbar/navbar_screen.dart
 
-// class NavbarScreen extends StatelessWidget {
-//   const NavbarScreen({super.key});
-
-//   static const List<Widget> _pages = [
-//     HomeScreen(),
-//     HistoryScreen(),
-//     ProfileScreen(),
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final navbarProvider = context.watch<BottomNavbarProvider>();
-
-//     return Scaffold(
-//       backgroundColor: const Color(0xFFF7F7F7),
-//       extendBody: true,
-//       body: _pages[navbarProvider.currentIndex],
-//       bottomNavigationBar: CurvedNavigationBar(
-//         index: navbarProvider.currentIndex,
-//         height: 65.0,
-//         backgroundColor: Colors.transparent,
-//         color: const Color(0xFF111111),          // Deep black bar
-//         buttonBackgroundColor: Colors.white,      // White raised bubble
-//         animationCurve: Curves.easeInOut,
-//         animationDuration: const Duration(milliseconds: 400),
-//         onTap: (index) => navbarProvider.setIndex(index),
-//         items: [
-//           Icon(
-//             Icons.home_rounded,
-//             size: 28,
-//             color: navbarProvider.currentIndex == 0
-//                 ? Colors.black
-//                 : Colors.white,
-//           ),
-//           Icon(
-//             Icons.history_rounded,
-//             size: 28,
-//             color: navbarProvider.currentIndex == 1
-//                 ? Colors.black
-//                 : Colors.white,
-//           ),
-//           Icon(
-//             Icons.person_rounded,
-//             size: 28,
-//             color: navbarProvider.currentIndex == 2
-//                 ? Colors.black
-//                 : Colors.white,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import 'package:brublaapp/provider/navbar/navbar_provider.dart';
+import 'package:brublaapp/provider/navbar/tailor/tailor_navbar_provider.dart';
+import 'package:brublaapp/views/Tailormodule/home/history_screen.dart';
+import 'package:brublaapp/views/Tailormodule/home/home_screen.dart';
+import 'package:brublaapp/views/Tailormodule/home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -90,14 +12,15 @@ class TailorNavbarScreen extends StatelessWidget {
   const TailorNavbarScreen({super.key});
 
   static const List<Widget> _pages = [
-    // HomeScreen(),
-    // HistoryScreen(),
-    // ProfileScreen(),
+    
+    TailorHomescreen(),
+    HistoryScreen(),
+    TailorProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final navbarProvider = context.watch<BottomNavbarProvider>();
+    final navbarProvider = context.watch<TailorNavbarProvider>();
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F7),
