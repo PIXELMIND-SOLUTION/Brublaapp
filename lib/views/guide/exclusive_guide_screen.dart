@@ -76,7 +76,8 @@ class ExclusiveGuideScreen extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFD4A96A),
+                      // backgroundColor: const Color(0xFFD4A96A),
+                        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -89,6 +90,7 @@ class ExclusiveGuideScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
+                        color: Colors.black
                       ),
                     ),
                   ),

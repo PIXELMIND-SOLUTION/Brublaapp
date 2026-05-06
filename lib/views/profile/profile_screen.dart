@@ -92,14 +92,19 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      CircleAvatar(
-                        radius: 36,
-                        backgroundImage: const AssetImage('assets/profile.png'),
-                        backgroundColor: Colors.grey.shade200,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfile()));
+                        },
+                        child: CircleAvatar(
+                          radius: 36,
+                          backgroundImage: const AssetImage('assets/profile.png'),
+                          backgroundColor: Colors.grey.shade200,
+                        ),
                       ),
                       Positioned(
                         bottom: 0,
-                        left: 0,
+                        left: 46,
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: const BoxDecoration(

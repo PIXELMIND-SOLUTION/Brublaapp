@@ -19,7 +19,7 @@ class DetailScreen extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
+          icon: Icon(Icons.arrow_back_ios,color: const Color.fromARGB(255, 0, 0, 0),),
         ),
         title: const Text(
           'Latest Designs',

@@ -744,14 +744,17 @@ class _SingleDetailScreenState extends State<ExclusiveSingleDetail> {
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFB8860B),
+                  border: Border.all(),
+                  // color: const Color(0xFFB8860B),
+                                    color: const Color.fromARGB(255, 255, 255, 255),
+
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
                   child: Text(
                     'Buy',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 0, 0, 0),
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                     ),

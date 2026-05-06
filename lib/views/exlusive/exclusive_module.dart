@@ -19,9 +19,35 @@ class ExclusiveModule extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<ExclusiveModule> {
+  final List<String> _searchHints = ['Shirts', 'Pants', 'Shorts', 'Kurtas'];
+
+  int _currentHintIndex = 0;
   int _currentBannerIndex = 0;
   int _currentBrublaIndex = 0;
   final CarouselSliderController _bannerController = CarouselSliderController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      _startHintRotation();
+    });
+  }
+
+  void _startHintRotation() {
+    Future.doWhile(() async {
+      await Future.delayed(const Duration(seconds: 2));
+
+      if (!mounted) return false;
+
+      setState(() {
+        _currentHintIndex = (_currentHintIndex + 1) % _searchHints.length;
+      });
+
+      return true;
+    });
+  }
 
   final List<Map<String, dynamic>> _brublaverse = [
     {'image': 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b'},
@@ -129,7 +155,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
               _buildBannerCarousel(),
               _buildSectionWithGrid(
                 title: 'Recently Viewed',
-                
+
                 items: _latestDesigns,
                 showSelected: true,
                 onViewAllTap: () {
@@ -159,7 +185,10 @@ class _HomeScreenState extends State<ExclusiveModule> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
             },
             child: CircleAvatar(
               radius: 22,
@@ -173,18 +202,29 @@ class _HomeScreenState extends State<ExclusiveModule> {
             children: const [
               Text(
                 'Good Morning',
-                style: TextStyle(fontSize: 14, color: Color.fromARGB(255, 255, 255, 255),fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 'PMS',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Colors.white),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ],
           ),
           const Spacer(),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>WalletScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WalletScreen()),
+              );
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -194,11 +234,19 @@ class _HomeScreenState extends State<ExclusiveModule> {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.credit_card, size: 16, color: Color.fromARGB(255, 255, 255, 255)),
+                  Icon(
+                    Icons.credit_card,
+                    size: 16,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Colors.white),
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -207,9 +255,13 @@ class _HomeScreenState extends State<ExclusiveModule> {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>AddressScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddressScreen()),
+              );
             },
-            child: _iconButton(Icons.location_on_outlined,)),
+            child: _iconButton(Icons.location_on_outlined),
+          ),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
@@ -233,7 +285,11 @@ class _HomeScreenState extends State<ExclusiveModule> {
         shape: BoxShape.circle,
         border: Border.all(color: Colors.grey.shade200),
       ),
-      child: Icon(icon, size: 18, color: const Color.fromARGB(221, 255, 255, 255)),
+      child: Icon(
+        icon,
+        size: 18,
+        color: const Color.fromARGB(221, 255, 255, 255),
+      ),
     );
   }
 
@@ -252,12 +308,52 @@ class _HomeScreenState extends State<ExclusiveModule> {
               child: TextField(
                 textAlignVertical: TextAlignVertical.center,
                 style: const TextStyle(fontSize: 14),
+
+                // decoration: InputDecoration(
+                //   isCollapsed: true, // ⭐ KEY FIX
+                //   // hintText: 'Search for "Shirts"',
+
+                //   hintText: 'Search for "${_searchHints[_currentHintIndex]}"',
+                //   hintStyle: TextStyle(
+                //     fontSize: 13,
+                //     color: Colors.grey.shade500,
+                //   ),
+                //   prefixIcon: Icon(
+                //     Icons.search,
+                //     size: 20,
+                //     color: Colors.grey.shade500,
+                //   ),
+                //   prefixIconConstraints: const BoxConstraints(
+                //     minWidth: 40,
+                //     minHeight: 40,
+                //   ),
+                //   border: InputBorder.none,
+                //   contentPadding: const EdgeInsets.symmetric(
+                //     vertical: 12, // ⭐ balances text perfectly
+                //   ),
+                // ),
                 decoration: InputDecoration(
-                  isCollapsed: true, // ⭐ KEY FIX
-                  hintText: 'Search for "Shirts"',
-                  hintStyle: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey.shade500,
+                  isCollapsed: true,
+                  hint: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Search for ',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '"${_searchHints[_currentHintIndex]}"',
+                          style: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.black, // 👈 ONLY this part is black
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   prefixIcon: Icon(
                     Icons.search,
@@ -269,9 +365,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
                     minHeight: 40,
                   ),
                   border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 12, // ⭐ balances text perfectly
-                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 ),
               ),
             ),
@@ -279,15 +373,23 @@ class _HomeScreenState extends State<ExclusiveModule> {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>WishlistScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WishlistScreen()),
+              );
             },
-            child: _searchActionButton(Icons.favorite_border)),
+            child: _searchActionButton(Icons.favorite_border),
+          ),
           const SizedBox(width: 8),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
             },
-            child: _searchActionButton(Icons.shopping_cart_outlined)),
+            child: _searchActionButton(Icons.shopping_cart_outlined),
+          ),
         ],
       ),
     );
@@ -665,13 +767,13 @@ class _HomeScreenState extends State<ExclusiveModule> {
                 color: Colors.black,
               ),
               children: [
-                TextSpan(text: 'Explore The ',style: TextStyle(color: Colors.white)),
+                TextSpan(
+                  text: 'Explore The ',
+                  style: TextStyle(color: Colors.white),
+                ),
                 TextSpan(
                   text: 'Brublaverse',
-                  style: TextStyle(
-                    decorationThickness: 2,
-                    color: Colors.white
-                  ),
+                  style: TextStyle(decorationThickness: 2, color: Colors.white),
                 ),
               ],
             ),
@@ -833,13 +935,20 @@ class _HomeScreenState extends State<ExclusiveModule> {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 255, 255, 255)),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
         ),
         GestureDetector(
           onTap: onTap, // 👈 dynamic action
           child: const Text(
             'View all >>',
-            style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 255, 255, 255)),
+            style: TextStyle(
+              fontSize: 12,
+              color: Color.fromARGB(255, 255, 255, 255),
+            ),
           ),
         ),
       ],

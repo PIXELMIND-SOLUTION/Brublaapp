@@ -1,4 +1,5 @@
 // ignore_for_file: unused_field
+import 'dart:async';
 import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/category/category_screen.dart';
@@ -19,9 +20,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
+  final List<String> _searchKeywords = ['Shirts', 'Pants', 'Jeans', 'Jackets', 'Hoodies', 'Sneakers', 'Kurtas'];
+int _currentKeywordIndex = 0;
+late Timer _keywordTimer;
   int _currentBannerIndex = 0;
   int _currentBrublaIndex = 0;
   final CarouselSliderController _bannerController = CarouselSliderController();
+
+
+
+
+  @override
+void initState() {
+  super.initState();
+  _keywordTimer = Timer.periodic(const Duration(seconds: 2), (_) {
+    setState(() {
+      _currentKeywordIndex = (_currentKeywordIndex + 1) % _searchKeywords.length;
+    });
+  });
+}
+
+
+
+@override
+void dispose() {
+  _keywordTimer.cancel();
+  super.dispose();
+}
 
   final List<Map<String, dynamic>> _brublaverse = [
     {'image': 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b'},
@@ -256,20 +284,89 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Widget _buildSearchBar() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //     child: Row(
+  //       children: [
+  //         Expanded(
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               Navigator.push(
+  //                 context,
+  //                 MaterialPageRoute(builder: (context) => const SearchScreen()),
+  //               );
+  //             },
+  //             child: Container(
+  //               height: 44,
+  //               decoration: BoxDecoration(
+  //                 color: Colors.grey.shade100,
+  //                 borderRadius: BorderRadius.circular(12),
+  //               ),
+  //               alignment: Alignment.centerLeft,
+  //               padding: const EdgeInsets.symmetric(horizontal: 12),
+  //               child: Row(
+  //                 children: [
+  //                   Icon(Icons.search, size: 20, color: Colors.grey.shade500),
+  //                   const SizedBox(width: 8),
+  //                   Text(
+  //                     'Search for "Shirts"',
+  //                     style: TextStyle(
+  //                       fontSize: 13,
+  //                       color: Colors.grey.shade500,
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //         const SizedBox(width: 10),
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(builder: (context) => WishlistScreen()),
+  //             );
+  //           },
+  //           child: _searchActionButton(Icons.favorite_border),
+  //         ),
+  //         const SizedBox(width: 8),
+  //         GestureDetector(
+  //           onTap: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(builder: (context) => CartScreen()),
+  //             );
+  //           },
+  //           child: _searchActionButton(Icons.shopping_cart_outlined),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+
+
+
+
+
   Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SearchScreen()),
-                );
-              },
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    child: Row(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchScreen()),
+              );
+            },
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
               child: Container(
+                key: ValueKey(_currentKeywordIndex),
                 height: 44,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
@@ -281,11 +378,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Icon(Icons.search, size: 20, color: Colors.grey.shade500),
                     const SizedBox(width: 8),
-                    Text(
-                      'Search for "Shirts"',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey.shade500,
+                    RichText(
+                      text: TextSpan(
+                        style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+                        children: [
+                          const TextSpan(text: 'Search for "'),
+                          TextSpan(
+                            text: _searchKeywords[_currentKeywordIndex],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const TextSpan(text: '"'),
+                        ],
                       ),
                     ),
                   ],
@@ -293,30 +399,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          const SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WishlistScreen()),
-              );
-            },
-            child: _searchActionButton(Icons.favorite_border),
-          ),
-          const SizedBox(width: 8),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CartScreen()),
-              );
-            },
-            child: _searchActionButton(Icons.shopping_cart_outlined),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+        const SizedBox(width: 10),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WishlistScreen()),
+            );
+          },
+          child: _searchActionButton(Icons.favorite_border),
+        ),
+        const SizedBox(width: 8),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CartScreen()),
+            );
+          },
+          child: _searchActionButton(Icons.shopping_cart_outlined),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _searchActionButton(IconData icon) {
     return Container(
@@ -440,8 +547,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 7,
               decoration: BoxDecoration(
                 color: _currentBannerIndex == i
-                    ? Colors.orange
-                    : Colors.grey.shade300,
+                    ? const Color.fromARGB(255, 0, 0, 0)
+                    : const Color.fromARGB(255, 174, 174, 174),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),

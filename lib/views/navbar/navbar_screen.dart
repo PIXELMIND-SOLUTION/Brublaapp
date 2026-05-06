@@ -1,5 +1,6 @@
 import 'package:brublaapp/views/exlusive/exclusive_module.dart';
 import 'package:brublaapp/views/history/history_screen.dart';
+import 'package:brublaapp/views/history/tailor_history_screen.dart';
 import 'package:brublaapp/views/home/home_screen.dart';
 import 'package:brublaapp/views/home/tailer_screen.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
@@ -29,17 +30,19 @@ class _NavbarScreenState extends State<NavbarScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    HomeScreen(),     
+    HomeScreen(),
     HistoryScreen(),
     ExclusiveModule(),
-    TailerScreen(),    
-    ProfileScreen(),   
+
+    TailorHistoryScreen(),
+    // TailerScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true, 
+      extendBody: true,
       backgroundColor: Colors.white,
       body: _screens[_currentIndex],
       bottomNavigationBar: BrublaBottomNavBar(
@@ -73,8 +76,8 @@ class _CurvedWithBumpShape extends CustomPainter {
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
 
     final double cx = size.width / 2;
-    const double bumpRadius = 38.0; 
-    const double bumpHeight = 28.0; 
+    const double bumpRadius = 38.0;
+    const double bumpHeight = 28.0;
 
     final path = Path();
 
@@ -85,16 +88,15 @@ class _CurvedWithBumpShape extends CustomPainter {
     path.lineTo(cx - bumpRadius - 22, bumpHeight);
 
     // Smooth curve UP into the bump (left side)
-    path.cubicTo(
-      cx - bumpRadius - 6, bumpHeight, 
-      cx - bumpRadius, 0,              
-      cx, 0,                           
-    );
+    path.cubicTo(cx - bumpRadius - 6, bumpHeight, cx - bumpRadius, 0, cx, 0);
 
     path.cubicTo(
-      cx + bumpRadius, 0,              
-      cx + bumpRadius + 6, bumpHeight, // cp2
-      cx + bumpRadius + 22, bumpHeight, // back to bar level
+      cx + bumpRadius,
+      0,
+      cx + bumpRadius + 6,
+      bumpHeight, // cp2
+      cx + bumpRadius + 22,
+      bumpHeight, // back to bar level
     );
 
     path.lineTo(size.width, bumpHeight);
@@ -122,11 +124,11 @@ class BrublaBottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  static const Color activeColor   = Color(0xFFCCA882);
+  static const Color activeColor = Color(0xFFCCA882);
   static const Color inactiveColor = Color(0xFF9E9E9E);
-  static const double bumpHeight   = 28.0;
-  static const double fabSize      = 58.0;
-  static const double barHeight    = 68.0;
+  static const double bumpHeight = 28.0;
+  static const double fabSize = 58.0;
+  static const double barHeight = 68.0;
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +267,9 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? const Color.fromARGB(255, 0, 0, 0) : const Color(0xFF9E9E9E);
+    final color = isActive
+        ? const Color.fromARGB(255, 0, 0, 0)
+        : const Color(0xFF9E9E9E);
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,

@@ -1,33 +1,81 @@
 import 'package:flutter/material.dart';
 
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
+
+  @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  List<Map<String, String>> notifications = [
+    {
+      "image": "assets/notificationimage.png",
+      "title": "New Shirt added",
+      "time": "6 min ago",
+    },
+    {
+      "image": "assets/notificationimage1.png",
+      "title": "New Shirt added",
+      "time": "6 min ago",
+    },
+  ];
+
+  void deleteItem(int index) {
+    setState(() {
+      notifications.removeAt(index);
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.green,
+        content: Text("Message deleted successfully"),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(Icons.arrow_back_ios,color: Colors.white,),
+          onPressed: () => Navigator.of(context).pop(),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
         ),
         title: const Text(
           "Notifications",
-          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontWeight: FontWeight.w600),
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: Center(
-              child: Text(
-                "Clear all",
-                style: TextStyle(color: Colors.black54, fontSize: 14),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                notifications.clear();
+              });
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text("All messages cleared"),
+                ),
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(right: 16),
+              child: Center(
+                child: Text(
+                  "Clear all",
+                  style: TextStyle(color: Colors.black54, fontSize: 14),
+                ),
               ),
             ),
           ),
@@ -36,21 +84,49 @@ class NotificationScreen extends StatelessWidget {
 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Column(
-          children: const [
-            NotificationCard(
-              image: "assets/notificationimage.png",
-              title: "New Shirt added",
-              time: "6 min ago",
-            ),
-            SizedBox(height: 10),
-            NotificationCard(
-              image: "assets/notificationimage1.png",
-              title: "New Shirt added",
-              time: "6 min ago",
-            ),
-          ],
-        ),
+        child: notifications.isEmpty
+            ? const Center(child: Text("No notifications"))
+            : ListView.builder(
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  final item = notifications[index];
+
+                  return Dismissible(
+                    key: Key(item['title']! + index.toString()),
+                    direction: DismissDirection.endToStart,
+
+                    // Background when swiping
+                    background: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      alignment: Alignment.centerRight,
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    onDismissed: (direction) {
+                      deleteItem(index);
+                    },
+
+                    child: Column(
+                      children: [
+                        NotificationCard(
+                          image: item["image"]!,
+                          title: item["title"]!,
+                          time: item["time"]!,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    ),
+                  );
+                },
+              ),
       ),
     );
   }
@@ -83,26 +159,33 @@ class NotificationCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Image
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.asset(image, height: 40, width: 40, fit: BoxFit.cover),
+            child: Image.asset(
+              image,
+              height: 40,
+              width: 40,
+              fit: BoxFit.cover,
+            ),
           ),
-
           const SizedBox(width: 12),
 
-          // Texts
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
 
-          // Time
           Text(
             time,
-            style: const TextStyle(fontSize: 12, color: Colors.black45),
+            style: const TextStyle(
+              fontSize: 12,
+              color: Colors.black45,
+            ),
           ),
         ],
       ),
