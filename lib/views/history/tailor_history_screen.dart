@@ -1,7 +1,6 @@
 import 'package:brublaapp/views/home/tailer_screen.dart';
 import 'package:flutter/material.dart';
 
-
 enum BookingStatus { pending, accepted, rejected }
 
 class TailorBooking {
@@ -26,7 +25,8 @@ final List<TailorBooking> _sampleBookings = [
   TailorBooking(
     id: '#T-1042',
     productName: 'Silk Kurta Set',
-    imageUrl: 'https://images.unsplash.com/photo-1594938298603-c8148c4b4457?w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1594938298603-c8148c4b4457?w=400',
     price: 1850.00,
     status: BookingStatus.accepted,
     date: DateTime.now().subtract(const Duration(days: 1)),
@@ -34,7 +34,8 @@ final List<TailorBooking> _sampleBookings = [
   TailorBooking(
     id: '#T-1041',
     productName: 'Bridal Lehenga',
-    imageUrl: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400',
     price: 12500.00,
     status: BookingStatus.pending,
     date: DateTime.now().subtract(const Duration(days: 3)),
@@ -42,7 +43,8 @@ final List<TailorBooking> _sampleBookings = [
   TailorBooking(
     id: '#T-1039',
     productName: 'Cotton Salwar Suit',
-    imageUrl: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=400',
     price: 950.00,
     status: BookingStatus.rejected,
     date: DateTime.now().subtract(const Duration(days: 7)),
@@ -50,7 +52,8 @@ final List<TailorBooking> _sampleBookings = [
   TailorBooking(
     id: '#T-1038',
     productName: 'Men\'s Sherwani',
-    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
+    imageUrl:
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
     price: 8200.00,
     status: BookingStatus.accepted,
     date: DateTime.now().subtract(const Duration(days: 10)),
@@ -73,7 +76,7 @@ class TailorHistoryScreen extends StatefulWidget {
 }
 
 class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
-  BookingStatus? _selectedFilter; 
+  BookingStatus? _selectedFilter;
 
   List<TailorBooking> get _filteredBookings {
     if (_selectedFilter == null) return _sampleBookings;
@@ -96,21 +99,48 @@ class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
-      appBar: _buildAppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          Expanded(
-            child: _filteredBookings.isEmpty
-                ? _buildEmptyState()
-                : _buildBookingList(),
+  Future<bool> _showExitDialog(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Exit App'),
+        content: const Text('Are you sure you want to exit?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Yes'),
           ),
         ],
+      ),
+    );
+    return result ?? false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await _showExitDialog(context);
+        return shouldExit;
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF5F5F5),
+        appBar: _buildAppBar(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: _filteredBookings.isEmpty
+                  ? _buildEmptyState()
+                  : _buildBookingList(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -187,9 +217,11 @@ class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
 
   Widget _buildHeader() {
     final activeCount = _sampleBookings
-        .where((b) =>
-            b.status == BookingStatus.pending ||
-            b.status == BookingStatus.accepted)
+        .where(
+          (b) =>
+              b.status == BookingStatus.pending ||
+              b.status == BookingStatus.accepted,
+        )
         .length;
 
     return Container(
@@ -205,13 +237,14 @@ class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
             GestureDetector(
               onTap: () => setState(() => _selectedFilter = null),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.redAccent.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
-                  border:
-                      Border.all(color: Colors.redAccent.withOpacity(0.5)),
+                  border: Border.all(color: Colors.redAccent.withOpacity(0.5)),
                 ),
                 child: const Row(
                   children: [
@@ -224,8 +257,11 @@ class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
                       ),
                     ),
                     SizedBox(width: 4),
-                    Icon(Icons.close_rounded,
-                        size: 12, color: Colors.redAccent),
+                    Icon(
+                      Icons.close_rounded,
+                      size: 12,
+                      color: Colors.redAccent,
+                    ),
                   ],
                 ),
               ),
@@ -316,8 +352,11 @@ class _TailorHistoryScreenState extends State<TailorHistoryScreen> {
               color: Colors.black.withOpacity(0.06),
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.content_cut_rounded,
-                size: 36, color: Colors.black38),
+            child: const Icon(
+              Icons.content_cut_rounded,
+              size: 36,
+              color: Colors.black38,
+            ),
           ),
           const SizedBox(height: 16),
           const Text(
@@ -511,12 +550,7 @@ class _BookingCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          _buildCardTop(),
-          _buildCardBottom(),
-        ],
-      ),
+      child: Column(children: [_buildCardTop(), _buildCardBottom()]),
     );
   }
 
@@ -538,8 +572,10 @@ class _BookingCard extends StatelessWidget {
                 width: 90,
                 height: 90,
                 color: Colors.grey.shade200,
-                child: const Icon(Icons.image_not_supported_rounded,
-                    color: Colors.grey),
+                child: const Icon(
+                  Icons.image_not_supported_rounded,
+                  color: Colors.grey,
+                ),
               ),
               loadingBuilder: (_, child, loadingProgress) {
                 if (loadingProgress == null) return child;
@@ -621,8 +657,11 @@ class _BookingCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.calendar_today_rounded,
-              size: 12, color: Colors.black38),
+          const Icon(
+            Icons.calendar_today_rounded,
+            size: 12,
+            color: Colors.black38,
+          ),
           const SizedBox(width: 5),
           Text(
             _formatDate(booking.date),
@@ -642,8 +681,11 @@ class _BookingCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 3),
-                Icon(Icons.arrow_forward_ios_rounded,
-                    size: 10, color: Colors.black87),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  size: 10,
+                  color: Colors.black87,
+                ),
               ],
             ),
           ),

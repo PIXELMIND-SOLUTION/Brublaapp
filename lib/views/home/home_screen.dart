@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, deprecated_member_use
 import 'dart:async';
 import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/cart/cart_screen.dart';
@@ -20,36 +20,58 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
-
-  final List<String> _searchKeywords = ['Shirts', 'Pants', 'Jeans', 'Jackets', 'Hoodies', 'Sneakers', 'Kurtas'];
-int _currentKeywordIndex = 0;
-late Timer _keywordTimer;
+  final List<String> _searchKeywords = [
+    'Shirts',
+    'Pants',
+    'Jeans',
+    'Jackets',
+    'Hoodies',
+    'Sneakers',
+    'Kurtas',
+  ];
+  int _currentKeywordIndex = 0;
+  late Timer _keywordTimer;
   int _currentBannerIndex = 0;
   int _currentBrublaIndex = 0;
   final CarouselSliderController _bannerController = CarouselSliderController();
 
+  @override
+  void initState() {
+    super.initState();
+    _keywordTimer = Timer.periodic(const Duration(seconds: 2), (_) {
+      setState(() {
+        _currentKeywordIndex =
+            (_currentKeywordIndex + 1) % _searchKeywords.length;
+      });
+    });
+  }
 
-
+  Future<bool> _showExitDialog(BuildContext context) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Exit App'),
+        content: const Text('Are you sure you want to exit?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Yes'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  }
 
   @override
-void initState() {
-  super.initState();
-  _keywordTimer = Timer.periodic(const Duration(seconds: 2), (_) {
-    setState(() {
-      _currentKeywordIndex = (_currentKeywordIndex + 1) % _searchKeywords.length;
-    });
-  });
-}
-
-
-
-@override
-void dispose() {
-  _keywordTimer.cancel();
-  super.dispose();
-}
+  void dispose() {
+    _keywordTimer.cancel();
+    super.dispose();
+  }
 
   final List<Map<String, dynamic>> _brublaverse = [
     {'image': 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b'},
@@ -143,37 +165,41 @@ void dispose() {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTopBar(),
-              _buildSearchBar(),
-              _buildCategoryTabs(),
-              _buildCategorySection(),
-              _buildBannerCarousel(),
-              _buildSectionWithGrid(
-                title: 'Latest Designs',
-                items: _latestDesigns,
-                showSelected: true,
-                onViewAllTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => DetailScreen()),
-                  );
-                },
-              ),
-              _buildRecommendedRow(),
-              _buildBrublaverseSection(),
-              _buildUpcomingDropSection(),
-              _buildMostSalesSection(),
-              const SizedBox(height: 24),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await _showExitDialog(context);
+        return shouldExit;
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTopBar(),
+                _buildSearchBar(),
+                _buildCategoryTabs(),
+                _buildCategorySection(),
+                _buildBannerCarousel(),
+                _buildSectionWithGrid(
+                  title: 'Latest Designs',
+                  items: _latestDesigns,
+                  showSelected: true,
+                  onViewAllTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => DetailScreen()),
+                    );
+                  },
+                ),
+                _buildRecommendedRow(),
+                _buildBrublaverseSection(),
+                _buildUpcomingDropSection(),
+                _buildMostSalesSection(),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),
@@ -213,7 +239,11 @@ void dispose() {
               ),
               Text(
                 'PMS',
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 0, 0, 0)),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
               ),
             ],
           ),
@@ -241,7 +271,11 @@ void dispose() {
                   const SizedBox(width: 4),
                   const Text(
                     '1200',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,color: Color.fromARGB(255, 0, 0, 0)),
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
                   ),
                 ],
               ),
@@ -255,7 +289,7 @@ void dispose() {
                 MaterialPageRoute(builder: (context) => AddressScreen()),
               );
             },
-            child: _iconButton(Icons.location_on_outlined,),
+            child: _iconButton(Icons.location_on_outlined),
           ),
           const SizedBox(width: 8),
           GestureDetector(
@@ -346,84 +380,83 @@ void dispose() {
   //   );
   // }
 
-
-
-
-
   Widget _buildSearchBar() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    child: Row(
-      children: [
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchScreen()),
-              );
-            },
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              child: Container(
-                key: ValueKey(_currentKeywordIndex),
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: [
-                    Icon(Icons.search, size: 20, color: Colors.grey.shade500),
-                    const SizedBox(width: 8),
-                    RichText(
-                      text: TextSpan(
-                        style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
-                        children: [
-                          const TextSpan(text: 'Search for "'),
-                          TextSpan(
-                            text: _searchKeywords[_currentKeywordIndex],
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchScreen()),
+                );
+              },
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: Container(
+                  key: ValueKey(_currentKeywordIndex),
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Row(
+                    children: [
+                      Icon(Icons.search, size: 20, color: Colors.grey.shade500),
+                      const SizedBox(width: 8),
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.grey.shade500,
                           ),
-                          const TextSpan(text: '"'),
-                        ],
+                          children: [
+                            const TextSpan(text: 'Search for "'),
+                            TextSpan(
+                              text: _searchKeywords[_currentKeywordIndex],
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const TextSpan(text: '"'),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        const SizedBox(width: 10),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WishlistScreen()),
-            );
-          },
-          child: _searchActionButton(Icons.favorite_border),
-        ),
-        const SizedBox(width: 8),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartScreen()),
-            );
-          },
-          child: _searchActionButton(Icons.shopping_cart_outlined),
-        ),
-      ],
-    ),
-  );
-}
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WishlistScreen()),
+              );
+            },
+            child: _searchActionButton(Icons.favorite_border),
+          ),
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartScreen()),
+              );
+            },
+            child: _searchActionButton(Icons.shopping_cart_outlined),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _searchActionButton(IconData icon) {
     return Container(
@@ -507,7 +540,11 @@ void dispose() {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey.shade200),
           ),
-          child: Image.asset(cat['image'], fit: BoxFit.contain,color: Colors.white,),
+          child: Image.asset(
+            cat['image'],
+            fit: BoxFit.contain,
+            color: Colors.white,
+          ),
         ),
         const SizedBox(height: 6),
         Text(
@@ -991,15 +1028,17 @@ void dispose() {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Color.fromARGB(255, 0, 0, 0)),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
         ),
         GestureDetector(
-          onTap: onTap, // 👈 dynamic action
+          onTap: onTap, 
           child: const Text(
             'View all >>',
-            // style: TextStyle(fontSize: 12, color: Colors.black),
-                        style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 0, 0, 0)),
-
+            style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 0, 0, 0)),
           ),
         ),
       ],

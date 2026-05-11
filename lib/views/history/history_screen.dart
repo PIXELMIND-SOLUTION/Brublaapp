@@ -1018,157 +1018,186 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
+
+
+  Future<bool> _showExitDialog(BuildContext context) async {
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Exit App'),
+      content: const Text('Are you sure you want to exit?'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('No'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text('Yes'),
+        ),
+      ],
+    ),
+  );
+  return result ?? false;
+}
+
   // ── Build ─────────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     final filtered = _filteredBookings;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8F8F6),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Recent Bookings',
-              style: TextStyle(
-                fontFamily: 'Georgia',
-                fontSize: 22,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-            Row(
-              children: [
-                const Text(
-                  'Brubla Store',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF6B7280),
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.5,
-                  ),
+    return WillPopScope(
+       onWillPop: () async {
+      final shouldExit = await _showExitDialog(context);
+      return shouldExit;
+    },
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF8F8F6),
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: false,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Recent Bookings',
+                style: TextStyle(
+                  fontFamily: 'Georgia',
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF111827),
                 ),
-                if (_selectedFilter != 'All') ...[
-                  const SizedBox(width: 6),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 2,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Brubla Store',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFF6B7280),
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0.5,
                     ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF111827),
-                      borderRadius: BorderRadius.circular(20),
+                  ),
+                  if (_selectedFilter != 'All') ...[
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF111827),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        _selectedFilter,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                    child: Text(
-                      _selectedFilter,
-                      style: const TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
+                  ],
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.filter_list_rounded,
+                    color: Color(0xFF374151),
+                  ),
+                  onPressed: _showFilterSheet,
+                ),
+                if (_selectedFilter != 'All')
+                  Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFF97316),
+                        shape: BoxShape.circle,
                       ),
                     ),
                   ),
-                ],
               ],
+            ),
+            const SizedBox(width: 4),
+          ],
+        ),
+        // ── Body + sticky bottom button using Column ──────────────────────────────
+        body: Column(
+          children: [
+            Expanded(
+              child: filtered.isEmpty
+                  ? _buildEmptyState()
+                  : ListView.separated(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: filtered.length,
+                      separatorBuilder: (_, __) => const SizedBox(height: 12),
+                      itemBuilder: (ctx, i) => _BookingCard(
+                        booking: filtered[i],
+                        statusColor: _statusColor(filtered[i]['status']),
+                        statusIcon: _statusIcon(filtered[i]['status']),
+                      ),
+                    ),
+            ),
+            // ── Create Stylist button — always visible ────────────────────────────
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(
+                16,
+                12,
+                16,
+                MediaQuery.of(context).padding.bottom + 12,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StylistScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.add_rounded,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  label: const Text(
+                    'Create Stylist',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF111827),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
-        actions: [
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              IconButton(
-                icon: const Icon(
-                  Icons.filter_list_rounded,
-                  color: Color(0xFF374151),
-                ),
-                onPressed: _showFilterSheet,
-              ),
-              if (_selectedFilter != 'All')
-                Positioned(
-                  top: 8,
-                  right: 8,
-                  child: Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF97316),
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                ),
-            ],
-          ),
-          const SizedBox(width: 4),
-        ],
-      ),
-      // ── Body + sticky bottom button using Column ──────────────────────────────
-      body: Column(
-        children: [
-          Expanded(
-            child: filtered.isEmpty
-                ? _buildEmptyState()
-                : ListView.separated(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: filtered.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (ctx, i) => _BookingCard(
-                      booking: filtered[i],
-                      statusColor: _statusColor(filtered[i]['status']),
-                      statusIcon: _statusIcon(filtered[i]['status']),
-                    ),
-                  ),
-          ),
-          // ── Create Stylist button — always visible ────────────────────────────
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.fromLTRB(
-              16,
-              12,
-              16,
-              MediaQuery.of(context).padding.bottom + 12,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => StylistScreen(),
-                    ),
-                  );
-                },
-                icon: const Icon(
-                  Icons.add_rounded,
-                  color: Colors.white,
-                  size: 20,
-                ),
-                label: const Text(
-                  'Create Stylist',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF111827),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

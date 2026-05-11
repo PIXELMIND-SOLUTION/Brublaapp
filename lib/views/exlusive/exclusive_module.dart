@@ -139,38 +139,66 @@ class _HomeScreenState extends State<ExclusiveModule> {
     },
   ];
 
+
+  Future<bool> _showExitDialog(BuildContext context) async {
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: const Text('Exit App'),
+      content: const Text('Are you sure you want to exit?'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: const Text('No'),
+        ),
+        TextButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: const Text('Yes'),
+        ),
+      ],
+    ),
+  );
+  return result ?? false;
+}
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTopBar(),
-              _buildSearchBar(),
-              _buildCategoryTabs(),
-              _buildCategorySection(),
-              _buildBannerCarousel(),
-              _buildSectionWithGrid(
-                title: 'Recently Viewed',
-
-                items: _latestDesigns,
-                showSelected: true,
-                onViewAllTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => ExclusiveDetails()),
-                  );
-                },
-              ),
-              _buildRecommendedRow(),
-              _buildBrublaverseSection(),
-              _buildUpcomingDropSection(),
-              _buildMostSalesSection(),
-              const SizedBox(height: 24),
-            ],
+    return WillPopScope(
+       onWillPop: () async {
+      final shouldExit = await _showExitDialog(context);
+      return shouldExit;
+    },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTopBar(),
+                _buildSearchBar(),
+                _buildCategoryTabs(),
+                _buildCategorySection(),
+                _buildBannerCarousel(),
+                _buildSectionWithGrid(
+                  title: 'Recently Viewed',
+      
+                  items: _latestDesigns,
+                  showSelected: true,
+                  onViewAllTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => ExclusiveDetails()),
+                    );
+                  },
+                ),
+                _buildRecommendedRow(),
+                _buildBrublaverseSection(),
+                _buildUpcomingDropSection(),
+                _buildMostSalesSection(),
+                const SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),

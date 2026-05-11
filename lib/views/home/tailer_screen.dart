@@ -189,6 +189,8 @@
 
 
 
+// ignore_for_file: unused_import
+
 import 'package:brublaapp/views/paymentdetails/payment_details.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -368,9 +370,7 @@ class _TailerScreenState extends State<TailerScreen> {
   }
 }
 
-// ─────────────────────────────────────────────
-//  Confirmation Dialog Widget
-// ─────────────────────────────────────────────
+
 class _ConfirmationDialog extends StatefulWidget {
   const _ConfirmationDialog();
 
@@ -631,9 +631,7 @@ class _AnimatedProgressBarState extends State<_AnimatedProgressBar>
   }
 }
 
-// ─────────────────────────────────────────────
-//  Status Chip with fade-in delay
-// ─────────────────────────────────────────────
+
 class _StatusChip extends StatefulWidget {
   final String label;
   final int delay;

@@ -246,6 +246,8 @@
 
 
 
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -468,11 +470,11 @@ class _FaqTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E1E2C), // Dark card
+        color: const Color(0xFF1E1E2C), 
         borderRadius: BorderRadius.circular(12),
         border: const Border(
           left: BorderSide(
-            color: Color(0xFFE94560), // Accent border
+            color: Color(0xFFE94560), 
             width: 3,
           ),
         ),

@@ -21,21 +21,10 @@
 // //   }
 // // }
 
-
-
-
-
-
-
-
-
-
-
 // import 'package:brublaapp/provider/navbar/navbar_provider.dart';
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 // import 'package:brublaapp/views/splash/splash_screen.dart';
-
 
 // void main() {
 //   runApp(const MyAppWrapper());
@@ -51,7 +40,6 @@
 //         ChangeNotifierProvider<BottomNavbarProvider>(
 //           create: (_) => BottomNavbarProvider(),
 //         ),
-
 
 //       ],
 //       child: const MyApp(),
@@ -77,25 +65,21 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
 // lib/main.dart
 
+import 'package:brublaapp/helper/shared_preference.dart';
 import 'package:brublaapp/provider/dessigner/designer_provider.dart';
 import 'package:brublaapp/provider/navbar/navbar_provider.dart';
 import 'package:brublaapp/provider/navbar/tailor/tailor_navbar_provider.dart';
 import 'package:brublaapp/provider/stylist/stylist_navbar_provider.dart';
+import 'package:brublaapp/views/navbar/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:brublaapp/views/splash/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // ← required for async in main
+  await SharedPrefsHelper.init();
   runApp(const MyAppWrapper());
 }
 
@@ -118,6 +102,8 @@ class MyAppWrapper extends StatelessWidget {
         ChangeNotifierProvider<UserNavbarProvider>(
           create: (_) => UserNavbarProvider(),
         ),
+
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
       ],
       child: const MyApp(),
     );
@@ -133,9 +119,7 @@ class MyApp extends StatelessWidget {
       title: 'BRUBLA',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       home: const SplashScreen(),
     );
