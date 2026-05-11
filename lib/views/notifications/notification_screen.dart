@@ -8,13 +8,15 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  List<Map<String, String>> notifications = [
+  List<Map<String, dynamic>> notifications = [
     {
+      "id": 1,
       "image": "assets/notificationimage.png",
       "title": "New Shirt added",
       "time": "6 min ago",
     },
     {
+      "id": 2,
       "image": "assets/notificationimage1.png",
       "title": "New Shirt added",
       "time": "6 min ago",
@@ -39,7 +41,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         elevation: 0,
@@ -49,10 +50,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         title: const Text(
           "Notifications",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         actions: [
@@ -61,7 +59,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
               setState(() {
                 notifications.clear();
               });
-
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   backgroundColor: Colors.green,
@@ -81,7 +78,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ],
       ),
-
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: notifications.isEmpty
@@ -92,10 +88,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   final item = notifications[index];
 
                   return Dismissible(
-                    key: Key(item['title']! + index.toString()),
+                    key: ValueKey(item['id']),
                     direction: DismissDirection.endToStart,
-
-                    // Background when swiping
                     background: Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -104,16 +98,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       alignment: Alignment.centerRight,
-                      child: const Icon(
-                        Icons.delete,
-                        color: Colors.white,
-                      ),
+                      child: const Icon(Icons.delete, color: Colors.white),
                     ),
-
-                    onDismissed: (direction) {
-                      deleteItem(index);
-                    },
-
+                    onDismissed: (direction) => deleteItem(index),
                     child: Column(
                       children: [
                         NotificationCard(
@@ -131,10 +118,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 }
-
-// ─────────────────────────────
-// Notification Card Widget
-// ─────────────────────────────
 
 class NotificationCard extends StatelessWidget {
   final String image;
@@ -169,23 +152,15 @@ class NotificationCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-
           Expanded(
             child: Text(
               title,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
-
           Text(
             time,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.black45,
-            ),
+            style: const TextStyle(fontSize: 12, color: Colors.black45),
           ),
         ],
       ),
