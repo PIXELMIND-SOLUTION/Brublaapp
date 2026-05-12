@@ -467,38 +467,6 @@ class StylistProfileScreen extends StatelessWidget {
   }
 }
 
-/// ── Stat Item Widget ──
-class _StatItem extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _StatItem({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.grey[600],
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 /// ── Modern Action Card Widget ──
 class _ModernActionCard extends StatelessWidget {

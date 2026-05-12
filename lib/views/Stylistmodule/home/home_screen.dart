@@ -1,3 +1,4 @@
+// ignore_for_file: unused_import, unused_field
 
 import 'package:brublaapp/views/Stylistmodule/home/notification_screen.dart';
 import 'package:brublaapp/views/Stylistmodule/home/profile_screen.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<StylistHomeScreen>
   late AnimationController _animController;
   late Animation<double> _fadeAnim;
   late Animation<Offset> _slideAnim;
-  
+
   List<DesignModel> designs = [];
 
   @override
@@ -28,13 +29,11 @@ class _HomeScreenState extends State<StylistHomeScreen>
       vsync: this,
       duration: const Duration(milliseconds: 700),
     );
-    _fadeAnim =
-        CurvedAnimation(parent: _animController, curve: Curves.easeOut);
+    _fadeAnim = CurvedAnimation(parent: _animController, curve: Curves.easeOut);
     _slideAnim = Tween<Offset>(
       begin: const Offset(0, 0.12),
       end: Offset.zero,
-    ).animate(
-        CurvedAnimation(parent: _animController, curve: Curves.easeOut));
+    ).animate(CurvedAnimation(parent: _animController, curve: Curves.easeOut));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showNewOrderModal(context);
@@ -65,8 +64,7 @@ class _HomeScreenState extends State<StylistHomeScreen>
           position: Tween<Offset>(
             begin: const Offset(0, 1),
             end: Offset.zero,
-          ).animate(
-              CurvedAnimation(parent: anim, curve: Curves.easeOutCubic)),
+          ).animate(CurvedAnimation(parent: anim, curve: Curves.easeOutCubic)),
           child: child,
         );
       },
@@ -86,8 +84,7 @@ class _HomeScreenState extends State<StylistHomeScreen>
           position: Tween<Offset>(
             begin: const Offset(0, 1),
             end: Offset.zero,
-          ).animate(
-              CurvedAnimation(parent: anim, curve: Curves.easeOutCubic)),
+          ).animate(CurvedAnimation(parent: anim, curve: Curves.easeOutCubic)),
           child: child,
         );
       },
@@ -169,17 +166,24 @@ class _HomeScreenState extends State<StylistHomeScreen>
       ),
       actions: [
         IconButton(
-          icon:
-              const Icon(Icons.notifications_outlined, color: Colors.white),
+          icon: const Icon(Icons.notifications_outlined, color: Colors.white),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => DesignerNotificationsScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DesignerNotificationsScreen(),
+              ),
+            );
           },
         ),
         Padding(
           padding: const EdgeInsets.only(right: 12),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => StylistProfileScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StylistProfileScreen()),
+              );
             },
             child: CircleAvatar(
               radius: 17,
@@ -507,8 +511,7 @@ class _DesignCard extends StatelessWidget {
         children: [
           // Image area
           ClipRRect(
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(20)),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             child: Stack(
               children: [
                 imageFile != null
@@ -522,8 +525,11 @@ class _DesignCard extends StatelessWidget {
                         width: 155,
                         height: 130,
                         color: Colors.grey.shade200,
-                        child: const Icon(Icons.image_outlined,
-                            color: Colors.black26, size: 40),
+                        child: const Icon(
+                          Icons.image_outlined,
+                          color: Colors.black26,
+                          size: 40,
+                        ),
                       ),
                 // Tag chip
                 Positioned(
@@ -531,7 +537,9 @@ class _DesignCard extends StatelessWidget {
                   left: 10,
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8, vertical: 3),
+                      horizontal: 8,
+                      vertical: 3,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.82),
                       borderRadius: BorderRadius.circular(20),
@@ -573,16 +581,23 @@ class _DesignCard extends StatelessWidget {
                     Text(
                       category,
                       style: const TextStyle(
-                          fontSize: 10, color: Colors.black45),
+                        fontSize: 10,
+                        color: Colors.black45,
+                      ),
                     ),
                     const Spacer(),
-                    const Icon(Icons.straighten_rounded,
-                        size: 10, color: Colors.black38),
+                    const Icon(
+                      Icons.straighten_rounded,
+                      size: 10,
+                      color: Colors.black38,
+                    ),
                     const SizedBox(width: 3),
                     Text(
                       dims,
                       style: const TextStyle(
-                          fontSize: 9, color: Colors.black38),
+                        fontSize: 9,
+                        color: Colors.black38,
+                      ),
                     ),
                   ],
                 ),
@@ -704,7 +719,9 @@ class _AddDesignFormState extends State<_AddDesignForm> {
       category: _selectedCategory!,
       keywords: _selectedKeywords.toList(),
       width: _widthController.text.isEmpty ? 'Standard' : _widthController.text,
-      height: _heightController.text.isEmpty ? 'Standard' : _heightController.text,
+      height: _heightController.text.isEmpty
+          ? 'Standard'
+          : _heightController.text,
       imageFile: File(_selectedImages.first.path),
       images: _selectedImages,
     );
@@ -718,7 +735,7 @@ class _AddDesignFormState extends State<_AddDesignForm> {
         duration: Duration(seconds: 2),
       ),
     );
-    
+
     Navigator.of(context).pop();
   }
 
@@ -734,8 +751,7 @@ class _AddDesignFormState extends State<_AddDesignForm> {
       prefixIcon: Icon(icon, color: Colors.black54, size: 18),
       filled: true,
       fillColor: Colors.white,
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: const BorderSide(color: Colors.black12),
@@ -753,141 +769,198 @@ class _AddDesignFormState extends State<_AddDesignForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Material(
-        color: Colors.transparent,
-        child: Container(
-          width: double.infinity,
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.92,
-          ),
-          decoration: const BoxDecoration(
-            color: Color(0xFFF5F5F3),
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(32)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Handle + header
-              Padding(
-                padding:
-                    const EdgeInsets.fromLTRB(22, 14, 22, 0),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Container(
-                        width: 40,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: Colors.black26,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.design_services_rounded,
-                                  color: Colors.white, size: 13),
-                              SizedBox(width: 6),
-                              Text(
-                                'ADD NEW DESIGN',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1.5,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            width: 34,
-                            height: 34,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: Colors.black12),
-                            ),
-                            child: const Icon(Icons.close_rounded,
-                                size: 16, color: Colors.black),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+
+        final shouldExit = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: const Text(
+              'Exit App',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            content: const Text('Are you sure you want to exit?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.grey),
                 ),
               ),
-              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF5A35EB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  'Exit',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+        );
 
-              // Scrollable form
-              Expanded(
-                child: SingleChildScrollView(
-                  padding:
-                      const EdgeInsets.fromLTRB(22, 0, 22, 36),
+        if (shouldExit == true && context.mounted) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: double.infinity,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.92,
+            ),
+            decoration: const BoxDecoration(
+              color: Color(0xFFF5F5F3),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle + header
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(22, 14, 22, 0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Name
-                      TextField(
-                        controller: _nameController,
-                        decoration: _fieldDecor(
-                            'Design Name',
-                            Icons.drive_file_rename_outline_rounded),
-                        style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Category dropdown
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          border: Border.all(color: Colors.black12),
+                      Center(
+                        child: Container(
+                          width: 40,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: Colors.black26,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: _selectedCategory,
-                            isExpanded: true,
-                            hint: Row(
+                      ),
+                      const SizedBox(height: 18),
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Icon(Icons.category_outlined,
-                                    color: Colors.black54, size: 18),
-                                const SizedBox(width: 8),
-                                const Text(
-                                  'Category',
+                                Icon(
+                                  Icons.design_services_rounded,
+                                  color: Colors.white,
+                                  size: 13,
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  'ADD NEW DESIGN',
                                   style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 0.6,
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 1.5,
                                   ),
                                 ),
                               ],
                             ),
-                            items: _categories
-                                .map((c) => DropdownMenuItem(
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).pop(),
+                            child: Container(
+                              width: 34,
+                              height: 34,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Colors.black12),
+                              ),
+                              child: const Icon(
+                                Icons.close_rounded,
+                                size: 16,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                // Scrollable form
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.fromLTRB(22, 0, 22, 36),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Name
+                        TextField(
+                          controller: _nameController,
+                          decoration: _fieldDecor(
+                            'Design Name',
+                            Icons.drive_file_rename_outline_rounded,
+                          ),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Category dropdown
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                            border: Border.all(color: Colors.black12),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: _selectedCategory,
+                              isExpanded: true,
+                              hint: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.category_outlined,
+                                    color: Colors.black54,
+                                    size: 18,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    'Category',
+                                    style: TextStyle(
+                                      color: Colors.black45,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.6,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              items: _categories
+                                  .map(
+                                    (c) => DropdownMenuItem(
                                       value: c,
                                       child: Text(
                                         c,
@@ -897,227 +970,231 @@ class _AddDesignFormState extends State<_AddDesignForm> {
                                           color: Colors.black,
                                         ),
                                       ),
-                                    ))
-                                .toList(),
-                            onChanged: (val) =>
-                                setState(() => _selectedCategory = val),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Description
-                      TextField(
-                        controller: _descController,
-                        maxLines: 3,
-                        decoration: _fieldDecor(
-                          'Description',
-                          Icons.notes_rounded,
-                        ),
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      const SizedBox(height: 14),
-
-                      // Image upload area
-                      _buildSectionLabel('IMAGES'),
-                      const SizedBox(height: 10),
-                      GestureDetector(
-                        onTap: _pickImages,
-                        child: Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 22),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 1.2,
+                                    ),
+                                  )
+                                  .toList(),
+                              onChanged: (val) =>
+                                  setState(() => _selectedCategory = val),
                             ),
                           ),
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius:
-                                      BorderRadius.circular(12),
-                                ),
-                                child: const Icon(
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Description
+                        TextField(
+                          controller: _descController,
+                          maxLines: 3,
+                          decoration: _fieldDecor(
+                            'Description',
+                            Icons.notes_rounded,
+                          ),
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                        const SizedBox(height: 14),
+
+                        // Image upload area
+                        _buildSectionLabel('IMAGES'),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                          onTap: _pickImages,
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 22),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1.2,
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 44,
+                                  height: 44,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: const Icon(
                                     Icons.add_photo_alternate_outlined,
                                     color: Colors.white,
-                                    size: 22),
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                _selectedImages.isNotEmpty
-                                    ? '${_selectedImages.length} image${_selectedImages.length > 1 ? 's' : ''} selected'
-                                    : 'Tap to upload images',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: _selectedImages.isNotEmpty
-                                      ? Colors.black
-                                      : Colors.black45,
+                                    size: 22,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'JPG, PNG up to 10MB each',
-                                style: TextStyle(
+                                const SizedBox(height: 10),
+                                Text(
+                                  _selectedImages.isNotEmpty
+                                      ? '${_selectedImages.length} image${_selectedImages.length > 1 ? 's' : ''} selected'
+                                      : 'Tap to upload images',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: _selectedImages.isNotEmpty
+                                        ? Colors.black
+                                        : Colors.black45,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                const Text(
+                                  'JPG, PNG up to 10MB each',
+                                  style: TextStyle(
                                     fontSize: 10,
-                                    color: Colors.black38),
-                              ),
-                            ],
+                                    color: Colors.black38,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 22),
+                        const SizedBox(height: 22),
 
-                      // Keywords
-                      _buildSectionLabel('KEYWORDS'),
-                      const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: _allKeywords.map((kw) {
-                          final selected =
-                              _selectedKeywords.contains(kw);
-                          return GestureDetector(
-                            onTap: () => setState(() {
-                              if (selected) {
-                                _selectedKeywords.remove(kw);
-                              } else {
-                                _selectedKeywords.add(kw);
-                              }
-                            }),
-                            child: AnimatedContainer(
-                              duration:
-                                  const Duration(milliseconds: 200),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 14, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: selected
-                                    ? Colors.black
-                                    : Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(30),
-                                border: Border.all(
-                                  color: selected
-                                      ? Colors.black
-                                      : Colors.black26,
+                        // Keywords
+                        _buildSectionLabel('KEYWORDS'),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: _allKeywords.map((kw) {
+                            final selected = _selectedKeywords.contains(kw);
+                            return GestureDetector(
+                              onTap: () => setState(() {
+                                if (selected) {
+                                  _selectedKeywords.remove(kw);
+                                } else {
+                                  _selectedKeywords.add(kw);
+                                }
+                              }),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 14,
+                                  vertical: 8,
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (selected) ...[
-                                    const Icon(
+                                decoration: BoxDecoration(
+                                  color: selected ? Colors.black : Colors.white,
+                                  borderRadius: BorderRadius.circular(30),
+                                  border: Border.all(
+                                    color: selected
+                                        ? Colors.black
+                                        : Colors.black26,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (selected) ...[
+                                      const Icon(
                                         Icons.check_rounded,
                                         size: 12,
-                                        color: Colors.white),
-                                    const SizedBox(width: 4),
-                                  ],
-                                  Text(
-                                    kw,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      color: selected
-                                          ? Colors.white
-                                          : Colors.black,
-                                      letterSpacing: 0.3,
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(width: 4),
+                                    ],
+                                    Text(
+                                      kw,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: selected
+                                            ? Colors.white
+                                            : Colors.black,
+                                        letterSpacing: 0.3,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                      const SizedBox(height: 22),
-
-                      // Dimensions
-                      _buildSectionLabel('DIMENSIONS'),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: _widthController,
-                              keyboardType: TextInputType.number,
-                              decoration: _fieldDecor(
-                                  'Width (in)',
-                                  Icons.swap_horiz_rounded),
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Container(
-                            width: 32,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.circular(8),
-                            ),
-                            child: const Icon(Icons.close_rounded,
-                                color: Colors.white, size: 14),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: TextField(
-                              controller: _heightController,
-                              keyboardType: TextInputType.number,
-                              decoration: _fieldDecor(
-                                  'Height (in)',
-                                  Icons.swap_vert_rounded),
-                              style: const TextStyle(fontSize: 14),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 28),
-
-                      // Submit button
-                      GestureDetector(
-                        onTap: _submitDesign,
-                        child: Container(
-                          width: double.infinity,
-                          height: 56,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius:
-                                BorderRadius.circular(18),
-                          ),
-                          child: const Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.save_alt_rounded,
-                                  color: Colors.white, size: 18),
-                              SizedBox(width: 10),
-                              Text(
-                                'SAVE DESIGN',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 2.5,
+                                  ],
                                 ),
                               ),
-                            ],
+                            );
+                          }).toList(),
+                        ),
+                        const SizedBox(height: 22),
+
+                        // Dimensions
+                        _buildSectionLabel('DIMENSIONS'),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: _widthController,
+                                keyboardType: TextInputType.number,
+                                decoration: _fieldDecor(
+                                  'Width (in)',
+                                  Icons.swap_horiz_rounded,
+                                ),
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(
+                                Icons.close_rounded,
+                                color: Colors.white,
+                                size: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: TextField(
+                                controller: _heightController,
+                                keyboardType: TextInputType.number,
+                                decoration: _fieldDecor(
+                                  'Height (in)',
+                                  Icons.swap_vert_rounded,
+                                ),
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 28),
+
+                        // Submit button
+                        GestureDetector(
+                          onTap: _submitDesign,
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.save_alt_rounded,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  'SAVE DESIGN',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 2.5,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -1232,8 +1309,7 @@ class _StatCard extends StatelessWidget {
                         : Colors.black.withOpacity(0.06),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child:
-                      Icon(icon, color: Colors.black87, size: 16),
+                  child: Icon(icon, color: Colors.black87, size: 16),
                 ),
                 const SizedBox(width: 10),
                 Column(
@@ -1360,8 +1436,7 @@ class _OrderTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   item,
-                  style: const TextStyle(
-                      color: Colors.black45, fontSize: 12),
+                  style: const TextStyle(color: Colors.black45, fontSize: 12),
                 ),
               ],
             ),
@@ -1370,8 +1445,7 @@ class _OrderTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 9, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                 decoration: BoxDecoration(
                   color: _statusBg,
                   borderRadius: BorderRadius.circular(20),
@@ -1379,8 +1453,8 @@ class _OrderTile extends StatelessWidget {
                     color: status == 'completed'
                         ? Colors.black26
                         : status == 'rejected'
-                            ? Colors.black12
-                            : Colors.transparent,
+                        ? Colors.black12
+                        : Colors.transparent,
                   ),
                 ),
                 child: Text(
@@ -1396,8 +1470,7 @@ class _OrderTile extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 date,
-                style: const TextStyle(
-                    color: Colors.black38, fontSize: 11),
+                style: const TextStyle(color: Colors.black38, fontSize: 11),
               ),
             ],
           ),
@@ -1423,8 +1496,7 @@ class _NewOrderModal extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(22, 12, 22, 36),
           decoration: const BoxDecoration(
             color: Color(0xFFF5F5F3),
-            borderRadius:
-                BorderRadius.vertical(top: Radius.circular(32)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -1446,7 +1518,9 @@ class _NewOrderModal extends StatelessWidget {
               // NEW ORDER badge
               Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 6),
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(20),
@@ -1454,8 +1528,11 @@ class _NewOrderModal extends StatelessWidget {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.fiber_new_rounded,
-                        color: Colors.white, size: 14),
+                    Icon(
+                      Icons.fiber_new_rounded,
+                      color: Colors.white,
+                      size: 14,
+                    ),
                     SizedBox(width: 6),
                     Text(
                       'NEW ORDER REQUEST',
@@ -1495,15 +1572,16 @@ class _NewOrderModal extends StatelessWidget {
                           height: 110,
                           decoration: BoxDecoration(
                             color: Colors.black,
-                            borderRadius:
-                                BorderRadius.circular(14),
+                            borderRadius: BorderRadius.circular(14),
                           ),
                           child: const Column(
-                            mainAxisAlignment:
-                                MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.checkroom_rounded,
-                                  color: Colors.white, size: 36),
+                              Icon(
+                                Icons.checkroom_rounded,
+                                color: Colors.white,
+                                size: 36,
+                              ),
                               SizedBox(height: 6),
                               Text(
                                 'DESIGNER',
@@ -1524,8 +1602,7 @@ class _NewOrderModal extends StatelessWidget {
                             height: 110,
                             decoration: BoxDecoration(
                               color: Colors.black12,
-                              borderRadius:
-                                  BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(14),
                             ),
                             child: const Center(
                               child: CircularProgressIndicator(
@@ -1540,17 +1617,17 @@ class _NewOrderModal extends StatelessWidget {
                     const SizedBox(width: 14),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // Designer tag
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 7, vertical: 3),
+                              horizontal: 7,
+                              vertical: 3,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.black,
-                              borderRadius:
-                                  BorderRadius.circular(6),
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
                               'DESIGNER PIECE',
@@ -1608,17 +1685,14 @@ class _NewOrderModal extends StatelessWidget {
                               ),
                               const SizedBox(width: 8),
                               Container(
-                                padding:
-                                    const EdgeInsets.symmetric(
-                                        horizontal: 7,
-                                        vertical: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 7,
+                                  vertical: 3,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: Colors.black
-                                      .withOpacity(0.07),
-                                  borderRadius:
-                                      BorderRadius.circular(6),
-                                  border: Border.all(
-                                      color: Colors.black12),
+                                  color: Colors.black.withOpacity(0.07),
+                                  borderRadius: BorderRadius.circular(6),
+                                  border: Border.all(color: Colors.black12),
                                 ),
                                 child: const Text(
                                   'Adv: ₹5,000',
@@ -1693,14 +1767,18 @@ class _NewOrderModal extends StatelessWidget {
                           Text(
                             'Delivery by Apr 20, 2025',
                             style: TextStyle(
-                                color: Colors.black45, fontSize: 12),
+                              color: Colors.black45,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 5),
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFFFD700).withOpacity(0.22),
                         borderRadius: BorderRadius.circular(10),
@@ -1733,8 +1811,7 @@ class _NewOrderModal extends StatelessWidget {
                             duration: Duration(seconds: 2),
                           ),
                         );
-                        Future.delayed(
-                            const Duration(milliseconds: 500), () {
+                        Future.delayed(const Duration(milliseconds: 500), () {
                           Navigator.of(context).pop();
                         });
                       },
@@ -1743,8 +1820,7 @@ class _NewOrderModal extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                              color: Colors.black, width: 1.5),
+                          border: Border.all(color: Colors.black, width: 1.5),
                         ),
                         child: const Center(
                           child: Text(
@@ -1772,8 +1848,7 @@ class _NewOrderModal extends StatelessWidget {
                             duration: Duration(seconds: 2),
                           ),
                         );
-                        Future.delayed(
-                            const Duration(milliseconds: 500), () {
+                        Future.delayed(const Duration(milliseconds: 500), () {
                           Navigator.of(context).pop();
                         });
                       },
@@ -1786,8 +1861,11 @@ class _NewOrderModal extends StatelessWidget {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.check_rounded,
-                                color: Colors.white, size: 18),
+                            Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                              size: 18,
+                            ),
                             SizedBox(width: 8),
                             Text(
                               'ACCEPT ORDER',

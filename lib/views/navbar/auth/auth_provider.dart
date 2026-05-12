@@ -3,14 +3,7 @@ import 'package:brublaapp/model/auth_model.dart';
 import 'package:brublaapp/services/auth/auth_services.dart';
 import 'package:flutter/foundation.dart';
 
-
-enum AuthState {
-  idle,
-  loading,
-  otpSent,      
-  authenticated,
-  error,
-}
+enum AuthState { idle, loading, otpSent, authenticated, error }
 
 enum AuthFlow { login, register }
 
@@ -48,7 +41,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   Future<void> login(String mobile) async {
     _flow = AuthFlow.login;
     _pendingMobile = mobile;
@@ -65,7 +57,6 @@ class AuthProvider extends ChangeNotifier {
       _setError(result.errorMessage!);
     }
   }
-
 
   Future<void> verifyLoginOtp(String otp) async {
     if (_pendingMobile == null || _pendingToken == null) {
@@ -129,7 +120,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   Future<void> verifyRegisterOtp(String otp) async {
     if (_pendingMobile == null || _pendingToken == null) {
       _setError('Session expired. Please register again.');
@@ -160,7 +150,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   Future<void> resendOtp() async {
     if (_pendingMobile == null) {
       _setError('Mobile number not found. Please start again.');
@@ -183,7 +172,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-
   Future<void> logout() async {
     await SharedPrefsHelper.clearSession();
     _currentUser = null;
@@ -193,6 +181,17 @@ class AuthProvider extends ChangeNotifier {
     _setState(AuthState.idle);
   }
 
+  // Future<void> _persistSession({
+  //   required String token,
+  //   required String mobile,
+  //   UserModel? user,
+  // }) async {
+  //   await SharedPrefsHelper.saveSession(token: token, mobile: mobile);
+  //   if (user != null) {
+  //     await SharedPrefsHelper.saveUser(user);
+  //     _currentUser = user;
+  //   }
+  // }
 
   Future<void> _persistSession({
     required String token,
@@ -202,6 +201,7 @@ class AuthProvider extends ChangeNotifier {
     await SharedPrefsHelper.saveSession(token: token, mobile: mobile);
     if (user != null) {
       await SharedPrefsHelper.saveUser(user);
+      await SharedPrefsHelper.saveUserId(user.id.toString());
       _currentUser = user;
     }
   }

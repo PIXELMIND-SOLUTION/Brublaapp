@@ -13,6 +13,12 @@ class ApiConstants {
 
   static const String resendOtp = '$_base/users/resend-otp';
 
+  static String userProfile(String userId) => '$_base/users/$userId';
+  static String updateUser(String userId) => '$_base/users/update/$userId';
+
+  
+
+
   static const String contentType = 'Content-Type';
   static const String applicationJson = 'application/json';
   static const String authorization = 'Authorization';
@@ -25,6 +31,9 @@ class ApiConstants {
   static const String keyToken = 'token';
   static const String keyOtp = 'otp';
 
+  static const String prefUserId = 'user_id';
+  static const String prefUserAbout = 'user_about';
+
   static const String keySuccess = 'success';
   static const String keyExists = 'exists';
   static const String keyMessage = 'message';
@@ -35,6 +44,11 @@ class ApiConstants {
   static const String prefUserEmail = 'user_email';
   static const String prefUserRole = 'user_role';
   static const String prefIsLoggedIn = 'is_logged_in';
+
+  static const String keyAbout = 'about';
+  static const String keyAddresses = 'addresses';
+  static const String keyWishlist = 'wishlist';
+  static const String keyUser = 'user';
 
   static const Duration connectTimeout = Duration(seconds: 30);
   static const Duration receiveTimeout = Duration(seconds: 30);

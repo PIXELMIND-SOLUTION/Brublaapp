@@ -12,10 +12,23 @@ class SharedPrefsHelper {
   }
 
   static SharedPreferences get _instance {
-    assert(_prefs != null,
-        'SharedPrefsHelper not initialised. Call SharedPrefsHelper.init() first.');
+    assert(
+      _prefs != null,
+      'SharedPrefsHelper not initialised. Call SharedPrefsHelper.init() first.',
+    );
     return _prefs!;
   }
+
+  static Future<void> saveUserId(String id) =>
+      _instance.setString(ApiConstants.prefUserId, id);
+
+  static String? getUserId() => _instance.getString(ApiConstants.prefUserId);
+
+  static Future<void> saveUserAbout(String about) =>
+      _instance.setString(ApiConstants.prefUserAbout, about);
+
+  static String? getUserAbout() =>
+      _instance.getString(ApiConstants.prefUserAbout);
 
   static Future<bool> saveAuthToken(String token) =>
       _instance.setString(ApiConstants.prefAuthToken, token);
@@ -53,12 +66,22 @@ class SharedPrefsHelper {
   static String? getUserRole() =>
       _instance.getString(ApiConstants.prefUserRole);
 
+  // static Future<void> saveUser(UserModel user) async {
+  //   await Future.wait([
+  //     saveUserMobile(user.mobile),
+  //     saveUserName(user.name),
+  //     saveUserEmail(user.email),
+  //     saveUserRole(user.role),
+  //   ]);
+  // }
+
   static Future<void> saveUser(UserModel user) async {
     await Future.wait([
       saveUserMobile(user.mobile),
       saveUserName(user.name),
       saveUserEmail(user.email),
       saveUserRole(user.role),
+      saveUserId(user.id.toString()),
     ]);
   }
 
@@ -72,7 +95,6 @@ class SharedPrefsHelper {
       role: getUserRole() ?? '',
     );
   }
-
 
   static Future<void> saveSession({
     required String token,

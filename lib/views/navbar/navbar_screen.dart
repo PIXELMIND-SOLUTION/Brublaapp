@@ -2,7 +2,7 @@ import 'package:brublaapp/views/exlusive/exclusive_module.dart';
 import 'package:brublaapp/views/history/history_screen.dart';
 import 'package:brublaapp/views/history/tailor_history_screen.dart';
 import 'package:brublaapp/views/home/home_screen.dart';
-import 'package:brublaapp/views/home/tailer_screen.dart';
+// import 'package:brublaapp/views/home/tailer_screen.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +33,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
     HomeScreen(),
     HistoryScreen(),
     ExclusiveModule(),
-
     TailorHistoryScreen(),
     // TailerScreen(),
     ProfileScreen(),
