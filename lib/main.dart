@@ -1,9 +1,11 @@
 import 'package:brublaapp/helper/shared_preference.dart';
+import 'package:brublaapp/provider/address/address_provider.dart';
 import 'package:brublaapp/provider/dessigner/designer_provider.dart';
 import 'package:brublaapp/provider/navbar/navbar_provider.dart';
 import 'package:brublaapp/provider/navbar/tailor/tailor_navbar_provider.dart';
 import 'package:brublaapp/provider/stylist/stylist_navbar_provider.dart';
 import 'package:brublaapp/views/navbar/auth/auth_provider.dart';
+import 'package:brublaapp/views/navbar/auth/profile_image_provider.dart';
 import 'package:brublaapp/views/navbar/auth/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +41,15 @@ class MyAppWrapper extends StatelessWidget {
 
         ChangeNotifierProvider<UserProfileProvider>(
           create: (_) => UserProfileProvider(),
+        ),
+
+        ChangeNotifierProvider<ProfileImageProvider>(
+          create: (_) => ProfileImageProvider(),
+        ),
+
+        
+        ChangeNotifierProvider<AddressProvider>(
+          create: (_) => AddressProvider(),
         ),
       ],
       child: const MyApp(),

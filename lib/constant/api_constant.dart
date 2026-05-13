@@ -16,8 +16,28 @@ class ApiConstants {
   static String userProfile(String userId) => '$_base/users/$userId';
   static String updateUser(String userId) => '$_base/users/update/$userId';
 
-  
+  static String updateProfileImage(String userId) =>
+      '$_base/users/update-image/$userId';
+  static const String keyProfileImage = 'profileImage';
 
+  static String addAddress(String userId) => '$_base/users/add/$userId';
+
+  static String getAllAddresses(String userId) => '$_base/users/all/$userId';
+
+  static String updateAddress(String userId, String addressId) =>
+      '$_base/users/update/$userId/$addressId';
+
+  static String deleteAddress(String userId, String addressId) =>
+      '$_base/users/delete/$userId/$addressId';
+
+  static const String keyAddressId = 'addressId';
+  static const String keyFullName = 'fullName';
+  static const String keyPincode = 'pincode';
+  static const String keyCity = 'city';
+  static const String keyState = 'state';
+  static const String keyType = 'type';
+  static const String keyLandmark = 'landmark';
+  static const String keyIsDefault = 'isDefault';
 
   static const String contentType = 'Content-Type';
   static const String applicationJson = 'application/json';

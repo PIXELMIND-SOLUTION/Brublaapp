@@ -1,14 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:brublaapp/views/navbar/auth/profile_provider.dart';
+import 'package:brublaapp/constant/api_constant.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:brublaapp/views/wallet/wallet_screen.dart';
 import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/notifications/notification_screen.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   const TopBar({super.key});
 
   @override
+  State<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = context.read<UserProfileProvider>();
+      if (provider.user == null && !provider.isFetchLoading) {
+        provider.fetchProfile();
+      }
+    });
+  }
+
+  String? _buildImageUrl(String? rawPath) {
+    if (rawPath == null || rawPath.isEmpty) return null;
+    return rawPath.startsWith('http')
+        ? rawPath
+        : '${ApiConstants.baseUrl}/$rawPath';
+  }
+
+  String getGreeting() {
+    final hour = DateTime.now().hour;
+
+    if (hour < 12) {
+      return 'Good Morning';
+    } else if (hour < 17) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final provider = context.watch<UserProfileProvider>();
+    final profile = provider.user;
+    final imageUrl = _buildImageUrl(profile?.profileImage);
+    final userName = profile?.name ?? 'Guest';
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
@@ -22,25 +65,29 @@ class TopBar extends StatelessWidget {
             },
             child: CircleAvatar(
               radius: 22,
-              backgroundImage: const AssetImage('assets/profile.png'),
               backgroundColor: Colors.grey.shade200,
+              backgroundImage: imageUrl != null ? NetworkImage(imageUrl) : null,
+              onBackgroundImageError: imageUrl != null ? (_, __) {} : null,
+              child: imageUrl == null
+                  ? Icon(Icons.person, size: 22, color: Colors.grey.shade400)
+                  : null,
             ),
           ),
           const SizedBox(width: 10),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Good Morning',
-                style: TextStyle(
+                getGreeting(),
+                style: const TextStyle(
                   fontSize: 14,
                   color: Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'PMS',
-                style: TextStyle(
+                userName,
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 0, 0, 0),

@@ -112,6 +112,7 @@ class UserProfileProvider extends ChangeNotifier {
     _updateState = ProfileState.idle;
     notifyListeners();
   }
+  
 
   void _setError(String message) {
     _errorMessage = message;
