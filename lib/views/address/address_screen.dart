@@ -106,7 +106,6 @@ class _AddressScreenState extends State<AddressScreen>
                               provider.addresses.isEmpty)
                             const _LoadingSkeleton()
                           else ...[
-                            // ── Saved addresses ───────────────────────
                             if (provider.addresses.isNotEmpty) ...[
                               _sectionLabel('SAVED ADDRESSES'),
                               const SizedBox(height: 12),
