@@ -30,6 +30,23 @@ class ApiConstants {
   static String deleteAddress(String userId, String addressId) =>
       '$_base/users/delete/$userId/$addressId';
 
+  static const String getAllCategories = '$_base/admin/categories';
+
+  static String getCategoryById(String categoryId) =>
+      '$_base/admin/categories/$categoryId';
+
+
+  static String subCategories(String categoryId) =>'$_base/admin/categories/$categoryId/subcategories' ; 
+
+  static const String keyCategories = 'categories';
+  static const String keyCategory = 'category';
+  static const String keyCount = 'count';
+  static const String keySubcategories = 'subcategories';
+  static const String keyIsActive = 'isActive';
+  static const String keyImage = 'image';
+  static const String keyCreatedAt = 'createdAt';
+  static const String keyUpdatedAt = 'updatedAt';
+
   static const String keyAddressId = 'addressId';
   static const String keyFullName = 'fullName';
   static const String keyPincode = 'pincode';

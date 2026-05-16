@@ -519,55 +519,107 @@ class _AddressScreenState extends State<AddressScreen>
     _pincodeController.clear();
   }
 
+  // Future<void> _handleSave(
+  //     BuildContext context, AddressProvider provider) async {
+  //   if (!(_formKey.currentState?.validate() ?? false)) return;
+
+  //   final address = AddressModel(
+  //     id: _editingAddressId,
+  //     fullName: _fullNameController.text.trim(),
+  //     mobile: _phoneController.text.trim(),
+  //     address: _line1Controller.text.trim(),
+  //     landmark: _line2Controller.text.trim().isEmpty
+  //         ? null
+  //         : _line2Controller.text.trim(),
+  //     city: _cityController.text.trim(),
+  //     state: _stateController.text.trim(),
+  //     pincode: _pincodeController.text.trim(),
+  //     type: _selectedAddressType.toLowerCase(),
+  //     isDefault: _isDefault,
+  //   );
+
+  //   bool success;
+  //   if (_editingAddressId != null) {
+  //     success = await provider.updateAddress(
+  //       addressId: _editingAddressId!,
+  //       address: address,
+  //     );
+  //   } else {
+  //     success = await provider.addAddress(address);
+  //   }
+
+  //   if (!mounted) return;
+
+  //   if (success) {
+  //     setState(() => _showAddForm = false);
+  //     _resetForm();
+  //     _showSnackBar(
+  //       context,
+  //       _editingAddressId != null
+  //           ? 'Address updated successfully'
+  //           : 'Address saved successfully',
+  //       isError: false,
+  //     );
+  //   } else {
+  //     _showSnackBar(
+  //       context,
+  //       provider.errorMessage ?? 'Something went wrong',
+  //       isError: true,
+  //     );
+  //   }
+  // }
+
+
+
   Future<void> _handleSave(
-      BuildContext context, AddressProvider provider) async {
-    if (!(_formKey.currentState?.validate() ?? false)) return;
+    BuildContext context, AddressProvider provider) async {
+  if (!(_formKey.currentState?.validate() ?? false)) return;
 
-    final address = AddressModel(
-      id: _editingAddressId,
-      fullName: _fullNameController.text.trim(),
-      mobile: _phoneController.text.trim(),
-      address: _line1Controller.text.trim(),
-      landmark: _line2Controller.text.trim().isEmpty
-          ? null
-          : _line2Controller.text.trim(),
-      city: _cityController.text.trim(),
-      state: _stateController.text.trim(),
-      pincode: _pincodeController.text.trim(),
-      type: _selectedAddressType.toLowerCase(),
-      isDefault: _isDefault,
+  final address = AddressModel(
+    id: _editingAddressId,
+    fullName: _fullNameController.text.trim(),
+    mobile: _phoneController.text.trim(),
+    address: _line1Controller.text.trim(),
+    landmark: _line2Controller.text.trim().isEmpty
+        ? null
+        : _line2Controller.text.trim(),
+    city: _cityController.text.trim(),
+    state: _stateController.text.trim(),
+    pincode: _pincodeController.text.trim(),
+    type: _selectedAddressType.toLowerCase(),
+    isDefault: _isDefault,
+  );
+
+  bool success;
+  if (_editingAddressId != null) {
+    success = await provider.updateAddress(
+      addressId: _editingAddressId!,
+      address: address,
     );
-
-    bool success;
-    if (_editingAddressId != null) {
-      success = await provider.updateAddress(
-        addressId: _editingAddressId!,
-        address: address,
-      );
-    } else {
-      success = await provider.addAddress(address);
-    }
-
-    if (!mounted) return;
-
-    if (success) {
-      setState(() => _showAddForm = false);
-      _resetForm();
-      _showSnackBar(
-        context,
-        _editingAddressId != null
-            ? 'Address updated successfully'
-            : 'Address saved successfully',
-        isError: false,
-      );
-    } else {
-      _showSnackBar(
-        context,
-        provider.errorMessage ?? 'Something went wrong',
-        isError: true,
-      );
-    }
+  } else {
+    success = await provider.addAddress([address]); // ← wrap in a list
   }
+
+  if (!mounted) return;
+
+  if (success) {
+    setState(() => _showAddForm = false);
+    _resetForm();
+    _showSnackBar(
+      context,
+      _editingAddressId != null
+          ? 'Address updated successfully'
+          : 'Address saved successfully',
+      isError: false,
+    );
+  } else {
+    _showSnackBar(
+      context,
+      provider.errorMessage ?? 'Something went wrong',
+      isError: true,
+    );
+  }
+}
 
   Future<void> _handleDelete(
       BuildContext context, AddressProvider provider, AddressModel address) async {
