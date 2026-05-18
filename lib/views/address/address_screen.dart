@@ -1183,20 +1183,7 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////// New code for getting the data automatically////////////////////////////////
-
-
-
 
 // ignore_for_file: dangling_library_doc_comments, deprecated_member_use
 
@@ -1363,7 +1350,7 @@ class _AddressScreenState extends State<AddressScreen>
 
         _showSnackBar(
           context,
-          'Location filled! Verify and complete.',
+          'Details filled successfully..!',
           isError: false,
         );
       } else {
@@ -1641,6 +1628,23 @@ class _AddressScreenState extends State<AddressScreen>
                   ),
                 ),
                 const SizedBox(width: 12),
+
+                // Expanded(
+                //   child: _FormField(
+                //     controller: _phoneController,
+                //     label: 'Phone',
+                //     hint: '98765 43210',
+                //     icon: Icons.phone_outlined,
+                //     accent: _accent,
+                //     ink: _ink,
+                //     muted: _muted,
+                //     border: _border,
+                //     bg: _bg,
+                //     keyboardType: TextInputType.phone,
+                //     validator: (v) =>
+                //         v == null || v.isEmpty ? 'Required' : null,
+                //   ),
+                // ),
                 Expanded(
                   child: _FormField(
                     controller: _phoneController,
@@ -1653,8 +1657,15 @@ class _AddressScreenState extends State<AddressScreen>
                     border: _border,
                     bg: _bg,
                     keyboardType: TextInputType.phone,
-                    validator: (v) =>
-                        v == null || v.isEmpty ? 'Required' : null,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10),
+                    ],
+                    validator: (v) {
+                      if (v == null || v.isEmpty) return 'Required';
+                      if (v.length != 10) return 'Enter 10-digit number';
+                      return null;
+                    },
                   ),
                 ),
               ],
