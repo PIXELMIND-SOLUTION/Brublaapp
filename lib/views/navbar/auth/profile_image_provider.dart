@@ -39,7 +39,6 @@ class ProfileImageProvider extends ChangeNotifier {
     final bool success = result[ApiConstants.keySuccess] == true;
 
     if (success) {
-      // Adjust the key based on your actual API response shape
       _updatedImageUrl = result['data']?['profileImage'] as String?;
       _successMessage =
           result[ApiConstants.keyMessage] as String? ??

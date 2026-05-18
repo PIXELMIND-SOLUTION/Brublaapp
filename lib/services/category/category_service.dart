@@ -8,7 +8,6 @@ class CategoryService {
     receiveTimeout: ApiConstants.receiveTimeout,
   ));
 
-  // CategoryService(this._dio);
   Future<List<CategoryModel>> getAllCategories({String? token}) async {
     final response = await _dio.get(
       ApiConstants.getAllCategories,
@@ -16,10 +15,10 @@ class CategoryService {
     );
 
     print(
-      'Response Status Code for get all categories: ${response.statusCode}',
+      '🚀 Response Status Code for get all categories: ${response.statusCode}',
     );
 
-    print('Response Body for get all categories: ${response.data}');
+    print('📥 Response Body for get all categories: ${response.data}');
 
     final data = response.data as Map<String, dynamic>;
     _assertSuccess(data);
@@ -40,11 +39,11 @@ class CategoryService {
     );
 
     print(
-      'Response Status Code for singleeeeeeeeee categories: ${response.statusCode}',
+      '🌐 Response Status Code for singleeeeeeeeee categories: ${response.statusCode}',
     );
 
     print(
-      'Response Body for get singleeeeeeeeeeeeeeeee categories: ${response.data}',
+      '🎉 Response Body for get singleeeeeeeeeeeeeeeee categories: ${response.data}',
     );
 
     final data = response.data as Map<String, dynamic>;
@@ -71,8 +70,8 @@ class CategoryService {
     options: _authOptions(token),
   );
 
-  print('Response Status Code for subcategories: ${response.statusCode}');
-  print('Response Body for subcategories: ${response.data}');
+  print('👀 Response Status Code for subcategories: ${response.statusCode}');
+  print('📬 Response Body for subcategories: ${response.data}');
 
   final data = response.data as Map<String, dynamic>;
   _assertSuccess(data);

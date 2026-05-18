@@ -6,32 +6,28 @@ import 'package:dio/dio.dart';
 enum CategoryStatus { initial, loading, success, error }
 
 class CategoryProvider extends ChangeNotifier {
-  // final CategoryService _service;
-
   final CategoryService _service = CategoryService();
-
-  // CategoryProvider(Dio dio) : _service = CategoryService(dio);
 
   CategoryStatus _status = CategoryStatus.initial;
   List<CategoryModel> _categories = [];
-
 
   String? _tabFilter;
 
   List<SubcategoryModel> _subcategories = [];
   List<SubcategoryModel> get subcategories => _subcategories;
 
+  String? _selectedTabCategoryId;
+  String? get selectedTabCategoryId => _selectedTabCategoryId;
+
   CategoryModel? _selectedCategory;
   String? _errorMessage;
 
-
   List<CategoryModel> get filteredCategories {
-  if (_tabFilter == null) return activeCategories;
-  return activeCategories
-      .where((c) => c.name.toLowerCase().contains(_tabFilter!.toLowerCase()))
-      .toList();
-}
-
+    if (_tabFilter == null) return activeCategories;
+    return activeCategories
+        .where((c) => c.name.toLowerCase().contains(_tabFilter!.toLowerCase()))
+        .toList();
+  }
 
   CategoryStatus get status => _status;
   List<CategoryModel> get categories => _categories;
@@ -97,17 +93,42 @@ class CategoryProvider extends ChangeNotifier {
     }
   }
 
+  void setTabFilter(String? filter) {
+    _tabFilter = filter;
+    _subcategories = [];
+
+    if (filter == null) {
+      _selectedTabCategoryId = null;
+      notifyListeners();
+      return;
+    }
+
+    final match = _categories.firstWhere(
+      (c) => c.name.toLowerCase() == filter.toLowerCase(),
+      orElse: () => throw StateError('Not found'),
+    );
+
+    _selectedTabCategoryId = match.id;
+    notifyListeners();
+
+    fetchSubcategories(match.id);
+  }
+
+  void selectCategoryById(String categoryId) {
+    try {
+      _selectedCategory = _categories.firstWhere((c) => c.id == categoryId);
+      _subcategories = _selectedCategory!.subcategories;
+      notifyListeners();
+    } catch (_) {
+      _subcategories = [];
+      notifyListeners();
+    }
+  }
+
   void clearSelectedCategory() {
     _selectedCategory = null;
     notifyListeners();
   }
-
-
-  void setTabFilter(String? filter) {
-  _tabFilter = filter;
-  _subcategories = [];
-  notifyListeners();
-}
 
   void clearSubcategories() {
     _subcategories = [];

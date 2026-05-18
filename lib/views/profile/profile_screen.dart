@@ -158,132 +158,138 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
           ],
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Stack(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => EditProfile(),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            await context.read<UserProfileProvider>().fetchProfile();
+          },
+          child: SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Stack(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditProfile(),
+                                ),
+                              );
+                            },
+                            child: _buildProfileAvatar(profile?.profileImage),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            left: 46,
+                            child: Container(
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
                               ),
-                            );
-                          },
-                          child: _buildProfileAvatar(profile?.profileImage),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          left: 46,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.edit,
-                              size: 14,
-                              color: Colors.black,
+                              child: const Icon(
+                                Icons.edit,
+                                size: 14,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 16),
-
-                    Expanded(
-                      child: _ProfileHeaderInfo(
-                        userName: userName,
-                        userMobile: userMobile,
-                        userEmail: userEmail,
-                        isLoading: profileProv.isFetchLoading,
-                        hasError: profileProv.fetchState == ProfileState.error,
-                        errorMsg: profileProv.errorMessage,
+                        ],
                       ),
+                      const SizedBox(width: 16),
+
+                      Expanded(
+                        child: _ProfileHeaderInfo(
+                          userName: userName,
+                          userMobile: userMobile,
+                          userEmail: userEmail,
+                          isLoading: profileProv.isFetchLoading,
+                          hasError:
+                              profileProv.fetchState == ProfileState.error,
+                          errorMsg: profileProv.errorMessage,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  _buildButtonGrid(context),
+
+                  const SizedBox(height: 20),
+
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.asset(
+                      'assets/banner.png',
+                      width: double.infinity,
+                      height: 110,
+                      fit: BoxFit.cover,
                     ),
-                  ],
-                ),
-
-                const SizedBox(height: 28),
-
-                _buildButtonGrid(context),
-
-                const SizedBox(height: 20),
-
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.asset(
-                    'assets/banner.png',
-                    width: double.infinity,
-                    height: 110,
-                    fit: BoxFit.cover,
                   ),
-                ),
 
-                const SizedBox(height: 28),
+                  const SizedBox(height: 28),
 
-                const Text(
-                  'Account',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                  const Text(
+                    'Account',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 8),
+                  const SizedBox(height: 8),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const HelpScreen()),
-                    );
-                  },
-                  child: _buildAccountTile(
-                    icon: Icons.help_outline,
-                    label: 'Need Help?',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const HelpScreen()),
+                      );
+                    },
+                    child: _buildAccountTile(
+                      icon: Icons.help_outline,
+                      label: 'Need Help?',
+                    ),
                   ),
-                ),
 
-                const Divider(height: 1, color: Color(0xFFEEEEEE)),
+                  const Divider(height: 1, color: Color(0xFFEEEEEE)),
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ContactUs()),
-                    );
-                  },
-                  child: _buildAccountTile(
-                    icon: Icons.phone_outlined,
-                    label: 'Contact Us',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ContactUs()),
+                      );
+                    },
+                    child: _buildAccountTile(
+                      icon: Icons.phone_outlined,
+                      label: 'Contact Us',
+                    ),
                   ),
-                ),
 
-                const Divider(height: 1, color: Color(0xFFEEEEEE)),
+                  const Divider(height: 1, color: Color(0xFFEEEEEE)),
 
-                GestureDetector(
-                  onTap: () => _showLogoutDialog(context),
-                  child: _buildAccountTile(
-                    icon: Icons.logout,
-                    label: 'Logout',
-                    iconColor: Colors.redAccent,
-                    labelColor: Colors.redAccent,
+                  GestureDetector(
+                    onTap: () => _showLogoutDialog(context),
+                    child: _buildAccountTile(
+                      icon: Icons.logout,
+                      label: 'Logout',
+                      iconColor: Colors.redAccent,
+                      labelColor: Colors.redAccent,
+                    ),
                   ),
-                ),
 
-                const SizedBox(height: 60),
-              ],
+                  const SizedBox(height: 60),
+                ],
+              ),
             ),
           ),
         ),

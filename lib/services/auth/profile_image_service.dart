@@ -27,7 +27,7 @@ class ProfileImageService {
         ),
       });
 
-      final response = await _dio.post(
+      final response = await _dio.put(
         ApiConstants.updateProfileImage(userId),
         data: formData,
         options: Options(
@@ -37,6 +37,7 @@ class ProfileImageService {
         ),
       );
 
+      print('👀 Tokeeeeeeeeeeeeeeeeeeeeeennn $token');
       print('✅ Response status code for profile image ${response.statusCode}');
       print(
         '📶 Response  bodddddyyyyyyyyyyyyyy for profile image ${response.data}',
