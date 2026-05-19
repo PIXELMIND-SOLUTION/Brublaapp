@@ -652,7 +652,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: showBorder
-            ? Border.all(color: Colors.orange, width: 2)
+            ? Border.all(color: const Color.fromARGB(255, 255, 255, 255), width: 2)
             : Border.all(color: Colors.grey.shade200),
       ),
       clipBehavior: Clip.hardEdge,
