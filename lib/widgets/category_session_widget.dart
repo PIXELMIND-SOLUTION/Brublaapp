@@ -150,6 +150,7 @@ class _CategorySectionState extends State<CategorySection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 15,),
           _sectionHeader(
             'Category',
             context,
@@ -160,7 +161,7 @@ class _CategorySectionState extends State<CategorySection> {
               );
             },
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           // _buildCategoryChips(context),
           _buildSubcategorySection(context),
         ],

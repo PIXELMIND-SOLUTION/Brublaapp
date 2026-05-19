@@ -25,7 +25,7 @@ class _BrublaverseSectionState extends State<BrublaverseSection> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
            RichText(
             text: TextSpan(

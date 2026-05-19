@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatefulWidget {
@@ -78,7 +80,7 @@ class _ProductCardState extends State<ProductCard> {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                   decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: const Color.fromARGB(255, 223, 223, 223),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(

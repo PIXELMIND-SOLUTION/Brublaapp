@@ -1,406 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class WalletScreen extends StatelessWidget {
-//   const WalletScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-//       appBar: AppBar(
-//         backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-//         elevation: 0,
-//         leading: Container(
-//           margin: const EdgeInsets.all(8),
-//           decoration: BoxDecoration(
-//             border: Border.all(color: Colors.grey.shade300),
-//             borderRadius: BorderRadius.circular(10),
-//           ),
-//           child: IconButton(onPressed: (){
-//             Navigator.of(context).pop();
-//           }, icon: Icon(Icons.chevron_left,color: Colors.white,)),
-//           // child: const Icon(Icons.chevron_left, color: Colors.black),
-//         ),
-//         title: const Text(
-//           'Wallet',
-//           style: TextStyle(
-//             color: Color.fromARGB(255, 255, 255, 255),
-//             fontWeight: FontWeight.w600,
-//             fontSize: 18,
-//           ),
-//         ),
-//         centerTitle: true,
-//       ),
-//       body: SingleChildScrollView(
-//         padding: const EdgeInsets.all(16),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Wallet Balance Card
-//             Container(
-//               width: double.infinity,
-//               padding: const EdgeInsets.all(16),
-//               decoration: BoxDecoration(
-//                 color: Colors.white,
-//                 borderRadius: BorderRadius.circular(16),
-//                 boxShadow: [
-//                   BoxShadow(
-//                     color: Colors.grey.withOpacity(0.08),
-//                     blurRadius: 10,
-//                     offset: const Offset(0, 4),
-//                   ),
-//                 ],
-//               ),
-//               child: Row(
-//                 children: [
-//                   // Wallet illustration
-//                   SizedBox(
-//                     width: 170,
-//                     height: 100,
-//                     child: Image.asset(
-//                       'assets/wallet.png',
-//                       fit: BoxFit.contain,
-//                       errorBuilder: (context, error, stackTrace) {
-//                         return _WalletIllustration();
-//                       },
-//                     ),
-//                   ),
-//                   const SizedBox(width: 12),
-//                   // Balance info
-//                   Expanded(
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         const Text(
-//                           '₹0',
-//                           style: TextStyle(
-//                             fontSize: 28,
-//                             fontWeight: FontWeight.bold,
-//                             color: Colors.black,
-//                           ),
-//                         ),
-//                         const SizedBox(height: 4),
-//                         Text(
-//                           'No wallet amount\navailable',
-//                           style: TextStyle(
-//                             fontSize: 13,
-//                             color: Colors.grey.shade500,
-//                             height: 1.4,
-//                           ),
-//                         ),
-//                         const SizedBox(height: 12),
-//                         SizedBox(
-//                           height: 36,
-//                           child: ElevatedButton(
-//                             onPressed: () {},
-//                             style: ElevatedButton.styleFrom(
-//                               backgroundColor: const Color(0xFFD4A853),
-//                               foregroundColor: Colors.white,
-//                               elevation: 0,
-//                               shape: RoundedRectangleBorder(
-//                                 borderRadius: BorderRadius.circular(8),
-//                               ),
-//                               padding: const EdgeInsets.symmetric(
-//                                 horizontal: 16,
-//                               ),
-//                             ),
-//                             child: const Text(
-//                               'Add Amount',
-//                               style: TextStyle(
-//                                 fontSize: 13,
-//                                 fontWeight: FontWeight.w500,
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-
-//             const SizedBox(height: 24),
-
-//             // Details Section
-//             const Text(
-//               'Details',
-//               style: TextStyle(
-//                 fontSize: 18,
-//                 fontWeight: FontWeight.w600,
-//                 color: Colors.black,
-//               ),
-//             ),
-
-//             const SizedBox(height: 12),
-
-//             // Transaction List
-//             Container(
-//               decoration: BoxDecoration(
-//                 color: Colors.white,
-//                 borderRadius: BorderRadius.circular(12),
-//                 boxShadow: [
-//                   BoxShadow(
-//                     color: Colors.grey.withOpacity(0.06),
-//                     blurRadius: 8,
-//                     offset: const Offset(0, 2),
-//                   ),
-//                 ],
-//               ),
-//               child: Column(
-//                 children: [
-//                   _TransactionTile(
-//                     icon: Icons.south_west,
-//                     iconColor: const Color(0xFF6B4EFF),
-//                     iconBgColor: const Color(0xFFF0ECFF),
-//                     title: 'Received From',
-//                     subtitle: 'referral id : #123456',
-//                     amount: '₹30',
-//                     amountLabel: 'Credited',
-//                     amountColor: Colors.green,
-//                     timeLabel: '1 day ago',
-//                     showDivider: true,
-//                   ),
-//                   _TransactionTile(
-//                     icon: Icons.north_east,
-//                     iconColor: const Color(0xFFFF4E4E),
-//                     iconBgColor: const Color(0xFFFFECEC),
-//                     title: 'Paid To',
-//                     subtitle: 'referral id : #123456',
-//                     amount: '₹30',
-//                     amountLabel: 'Debit',
-//                     amountColor: Colors.red,
-//                     timeLabel: '1 day ago',
-//                     showDivider: false,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// class _TransactionTile extends StatelessWidget {
-//   final IconData icon;
-//   final Color iconColor;
-//   final Color iconBgColor;
-//   final String title;
-//   final String subtitle;
-//   final String amount;
-//   final String amountLabel;
-//   final Color amountColor;
-//   final String timeLabel;
-//   final bool showDivider;
-
-//   const _TransactionTile({
-//     required this.icon,
-//     required this.iconColor,
-//     required this.iconBgColor,
-//     required this.title,
-//     required this.subtitle,
-//     required this.amount,
-//     required this.amountLabel,
-//     required this.amountColor,
-//     required this.timeLabel,
-//     required this.showDivider,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Row(
-//                 children: [
-//                   // Icon container
-//                   Container(
-//                     width: 42,
-//                     height: 42,
-//                     decoration: BoxDecoration(
-//                       color: iconBgColor,
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     child: Icon(icon, color: iconColor, size: 20),
-//                   ),
-//                   const SizedBox(width: 12),
-//                   // Title & subtitle
-//                   Expanded(
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           title,
-//                           style: const TextStyle(
-//                             fontSize: 15,
-//                             fontWeight: FontWeight.w600,
-//                             color: Colors.black,
-//                           ),
-//                         ),
-//                         const SizedBox(height: 2),
-//                         Text(
-//                           subtitle,
-//                           style: TextStyle(
-//                             fontSize: 12,
-//                             color: Colors.grey.shade500,
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                   // Amount & label
-//                   Column(
-//                     crossAxisAlignment: CrossAxisAlignment.end,
-//                     children: [
-//                       Text(
-//                         amount,
-//                         style: const TextStyle(
-//                           fontSize: 15,
-//                           fontWeight: FontWeight.w600,
-//                           color: Colors.black,
-//                         ),
-//                       ),
-//                       const SizedBox(height: 2),
-//                       Text(
-//                         amountLabel,
-//                         style: TextStyle(
-//                           fontSize: 12,
-//                           color: amountColor,
-//                           fontWeight: FontWeight.w500,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//               const SizedBox(height: 6),
-//               // Time label below icon
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 0),
-//                 child: Text(
-//                   timeLabel,
-//                   style: TextStyle(
-//                     fontSize: 11,
-//                     color: Colors.grey.shade400,
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//         if (showDivider)
-//           Divider(
-//             height: 1,
-//             thickness: 1,
-//             color: Colors.grey.shade100,
-//             indent: 16,
-//             endIndent: 16,
-//           ),
-//       ],
-//     );
-//   }
-// }
-
-// /// Fallback illustration widget if the asset is not found
-// class _WalletIllustration extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       alignment: Alignment.center,
-//       children: [
-//         // Teal blob background
-//         Positioned(
-//           top: 0,
-//           left: 10,
-//           child: Container(
-//             width: 70,
-//             height: 70,
-//             decoration: BoxDecoration(
-//               color: const Color(0xFF3DBFA0).withOpacity(0.3),
-//               borderRadius: BorderRadius.circular(40),
-//             ),
-//           ),
-//         ),
-//         // Purple phone shape
-//         Positioned(
-//           right: 10,
-//           top: 5,
-//           child: Container(
-//             width: 32,
-//             height: 55,
-//             decoration: BoxDecoration(
-//               color: const Color(0xFF7B5EA7),
-//               borderRadius: BorderRadius.circular(6),
-//             ),
-//           ),
-//         ),
-//         // Brown wallet shape
-//         Positioned(
-//           bottom: 5,
-//           left: 5,
-//           child: Container(
-//             width: 40,
-//             height: 28,
-//             decoration: BoxDecoration(
-//               color: const Color(0xFF8B5E3C),
-//               borderRadius: BorderRadius.circular(5),
-//             ),
-//           ),
-//         ),
-//         // Gold coin
-//         Positioned(
-//           top: 8,
-//           right: 5,
-//           child: Container(
-//             width: 18,
-//             height: 18,
-//             decoration: const BoxDecoration(
-//               color: Color(0xFFD4A853),
-//               shape: BoxShape.circle,
-//             ),
-//           ),
-//         ),
-//         // Person silhouette
-//         const Positioned(
-//           bottom: 10,
-//           left: 30,
-//           child: Icon(Icons.person, color: Color(0xFF3D3D8F), size: 36),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ignore_for_file: unused_import
 
@@ -427,6 +24,8 @@ class _WalletScreenState extends State<WalletScreen>
   late Animation<double> _balanceScale;
   late Animation<double> _shimmer;
   late Animation<double> _pulse;
+
+  double walletBalance = 0.0;
 
   @override
   void initState() {
@@ -456,9 +55,10 @@ class _WalletScreenState extends State<WalletScreen>
     _cardSlide = Tween<double>(begin: 60, end: 0).animate(
       CurvedAnimation(parent: _cardController, curve: Curves.easeOutCubic),
     );
-    _cardFade = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _cardController, curve: Curves.easeOut),
-    );
+    _cardFade = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _cardController, curve: Curves.easeOut));
     _balanceScale = Tween<double>(begin: 0.6, end: 1.0).animate(
       CurvedAnimation(parent: _balanceController, curve: Curves.elasticOut),
     );
@@ -488,6 +88,23 @@ class _WalletScreenState extends State<WalletScreen>
     _shimmerController.dispose();
     _pulseController.dispose();
     super.dispose();
+  }
+
+  void _showAddAmountModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => _AddAmountModal(
+        onAmountAdded: (amount) {
+          setState(() {
+            walletBalance += amount;
+          });
+          _balanceController.reset();
+          _balanceController.forward();
+        },
+      ),
+    );
   }
 
   @override
@@ -537,7 +154,11 @@ class _WalletScreenState extends State<WalletScreen>
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.white.withOpacity(0.05),
               ),
-              child: const Icon(Icons.chevron_left, color: Colors.white, size: 22),
+              child: const Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+                size: 22,
+              ),
             ),
           ),
           const Expanded(
@@ -551,16 +172,6 @@ class _WalletScreenState extends State<WalletScreen>
                 letterSpacing: 0.4,
               ),
             ),
-          ),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.white24),
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white.withOpacity(0.05),
-            ),
-            child: const Icon(Icons.more_horiz, color: Colors.white, size: 20),
           ),
         ],
       ),
@@ -597,7 +208,6 @@ class _WalletScreenState extends State<WalletScreen>
               borderRadius: BorderRadius.circular(28),
               child: Stack(
                 children: [
-                  // Background geometric shapes
                   Positioned(
                     top: -30,
                     right: -30,
@@ -634,7 +244,6 @@ class _WalletScreenState extends State<WalletScreen>
                       ),
                     ),
                   ),
-                  // Shimmer effect
                   Positioned.fill(
                     child: ShaderMask(
                       shaderCallback: (bounds) {
@@ -652,7 +261,6 @@ class _WalletScreenState extends State<WalletScreen>
                       child: Container(color: Colors.white),
                     ),
                   ),
-                  // Card content
                   Padding(
                     padding: const EdgeInsets.all(28),
                     child: Column(
@@ -683,9 +291,9 @@ class _WalletScreenState extends State<WalletScreen>
                                       child: child,
                                     );
                                   },
-                                  child: const Text(
-                                    '₹0.00',
-                                    style: TextStyle(
+                                  child: Text(
+                                    '₹${walletBalance.toStringAsFixed(2)}',
+                                    style: const TextStyle(
                                       fontSize: 38,
                                       fontWeight: FontWeight.w800,
                                       color: Colors.black,
@@ -726,41 +334,14 @@ class _WalletScreenState extends State<WalletScreen>
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'STATUS',
-                                  style: TextStyle(
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black.withOpacity(0.35),
-                                    letterSpacing: 1.5,
-                                  ),
-                                ),
                                 const SizedBox(height: 4),
                                 Row(
-                                  children: [
-                                    Container(
-                                      width: 8,
-                                      height: 8,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.black,
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    const Text(
-                                      'Active',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
+                                  children: [],
                                 ),
                               ],
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: _showAddAmountModal,
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 20,
@@ -797,7 +378,7 @@ class _WalletScreenState extends State<WalletScreen>
 
   Widget _buildQuickActions() {
     final actions = [
-      {'icon': Icons.add_rounded, 'label': 'Add'},
+      {'icon': Icons.add_rounded, 'label': 'Add', 'action': _showAddAmountModal},
       {'icon': Icons.send_rounded, 'label': 'Send'},
       {'icon': Icons.swap_horiz_rounded, 'label': 'Transfer'},
       {'icon': Icons.history_rounded, 'label': 'History'},
@@ -821,6 +402,9 @@ class _WalletScreenState extends State<WalletScreen>
             icon: actions[i]['icon'] as IconData,
             label: actions[i]['label'] as String,
             delay: i * 80,
+            onTap: actions[i]['action'] != null 
+                ? actions[i]['action'] as VoidCallback 
+                : null,
           );
         }),
       ),
@@ -924,11 +508,13 @@ class _QuickActionButton extends StatefulWidget {
   final IconData icon;
   final String label;
   final int delay;
+  final VoidCallback? onTap;
 
   const _QuickActionButton({
     required this.icon,
     required this.label,
     required this.delay,
+    this.onTap,
   });
 
   @override
@@ -947,9 +533,10 @@ class _QuickActionButtonState extends State<_QuickActionButton>
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _tapScale = Tween<double>(begin: 1.0, end: 0.92).animate(
-      CurvedAnimation(parent: _tapController, curve: Curves.easeInOut),
-    );
+    _tapScale = Tween<double>(
+      begin: 1.0,
+      end: 0.92,
+    ).animate(CurvedAnimation(parent: _tapController, curve: Curves.easeInOut));
   }
 
   @override
@@ -962,7 +549,12 @@ class _QuickActionButtonState extends State<_QuickActionButton>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: (_) => _tapController.forward(),
-      onTapUp: (_) => _tapController.reverse(),
+      onTapUp: (_) {
+        _tapController.reverse();
+        if (widget.onTap != null) {
+          widget.onTap!();
+        }
+      },
       onTapCancel: () => _tapController.reverse(),
       child: AnimatedBuilder(
         animation: _tapController,
@@ -1161,6 +753,265 @@ class _TransactionRowState extends State<_TransactionRow>
           ],
         ),
       ),
+    );
+  }
+}
+
+class _AddAmountModal extends StatefulWidget {
+  final Function(double) onAmountAdded;
+
+  const _AddAmountModal({required this.onAmountAdded});
+
+  @override
+  State<_AddAmountModal> createState() => _AddAmountModalState();
+}
+
+class _AddAmountModalState extends State<_AddAmountModal>
+    with SingleTickerProviderStateMixin {
+  final TextEditingController _amountController = TextEditingController();
+  final List<double> _presetAmounts = [100, 500, 1000, 2000, 5000];
+  double? _selectedPreset;
+  late AnimationController _animationController;
+  late Animation<double> _slideAnimation;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _slideAnimation = Tween<double>(begin: 0.3, end: 0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOutCubic),
+    );
+    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _amountController.dispose();
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _addAmount() {
+    double amount = _selectedPreset ?? 0;
+    if (_amountController.text.isNotEmpty) {
+      amount = double.tryParse(_amountController.text) ?? 0;
+    }
+    
+    if (amount > 0) {
+      widget.onAmountAdded(amount);
+      Navigator.pop(context);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) {
+        return Transform.translate(
+          offset: Offset(0, _slideAnimation.value * MediaQuery.of(context).size.height),
+          child: Opacity(
+            opacity: _fadeAnimation.value,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Color(0xFF1A1A1A),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 12),
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Add Money to Wallet',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Securely add funds to your wallet',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white.withOpacity(0.5),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.1),
+                        ),
+                      ),
+                      child: TextField(
+                        controller: _amountController,
+                        keyboardType: TextInputType.number,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                        decoration: InputDecoration(
+                          prefixText: '₹ ',
+                          prefixStyle: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                          hintText: '0',
+                          hintStyle: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white.withOpacity(0.3),
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 20,
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _selectedPreset = null;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: _presetAmounts.map((amount) {
+                        final isSelected = _selectedPreset == amount;
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _selectedPreset = amount;
+                              _amountController.clear();
+                            });
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? Colors.white
+                                  : Colors.white.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: isSelected
+                                    ? Colors.transparent
+                                    : Colors.white.withOpacity(0.1),
+                              ),
+                            ),
+                            child: Text(
+                              '₹$amount',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: isSelected
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: GestureDetector(
+                      onTap: _addAmount,
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withOpacity(0.2),
+                              blurRadius: 20,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: const Text(
+                          'Add Amount',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 14,
+                          color: Colors.white.withOpacity(0.4),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          'Secure transaction',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white.withOpacity(0.4),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

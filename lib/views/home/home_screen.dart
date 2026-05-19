@@ -1,4 +1,3 @@
-
 // ignore_for_file: deprecated_member_use
 
 import 'package:brublaapp/widgets/banner_widget.dart';
@@ -152,8 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   const TopBar(),
                   SearchBarWidget(searchKeywords: _searchKeywords),
+                  SizedBox(height: 20),
                   const CategoryTabs(),
+                  SizedBox(height: 20),
                   const CategorySection(),
+                  SizedBox(height: 20),
                   const BannerCarousel(),
                   SectionGrid(
                     title: 'Latest Designs',

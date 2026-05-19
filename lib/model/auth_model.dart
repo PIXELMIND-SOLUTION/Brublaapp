@@ -78,7 +78,6 @@ class LoginResponse {
       'LoginResponse(success: $success, exists: $exists, message: $message, token: $token)';
 }
 
-// ── Register Response ─────────────────────────────────────────────────────────
 class RegisterResponse {
   final bool success;
   final String message;
@@ -159,7 +158,6 @@ class VerifyOtpResponse {
       'VerifyOtpResponse(success: $success, message: $message, token: $token)';
 }
 
-// ── Resend OTP Response ───────────────────────────────────────────────────────
 class ResendOtpResponse {
   final bool success;
   final String message;
@@ -183,7 +181,6 @@ class ResendOtpResponse {
       'ResendOtpResponse(success: $success, message: $message, token: $token)';
 }
 
-// ── User Model ────────────────────────────────────────────────────────────────
 class UserModel {
   final String? id;
   final String name;

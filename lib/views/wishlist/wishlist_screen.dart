@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:brublaapp/views/details/single_detail_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -33,13 +35,11 @@ class _WishlistScreenState extends State<WishlistScreen>
   late List<WishlistItem> _items;
   final Set<String> _removingIds = {};
 
-  // Palette
   static const Color _bg = Color(0xFFFAF9F7);
   static const Color _ink = Color(0xFF1A1A2E);
   static const Color _accent = Color(0xFFB8860B);
   static const Color _rose = Color(0xFFE8D5C4);
   static const Color _muted = Color(0xFF8A8A8A);
- 
 
   @override
   void initState() {
@@ -49,7 +49,8 @@ class _WishlistScreenState extends State<WishlistScreen>
         id: '1',
         name: 'Silk Drape Blouse',
         brand: 'Maison Elara',
-        imageUrl: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&q=80',
+        imageUrl:
+            'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&q=80',
         price: 189.00,
         originalPrice: 249.00,
         category: 'Tops',
@@ -58,7 +59,8 @@ class _WishlistScreenState extends State<WishlistScreen>
         id: '2',
         name: 'Structured Leather Tote',
         brand: 'Valore Studio',
-        imageUrl: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80',
+        imageUrl:
+            'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80',
         price: 425.00,
         category: 'Bags',
       ),
@@ -66,7 +68,8 @@ class _WishlistScreenState extends State<WishlistScreen>
         id: '3',
         name: 'Merino Ribbed Pullover',
         brand: 'Nordvik',
-        imageUrl: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80',
+        imageUrl:
+            'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&q=80',
         price: 138.00,
         originalPrice: 175.00,
         category: 'Knitwear',
@@ -75,7 +78,8 @@ class _WishlistScreenState extends State<WishlistScreen>
         id: '4',
         name: 'Wide-Leg Tailored Trouser',
         brand: 'Atelier Forme',
-        imageUrl: 'https://images.unsplash.com/photo-1594938374182-a56a1b36a8de?w=400&q=80',
+        imageUrl:
+            'https://images.unsplash.com/photo-1594938374182-a56a1b36a8de?w=400&q=80',
         price: 210.00,
         category: 'Bottoms',
       ),
@@ -83,7 +87,8 @@ class _WishlistScreenState extends State<WishlistScreen>
         id: '5',
         name: 'Gold Vermeil Ear Cuff',
         brand: 'Aurore Fine',
-        imageUrl: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=80',
+        imageUrl:
+            'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=80',
         price: 78.00,
         originalPrice: 95.00,
         category: 'Jewellery',
@@ -123,9 +128,7 @@ class _WishlistScreenState extends State<WishlistScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: _bg,
-            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -141,68 +144,39 @@ class _WishlistScreenState extends State<WishlistScreen>
       ),
     );
   }
-
   Widget _buildAppBar() {
     return SliverAppBar(
-      expandedHeight: 110,
       pinned: true,
-      backgroundColor: _bg,
+      backgroundColor: Colors.black,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Color.fromARGB(255, 255, 255, 255)),
+        icon: const Icon(
+          Icons.arrow_back_ios_new_rounded,
+          size: 18,
+          color: Colors.white,
+        ),
         onPressed: () {
           Navigator.of(context).pop();
         },
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.share_outlined, size: 20, color: Color.fromARGB(255, 255, 255, 255)),
-          onPressed: () {},
-        ),
-        const SizedBox(width: 4),
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        background: Container(
-          color: const Color.fromARGB(255, 0, 0, 0),
-          padding: const EdgeInsets.fromLTRB(20, 80, 20, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 28,
-                    height: 2,
-                    color: _accent,
-                  ),
-                  const SizedBox(width: 10),
-                  const Text(
-                    'MY',
-                    style: TextStyle(
-                      fontSize: 11,
-                      letterSpacing: 4,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'Wishlist',
-                style: TextStyle(
-                  fontSize: 34,
-                  fontFamily: 'Georgia',
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontWeight: FontWeight.w400,
-                  height: 1.1,
-                ),
-              ),
-            ],
-          ),
+      title: const Text(
+        'Wishlist',
+        style: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Georgia',
+          color: Colors.white,
+          fontWeight: FontWeight.w400,
         ),
       ),
+      centerTitle: true,
+      // actions: [
+      //   IconButton(
+      //     icon: const Icon(Icons.share_outlined, size: 20, color: Colors.white),
+      //     onPressed: () {},
+      //   ),
+      //   const SizedBox(width: 4),
+      // ],
     );
   }
 
@@ -244,26 +218,23 @@ class _WishlistScreenState extends State<WishlistScreen>
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            final item = _items[index];
-            final isRemoving = _removingIds.contains(item.id);
-            return AnimatedOpacity(
+        delegate: SliverChildBuilderDelegate((context, index) {
+          final item = _items[index];
+          final isRemoving = _removingIds.contains(item.id);
+          return AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: isRemoving ? 0.0 : 1.0,
+            child: AnimatedSlide(
               duration: const Duration(milliseconds: 300),
-              opacity: isRemoving ? 0.0 : 1.0,
-              child: AnimatedSlide(
-                duration: const Duration(milliseconds: 300),
-                offset: isRemoving ? const Offset(0.08, 0) : Offset.zero,
-                child: _WishlistCard(
-                  item: item,
-                  onRemove: () => _removeItem(item.id),
-                  onAddToCart: () => _addToCart(item),
-                ),
+              offset: isRemoving ? const Offset(0.08, 0) : Offset.zero,
+              child: _WishlistCard(
+                item: item,
+                onRemove: () => _removeItem(item.id),
+                onAddToCart: () => _addToCart(item),
               ),
-            );
-          },
-          childCount: _items.length,
-        ),
+            ),
+          );
+        }, childCount: _items.length),
       ),
     );
   }
@@ -300,17 +271,10 @@ class _WishlistScreenState extends State<WishlistScreen>
             const Text(
               'Tap the heart on any product\nto save it here.',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: _muted,
-                height: 1.6,
-              ),
+              style: TextStyle(fontSize: 14, color: _muted, height: 1.6),
             ),
             const SizedBox(height: 36),
-            _GoldButton(
-              label: 'Start Shopping',
-              onTap: () {},
-            ),
+            _GoldButton(label: 'Start Shopping', onTap: () {}),
           ],
         ),
       ),
@@ -322,7 +286,6 @@ class _WishlistScreenState extends State<WishlistScreen>
   }
 }
 
-// ── Wishlist Card ─────────────────────────────────────────────────────────────
 
 class _WishlistCard extends StatefulWidget {
   final WishlistItem item;
@@ -382,9 +345,9 @@ class _WishlistCardState extends State<_WishlistCard>
   bool get _hasDiscount => widget.item.originalPrice != null;
   int get _discountPercent => _hasDiscount
       ? (((widget.item.originalPrice! - widget.item.price) /
-                  widget.item.originalPrice!) *
-              100)
-          .round()
+                    widget.item.originalPrice!) *
+                100)
+            .round()
       : 0;
 
   @override
@@ -403,12 +366,7 @@ class _WishlistCardState extends State<_WishlistCard>
           ),
         ],
       ),
-      child: Column(
-        children: [
-          _buildCardTop(),
-          _buildCardBottom(),
-        ],
-      ),
+      child: Column(children: [_buildCardTop(), _buildCardBottom()]),
     );
   }
 
@@ -432,7 +390,10 @@ class _WishlistCardState extends State<_WishlistCard>
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>SingleDetailScreen()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SingleDetailScreen()),
+            );
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8),
@@ -583,7 +544,6 @@ class _WishlistCardState extends State<_WishlistCard>
   }
 }
 
-// ── Gold Button ───────────────────────────────────────────────────────────────
 
 class _GoldButton extends StatefulWidget {
   final String label;
@@ -615,15 +575,12 @@ class _GoldButtonState extends State<_GoldButton> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 120),
         width: double.infinity,
-        padding: EdgeInsets.symmetric(
-          vertical: widget.isFlat ? 14 : 16,
-        ),
+        padding: EdgeInsets.symmetric(vertical: widget.isFlat ? 14 : 16),
         decoration: BoxDecoration(
           color: _pressed
               ? const Color(0xFF8B6508)
               : (widget.isFlat ? Colors.transparent : const Color(0xFFB8860B)),
-          borderRadius:
-              widget.isFlat ? null : BorderRadius.circular(8),
+          borderRadius: widget.isFlat ? null : BorderRadius.circular(8),
           gradient: widget.isFlat
               ? null
               : LinearGradient(
@@ -640,9 +597,7 @@ class _GoldButtonState extends State<_GoldButton> {
             Icon(
               Icons.shopping_bag_outlined,
               size: 16,
-              color: widget.isFlat
-                  ? const Color(0xFFB8860B)
-                  : Colors.white,
+              color: widget.isFlat ? const Color(0xFFB8860B) : Colors.white,
             ),
             const SizedBox(width: 8),
             Text(
@@ -651,9 +606,7 @@ class _GoldButtonState extends State<_GoldButton> {
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 1.2,
-                color: widget.isFlat
-                    ? const Color(0xFFB8860B)
-                    : Colors.white,
+                color: widget.isFlat ? const Color(0xFFB8860B) : Colors.white,
               ),
             ),
           ],

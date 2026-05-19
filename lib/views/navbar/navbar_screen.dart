@@ -2,11 +2,9 @@ import 'package:brublaapp/views/exlusive/exclusive_module.dart';
 import 'package:brublaapp/views/history/history_screen.dart';
 import 'package:brublaapp/views/history/tailor_history_screen.dart';
 import 'package:brublaapp/views/home/home_screen.dart';
-// import 'package:brublaapp/views/home/tailer_screen.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
-// ─── Provider ────────────────────────────────────────────────────────────────
 
 class BottomNavbarProvider extends ChangeNotifier {
   int _currentIndex = 0;
@@ -17,7 +15,6 @@ class BottomNavbarProvider extends ChangeNotifier {
   }
 }
 
-// ─── Navbar Screen ────────────────────────────────────────────────────────────
 
 class NavbarScreen extends StatefulWidget {
   const NavbarScreen({super.key});
@@ -69,7 +66,6 @@ class _CurvedWithBumpShape extends CustomPainter {
       ..color = bgColor
       ..style = PaintingStyle.fill;
 
-    // Soft drop shadow
     final shadowPaint = Paint()
       ..color = Colors.black.withOpacity(0.10)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10);
@@ -80,22 +76,19 @@ class _CurvedWithBumpShape extends CustomPainter {
 
     final path = Path();
 
-    // Start from top-left
     path.moveTo(0, bumpHeight);
 
-    // Left flat section
     path.lineTo(cx - bumpRadius - 22, bumpHeight);
 
-    // Smooth curve UP into the bump (left side)
     path.cubicTo(cx - bumpRadius - 6, bumpHeight, cx - bumpRadius, 0, cx, 0);
 
     path.cubicTo(
       cx + bumpRadius,
       0,
       cx + bumpRadius + 6,
-      bumpHeight, // cp2
+      bumpHeight, 
       cx + bumpRadius + 22,
-      bumpHeight, // back to bar level
+      bumpHeight, 
     );
 
     path.lineTo(size.width, bumpHeight);
@@ -111,7 +104,6 @@ class _CurvedWithBumpShape extends CustomPainter {
   bool shouldRepaint(_CurvedWithBumpShape old) => old.bgColor != bgColor;
 }
 
-// ─── Bottom Nav Bar ───────────────────────────────────────────────────────────
 
 class BrublaBottomNavBar extends StatelessWidget {
   const BrublaBottomNavBar({
@@ -125,28 +117,34 @@ class BrublaBottomNavBar extends StatelessWidget {
 
   static const Color activeColor = Color(0xFFCCA882);
   static const Color inactiveColor = Color(0xFF9E9E9E);
-  static const double bumpHeight = 28.0;
+  static const double bumpHeight = 0.0; 
   static const double fabSize = 58.0;
   static const double barHeight = 68.0;
 
   @override
   Widget build(BuildContext context) {
     final bottom = MediaQuery.of(context).padding.bottom;
-    final totalHeight = barHeight + bumpHeight + bottom;
+    final totalHeight = barHeight + bottom;
 
     return SizedBox(
       height: totalHeight,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // ── Curved painted background ──
           Positioned.fill(
-            child: CustomPaint(
-              painter: _CurvedWithBumpShape(bgColor: Colors.white),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 10,
+                    offset: Offset(0, -2),
+                  ),
+                ],
+              ),
             ),
           ),
-
-          // ── Left + Right nav items (sit on the flat bar, not the bump) ──
           Positioned(
             left: 0,
             right: 0,
@@ -154,7 +152,6 @@ class BrublaBottomNavBar extends StatelessWidget {
             height: barHeight,
             child: Row(
               children: [
-                // Home
                 Expanded(
                   child: _NavItem(
                     icon: Icons.home_outlined,
@@ -163,7 +160,6 @@ class BrublaBottomNavBar extends StatelessWidget {
                     onTap: () => onTap(0),
                   ),
                 ),
-                // Stylist
                 Expanded(
                   child: _NavItem(
                     icon: Icons.search,
@@ -173,10 +169,8 @@ class BrublaBottomNavBar extends StatelessWidget {
                   ),
                 ),
 
-                // Center gap — space for the bump + FAB
                 const SizedBox(width: 120),
 
-                // Tailer
                 Expanded(
                   child: _NavItem(
                     icon: Icons.shopping_bag_outlined,
@@ -185,7 +179,6 @@ class BrublaBottomNavBar extends StatelessWidget {
                     onTap: () => onTap(3),
                   ),
                 ),
-                // Profile
                 Expanded(
                   child: _NavItem(
                     icon: Icons.more_vert,
@@ -198,9 +191,8 @@ class BrublaBottomNavBar extends StatelessWidget {
             ),
           ),
 
-          // ── Center FAB sitting inside the bump ──
           Positioned(
-            top: 0,
+            top: -fabSize / 2,
             left: 0,
             right: 0,
             child: Center(
@@ -213,7 +205,7 @@ class BrublaBottomNavBar extends StatelessWidget {
                       width: fabSize,
                       height: fabSize,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 0, 0, 0),
+                        color: Colors.black,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
@@ -249,7 +241,6 @@ class BrublaBottomNavBar extends StatelessWidget {
   }
 }
 
-// ─── Nav Item ─────────────────────────────────────────────────────────────────
 
 class _NavItem extends StatelessWidget {
   const _NavItem({

@@ -675,7 +675,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 decoration: BoxDecoration(
-                  color: Colors.orange,
+                  color: const Color.fromARGB(255, 186, 186, 186),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Text(
@@ -785,7 +785,7 @@ class _HomeScreenState extends State<ExclusiveModule> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RichText(
             text: const TextSpan(

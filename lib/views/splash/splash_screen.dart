@@ -1,4 +1,3 @@
-
 // ignore_for_file: unused_field
 
 import 'package:brublaapp/helper/shared_preference.dart';
@@ -73,7 +72,6 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    // Logo animations
     _logoFade = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _logoController,
@@ -93,48 +91,39 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // Text animations
-    _textFade = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _textController, curve: Curves.easeOut),
-    );
-    _textSlide = Tween<Offset>(
-      begin: const Offset(0, 0.5),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _textController, curve: Curves.easeOutCubic),
-    );
+    _textFade = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _textController, curve: Curves.easeOut));
+    _textSlide = Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero)
+        .animate(
+          CurvedAnimation(parent: _textController, curve: Curves.easeOutCubic),
+        );
 
-    // Subtitle animations
     _subtitleFade = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _subtitleController, curve: Curves.easeOut),
     );
     _subtitleLetterSpacing = Tween<double>(begin: 1.0, end: 6.0).animate(
-      CurvedAnimation(
-          parent: _subtitleController, curve: Curves.easeOutCubic),
+      CurvedAnimation(parent: _subtitleController, curve: Curves.easeOutCubic),
     );
 
-    // Shimmer
     _shimmerAnim = Tween<double>(begin: -1.0, end: 2.0).animate(
       CurvedAnimation(parent: _shimmerController, curve: Curves.easeInOut),
     );
 
-    // Particles
     _particleAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _particleController, curve: Curves.easeOut),
     );
 
-    // Background
     _bgColorAnim = ColorTween(
       begin: const Color(0xFFF0EBE3),
       end: const Color(0xFFE8E0D5),
-    ).animate(
-      CurvedAnimation(parent: _bgController, curve: Curves.easeInOut),
-    );
+    ).animate(CurvedAnimation(parent: _bgController, curve: Curves.easeInOut));
 
-    // Exit animations
-    _exitScale = Tween<double>(begin: 1.0, end: 1.15).animate(
-      CurvedAnimation(parent: _bgController, curve: Curves.easeIn),
-    );
+    _exitScale = Tween<double>(
+      begin: 1.0,
+      end: 1.15,
+    ).animate(CurvedAnimation(parent: _bgController, curve: Curves.easeIn));
     _exitFade = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _bgController,
@@ -193,7 +182,6 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 
-  // ── Role → Navbar screen mapping ─────────────────────────────────────────
   Widget _navbarForRole(String role) {
     switch (role) {
       case 'Tailor':
@@ -247,7 +235,6 @@ class _SplashScreenState extends State<SplashScreen>
           backgroundColor: Colors.black,
           body: Stack(
             children: [
-              // Soft radial glow background
               Positioned.fill(
                 child: Opacity(
                   opacity: _logoFade.value * 0.4,
@@ -266,10 +253,8 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
 
-              // Floating particles
               ..._buildParticles(),
 
-              // Main content
               Center(
                 child: Opacity(
                   opacity: _isExiting ? _exitFade.value : 1.0,
@@ -278,11 +263,9 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Logo with glow ring
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            // Glow ring
                             Opacity(
                               opacity: _logoFade.value * 0.35,
                               child: Container(
@@ -292,8 +275,9 @@ class _SplashScreenState extends State<SplashScreen>
                                   shape: BoxShape.circle,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFFB8A99A)
-                                          .withOpacity(0.6),
+                                      color: const Color(
+                                        0xFFB8A99A,
+                                      ).withOpacity(0.6),
                                       blurRadius: 50,
                                       spreadRadius: 10,
                                     ),
@@ -301,12 +285,10 @@ class _SplashScreenState extends State<SplashScreen>
                                 ),
                               ),
                             ),
-                            // Logo
                             Opacity(
                               opacity: _logoFade.value,
                               child: Transform.scale(
-                                scale:
-                                    _logoScale.value * _logoBounce.value,
+                                scale: _logoScale.value * _logoBounce.value,
                                 child: Image.asset(
                                   'assets/logo.png',
                                   width: 170,
@@ -320,7 +302,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                         const SizedBox(height: 22),
 
-                        // Brand name with shimmer
                         SlideTransition(
                           position: _textSlide,
                           child: Opacity(
@@ -339,7 +320,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                         const SizedBox(height: 10),
 
-                        // Subtitle with expanding letter spacing
                         Opacity(
                           opacity: _subtitleFade.value,
                           child: Text(
@@ -348,15 +328,13 @@ class _SplashScreenState extends State<SplashScreen>
                               fontSize: 11,
                               fontWeight: FontWeight.w500,
                               color: const Color(0xFF8B7B6B),
-                              letterSpacing:
-                                  _subtitleLetterSpacing.value,
+                              letterSpacing: _subtitleLetterSpacing.value,
                             ),
                           ),
                         ),
 
                         const SizedBox(height: 40),
 
-                        // Loading dots
                         Opacity(
                           opacity: _subtitleFade.value,
                           child: _buildLoadingDots(),
@@ -400,12 +378,12 @@ class _SplashScreenState extends State<SplashScreen>
           animation: _particleController,
           builder: (context, _) {
             final delay = i * 0.25;
-            final t = ((_particleController.value - delay) % 1.0)
-                .clamp(0.0, 1.0);
-            final scale =
-                0.6 + 0.6 * (t < 0.5 ? t * 2 : (1.0 - t) * 2);
-            final opacity =
-                0.3 + 0.7 * (t < 0.5 ? t * 2 : (1.0 - t) * 2);
+            final t = ((_particleController.value - delay) % 1.0).clamp(
+              0.0,
+              1.0,
+            );
+            final scale = 0.6 + 0.6 * (t < 0.5 ? t * 2 : (1.0 - t) * 2);
+            final opacity = 0.3 + 0.7 * (t < 0.5 ? t * 2 : (1.0 - t) * 2);
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 4),
               child: Opacity(
@@ -431,20 +409,13 @@ class _SplashScreenState extends State<SplashScreen>
 
   List<Widget> _buildParticles() {
     final particles = [
-      _ParticleData(
-          left: 0.1, top: 0.15, size: 6, delay: 0.0, opacity: 0.4),
-      _ParticleData(
-          left: 0.85, top: 0.2, size: 8, delay: 0.1, opacity: 0.3),
-      _ParticleData(
-          left: 0.2, top: 0.75, size: 5, delay: 0.2, opacity: 0.35),
-      _ParticleData(
-          left: 0.78, top: 0.7, size: 7, delay: 0.15, opacity: 0.3),
-      _ParticleData(
-          left: 0.5, top: 0.1, size: 4, delay: 0.3, opacity: 0.25),
-      _ParticleData(
-          left: 0.05, top: 0.5, size: 5, delay: 0.05, opacity: 0.2),
-      _ParticleData(
-          left: 0.92, top: 0.45, size: 6, delay: 0.25, opacity: 0.25),
+      _ParticleData(left: 0.1, top: 0.15, size: 6, delay: 0.0, opacity: 0.4),
+      _ParticleData(left: 0.85, top: 0.2, size: 8, delay: 0.1, opacity: 0.3),
+      _ParticleData(left: 0.2, top: 0.75, size: 5, delay: 0.2, opacity: 0.35),
+      _ParticleData(left: 0.78, top: 0.7, size: 7, delay: 0.15, opacity: 0.3),
+      _ParticleData(left: 0.5, top: 0.1, size: 4, delay: 0.3, opacity: 0.25),
+      _ParticleData(left: 0.05, top: 0.5, size: 5, delay: 0.05, opacity: 0.2),
+      _ParticleData(left: 0.92, top: 0.45, size: 6, delay: 0.25, opacity: 0.25),
     ];
 
     return particles.map((p) {
@@ -452,11 +423,9 @@ class _SplashScreenState extends State<SplashScreen>
         animation: _particleController,
         builder: (context, _) {
           final screen = MediaQuery.of(context).size;
-          final t =
-              ((_particleController.value - p.delay).clamp(0.0, 1.0));
+          final t = ((_particleController.value - p.delay).clamp(0.0, 1.0));
           final floatY = -12.0 * t;
-          final opacity =
-              p.opacity * _logoFade.value * (1.0 - t * 0.3);
+          final opacity = p.opacity * _logoFade.value * (1.0 - t * 0.3);
 
           return Positioned(
             left: p.left * screen.width,
