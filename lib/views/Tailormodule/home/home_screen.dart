@@ -1,10 +1,12 @@
-
 import 'package:brublaapp/views/Tailormodule/home/notification_screen.dart';
+import 'package:brublaapp/views/navbar/auth/profile_provider.dart';
 import 'package:brublaapp/views/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class TailorHomescreen  extends StatefulWidget {
+import 'package:provider/provider.dart';
+
+class TailorHomescreen extends StatefulWidget {
   const TailorHomescreen({super.key});
 
   @override
@@ -99,7 +101,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── App Bar ──────────────────────────────────────────────────────────────
 
   Widget _buildSliverAppBar() {
     return SliverAppBar(
@@ -136,34 +137,88 @@ class _HomeScreenState extends State<TailorHomescreen>
         IconButton(
           icon: const Icon(Icons.notifications_outlined, color: Colors.white),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Notifications()));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Notifications()),
+            );
           },
         ),
+
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 12),
+        //   child: GestureDetector(
+        //     onTap: () {
+        //       Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+        //     },
+        //     child: CircleAvatar(
+        //       radius: 17,
+        //       backgroundColor: Colors.grey.shade800,
+        //       child: ClipOval(
+        //         child: Image.network(
+        //           'https://i.pravatar.cc/64?img=51',
+        //           width: 34,
+        //           height: 34,
+        //           fit: BoxFit.cover,
+        //           errorBuilder: (_, __, ___) => const Text(
+        //             'T',
+        //             style: TextStyle(
+        //               color: Colors.white,
+        //               fontWeight: FontWeight.w800,
+        //               fontSize: 13,
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
         Padding(
           padding: const EdgeInsets.only(right: 12),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfileScreen()),
+              );
             },
-            child: CircleAvatar(
-              radius: 17,
-              backgroundColor: Colors.grey.shade800,
-              child: ClipOval(
-                child: Image.network(
-                  'https://i.pravatar.cc/64?img=51',
-                  width: 34,
-                  height: 34,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Text(
-                    'T',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 13,
-                    ),
+            child: Consumer<UserProfileProvider>(
+              builder: (context, profileProvider, _) {
+                final raw = profileProvider.user?.profileImage;
+                final imageUrl = (raw != null && raw.isNotEmpty)
+                    ? '${raw.startsWith('http') ? raw : 'http://31.97.228.17:4077/$raw'}?t=${DateTime.now().millisecondsSinceEpoch}'
+                    : null;
+
+                return CircleAvatar(
+                  radius: 17,
+                  backgroundColor: Colors.grey.shade800,
+                  child: ClipOval(
+                    child: imageUrl != null
+                        ? Image.network(
+                            imageUrl,
+                            width: 34,
+                            height: 34,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) => const Text(
+                              'T',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 13,
+                              ),
+                            ),
+                          )
+                        : const Text(
+                            'T',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13,
+                            ),
+                          ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ),
@@ -171,7 +226,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── Greeting ─────────────────────────────────────────────────────────────
 
   Widget _buildGreetingRow() {
     return Row(
@@ -229,7 +283,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── Stats ─────────────────────────────────────────────────────────────────
 
   Widget _buildOrderStatsRow() {
     return Row(
@@ -270,7 +323,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── Section Label ─────────────────────────────────────────────────────────
 
   Widget _buildSectionLabel(String text) {
     return Row(
@@ -290,7 +342,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── Graph ─────────────────────────────────────────────────────────────────
 
   Widget _buildGraph() {
     return Container(
@@ -338,7 +389,6 @@ class _HomeScreenState extends State<TailorHomescreen>
     );
   }
 
-  // ── Recent Orders ─────────────────────────────────────────────────────────
 
   Widget _buildRecentOrders() {
     final orders = [
@@ -387,7 +437,6 @@ class _HomeScreenState extends State<TailorHomescreen>
   }
 }
 
-// ─── Stat Card ─────────────────────────────────────────────────────────────────
 
 class _StatCard extends StatelessWidget {
   final String label;
@@ -507,7 +556,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-// ─── Bar Chart ─────────────────────────────────────────────────────────────────
 
 class _BarChart extends StatefulWidget {
   @override
@@ -597,7 +645,6 @@ class _BarChartState extends State<_BarChart>
   }
 }
 
-// ─── Order Tile ────────────────────────────────────────────────────────────────
 
 class _OrderTile extends StatelessWidget {
   final String name;
@@ -648,7 +695,6 @@ class _OrderTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Network avatar with fallback
           CircleAvatar(
             radius: 21,
             backgroundColor: Colors.grey.shade300,
@@ -729,52 +775,50 @@ class _OrderTile extends StatelessWidget {
   }
 }
 
-// ─── Bottom Nav Item ───────────────────────────────────────────────────────────
 
-class _NavItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool active;
+// class _NavItem extends StatelessWidget {
+//   final IconData icon;
+//   final String label;
+//   final bool active;
 
-  const _NavItem({
-    required this.icon,
-    required this.label,
-    required this.active,
-  });
+//   const _NavItem({
+//     required this.icon,
+//     required this.label,
+//     required this.active,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: active ? Colors.white : Colors.white38, size: 22),
-        const SizedBox(height: 3),
-        Text(
-          label,
-          style: TextStyle(
-            color: active ? Colors.white : Colors.white38,
-            fontSize: 10,
-            fontWeight: active ? FontWeight.w700 : FontWeight.w400,
-            letterSpacing: 0.4,
-          ),
-        ),
-        if (active) ...[
-          const SizedBox(height: 3),
-          Container(
-            width: 4,
-            height: 4,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-          ),
-        ],
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Icon(icon, color: active ? Colors.white : Colors.white38, size: 22),
+//         const SizedBox(height: 3),
+//         Text(
+//           label,
+//           style: TextStyle(
+//             color: active ? Colors.white : Colors.white38,
+//             fontSize: 10,
+//             fontWeight: active ? FontWeight.w700 : FontWeight.w400,
+//             letterSpacing: 0.4,
+//           ),
+//         ),
+//         if (active) ...[
+//           const SizedBox(height: 3),
+//           Container(
+//             width: 4,
+//             height: 4,
+//             decoration: const BoxDecoration(
+//               color: Colors.white,
+//               shape: BoxShape.circle,
+//             ),
+//           ),
+//         ],
+//       ],
+//     );
+//   }
+// }
 
-// ─── New Order Modal ───────────────────────────────────────────────────────────
 
 class _NewOrderModal extends StatelessWidget {
   const _NewOrderModal();
@@ -796,7 +840,6 @@ class _NewOrderModal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Handle
               Center(
                 child: Container(
                   width: 40,
@@ -809,7 +852,6 @@ class _NewOrderModal extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // NEW ORDER badge
               Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
@@ -842,7 +884,6 @@ class _NewOrderModal extends StatelessWidget {
               ),
               const SizedBox(height: 18),
 
-              // Shirt preview card
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -853,7 +894,6 @@ class _NewOrderModal extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Network shirt image
                     ClipRRect(
                       borderRadius: BorderRadius.circular(14),
                       child: Image.network(
@@ -981,7 +1021,6 @@ class _NewOrderModal extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Customer info row
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
@@ -991,7 +1030,6 @@ class _NewOrderModal extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    // Network profile image
                     CircleAvatar(
                       radius: 20,
                       backgroundColor: Colors.grey.shade300,
@@ -1097,7 +1135,6 @@ class _NewOrderModal extends StatelessWidget {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // Show Snackbar
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             backgroundColor: Colors.red,
@@ -1106,7 +1143,6 @@ class _NewOrderModal extends StatelessWidget {
                           ),
                         );
 
-                        // Optional: close the screen after a short delay
                         Future.delayed(const Duration(milliseconds: 500), () {
                           Navigator.of(context).pop();
                         });
@@ -1177,7 +1213,6 @@ class _NewOrderModal extends StatelessWidget {
                           ),
                         );
 
-                        // Optional: close the screen after showing snackbar
                         Future.delayed(const Duration(milliseconds: 500), () {
                           Navigator.of(context).pop();
                         });
@@ -1221,7 +1256,6 @@ class _NewOrderModal extends StatelessWidget {
   }
 }
 
-// ─── Spec Row ──────────────────────────────────────────────────────────────────
 
 class _SpecRow extends StatelessWidget {
   final IconData icon;

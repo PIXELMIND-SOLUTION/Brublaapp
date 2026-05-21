@@ -1099,14 +1099,18 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         break;
       case 'Designer':
         destination = ChangeNotifierProvider(
-          create: (_) => DesignerNavbarProvider(),
-          child: const TailorNavbarScreen(),
+              create: (_) => StylistNavbarProvider(),
+          child: const StylistNavbarScreen(),
+          // create: (_) => DesignerNavbarProvider(),
+          // child: const TailorNavbarScreen(),
         );
         break;
       case 'Stylist':
         destination = ChangeNotifierProvider(
-          create: (_) => StylistNavbarProvider(),
-          child: const StylistNavbarScreen(),
+             create: (_) => DesignerNavbarProvider(),
+          child: const TailorNavbarScreen(),
+          // create: (_) => StylistNavbarProvider(),
+          // child: const StylistNavbarScreen(),
         );
         break;
       case 'User':
@@ -1426,15 +1430,15 @@ Future<void> _handleRegister() async {
             ? _loadingButton('Requesting...')
             : _primaryButton('Request OTP', _handleRequestOtp),
         const SizedBox(height: 12),
-        Center(
-          child: TextButton(
-            onPressed: () => setState(() => _currentStep = AuthStep.register),
-            child: const Text(
-              "Don't have an account? Register here",
-              style: TextStyle(color: Color(0xFF555555), fontSize: 13, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ),
+        // Center(
+        //   child: TextButton(
+        //     onPressed: () => setState(() => _currentStep = AuthStep.register),
+        //     child: const Text(
+        //       "Don't have an account? Register here",
+        //       style: TextStyle(color: Color(0xFF555555), fontSize: 13, fontWeight: FontWeight.w500),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

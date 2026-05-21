@@ -1,3 +1,7 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:brublaapp/model/address_model.dart';
+import 'package:brublaapp/views/address/address_screen.dart';
 import 'package:brublaapp/views/cart/cart_screen.dart';
 import 'package:brublaapp/views/guide/size_guide_screen.dart';
 import 'package:brublaapp/views/home/exclusive_screen.dart';
@@ -16,25 +20,23 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
   int _selectedTab = 0;
   int _selectedImageIndex = 0;
 
-  // Replace these with your actual asset paths
   final List<String> _productImages = [
     'assets/orderimage.png',
     'assets/detailscreenimage.png',
     'assets/homecard.png',
   ];
 
+  AddressModel? _selectedAddress;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-            // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Hero Image Section ──
               _buildHeroSection(context),
 
               Padding(
@@ -76,13 +78,9 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Hero Section  (thumbnails at bottom-center)
-  // ─────────────────────────────────────────────
   Widget _buildHeroSection(BuildContext context) {
     return Stack(
       children: [
-        // ── Main large image ──
         Container(
           width: double.infinity,
           height: 300,
@@ -93,7 +91,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           ),
         ),
 
-        // ── Dark gradient at the bottom so thumbnails are readable ──
         Positioned(
           bottom: 0,
           left: 0,
@@ -110,7 +107,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           ),
         ),
 
-        // ── Back button ──
         Positioned(
           top: 12,
           left: 12,
@@ -139,7 +135,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           ),
         ),
 
-        // ── Thumbnail strip — bottom center ──
         Positioned(
           bottom: 12,
           left: 0,
@@ -183,7 +178,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
           ),
         ),
 
-        // ── Dot indicators ──
         Positioned(
           bottom: -2,
           left: 0,
@@ -211,9 +205,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Title + Price
-  // ─────────────────────────────────────────────
   Widget _buildTitlePrice() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -252,9 +243,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Size Selector
-  // ─────────────────────────────────────────────
   Widget _buildSizeSelector() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -323,9 +311,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Designer Section
-  // ─────────────────────────────────────────────
   Widget _buildDesignerSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -388,9 +373,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Free Delivery Banner
-  // ─────────────────────────────────────────────
   Widget _buildDeliveryBanner() {
     return GestureDetector(
       onTap: () {
@@ -447,15 +429,70 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Delivery Details
-  // ─────────────────────────────────────────────
+  // Widget _buildDeliveryDetails() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       const Text(
+  //         'Delivery  Details',
+  //         style: TextStyle(
+  //           fontSize: 14,
+  //           fontWeight: FontWeight.bold,
+  //           color: Colors.black87,
+  //         ),
+  //       ),
+  //       const SizedBox(height: 8),
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           const Icon(
+  //             Icons.location_on_outlined,
+  //             size: 16,
+  //             color: Color(0xFFB8860B),
+  //           ),
+  //           const SizedBox(width: 6),
+  //           Expanded(
+  //             child: Text(
+  //               'Hyderabad, Telangana, Kukatpally, Kphb colony, 500072. Delivery on 20 August',
+  //               style: TextStyle(
+  //                 fontSize: 12,
+  //                 color: Colors.grey.shade600,
+  //                 height: 1.4,
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //       const SizedBox(height: 8),
+  //       Row(
+  //         children: [
+  //           const Icon(Icons.add, size: 14, color: Color(0xFFB8860B)),
+  //           const SizedBox(width: 4),
+  //           const Text(
+  //             'ADD NEW ADDRESS',
+  //             style: TextStyle(
+  //               fontSize: 12,
+  //               fontWeight: FontWeight.w600,
+  //               color: Color(0xFFB8860B),
+  //             ),
+  //           ),
+  //           const Spacer(),
+  //           Text(
+  //             'View All >>',
+  //             style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
+
   Widget _buildDeliveryDetails() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Delivery  Details',
+          'Delivery Details',
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -474,7 +511,16 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
             const SizedBox(width: 6),
             Expanded(
               child: Text(
-                'Hyderabad, Telangana, Kukatpally, Kphb colony, 500072. Delivery on 20 August',
+                _selectedAddress != null
+                    ? [
+                        _selectedAddress!.address,
+                        if (_selectedAddress!.landmark != null &&
+                            _selectedAddress!.landmark!.isNotEmpty)
+                          _selectedAddress!.landmark!,
+                        _selectedAddress!.city,
+                        '${_selectedAddress!.state} ${_selectedAddress!.pincode}',
+                      ].join(', ')
+                    : 'No address selected. Tap below to add one.',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade600,
@@ -487,21 +533,54 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
         const SizedBox(height: 8),
         Row(
           children: [
-            const Icon(Icons.add, size: 14, color: Color(0xFFB8860B)),
-            const SizedBox(width: 4),
-            const Text(
-              'ADD NEW ADDRESS',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFFB8860B),
+            GestureDetector(
+              onTap: () async {
+                final result = await Navigator.push<AddressModel>(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const AddressScreen(selectionMode: true),
+                  ),
+                );
+                if (result != null) {
+                  setState(() => _selectedAddress = result);
+                }
+              },
+              child: const Row(
+                children: [
+                  Icon(Icons.add, size: 14, color: Color(0xFFB8860B)),
+                  SizedBox(width: 4),
+                  Text(
+                    'ADD NEW ADDRESS',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFB8860B),
+                    ),
+                  ),
+                ],
               ),
             ),
             const Spacer(),
-            Text(
-              'View All >>',
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-            ),
+            if (_selectedAddress != null)
+              GestureDetector(
+                onTap: () async {
+                  final result = await Navigator.push<AddressModel>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const AddressScreen(selectionMode: true),
+                    ),
+                  );
+                  if (result != null) {
+                    setState(() => _selectedAddress = result);
+                  }
+                },
+                child: Text(
+                  'Change >>',
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
+                ),
+              ),
           ],
         ),
       ],
@@ -547,9 +626,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Description Text
-  // ─────────────────────────────────────────────
   Widget _buildDescriptionText() {
     return Text(
       'Explore a wide range of high-quality products tailored to meet your everyday needs. Our e-commerce platform offers a seamless shopping experience with secure payments, fast delivery, and easy returns. Discover trending items, exclusive deals, and personalized recommendations—all in one place.',
@@ -559,9 +635,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Action Buttons
-  // ─────────────────────────────────────────────
   Widget _buildActionButtons() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -623,9 +696,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Section Header
-  // ─────────────────────────────────────────────
   Widget _buildSectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -649,9 +719,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Designer Products (2×2 Grid)
-  // ─────────────────────────────────────────────
   Widget _buildProductGrid() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -677,9 +744,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Related Products Row
-  // ─────────────────────────────────────────────
   Widget _buildRelatedProductsRow() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -697,9 +761,6 @@ class _SingleDetailScreenState extends State<SingleDetailScreen> {
     );
   }
 
-  // ─────────────────────────────────────────────
-  //  Reusable Product Card
-  // ─────────────────────────────────────────────
   Widget _productCard() {
     return Container(
       height: 180,
