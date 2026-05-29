@@ -71,7 +71,7 @@ class UserProfileService {
     print('📦 Response Body for Update profile: ${response.data}');
     print('🙍 Nameeeeeeeeeeeeeeeeeeeee: $name');
     print('✉️ Emmaaaaailllllllllllllll: $email');
-    print('📝 aabbbbouttttttttttttttt: $about');
+    print('📝 aabbbbouttttttttttttttt:  $about');
 
     final body = response.data is String
         ? jsonDecode(response.data as String) as Map<String, dynamic>

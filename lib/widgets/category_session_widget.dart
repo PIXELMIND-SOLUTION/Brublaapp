@@ -95,6 +95,7 @@
 // ignore_for_file: unused_element
 
 import 'package:brublaapp/provider/category/category_provider.dart';
+import 'package:brublaapp/widgets/subcategory_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:brublaapp/model/category_model.dart';
@@ -116,33 +117,6 @@ class _CategorySectionState extends State<CategorySection> {
     });
   }
 
-  // void _onCategoryTap(BuildContext context, CategoryModel category) {
-  //   final provider = context.read<CategoryProvider>();
-
-  //   if (_selectedCategoryId == category.id) {
-  //     setState(() => _selectedCategoryId = null);
-  //     provider.clearSubcategories();
-  //     return;
-  //   }
-
-  //   setState(() => _selectedCategoryId = category.id);
-  //   provider.fetchSubcategories(category.id);
-  // }
-
-  // void _onCategoryTap(BuildContext context, CategoryModel category) {
-  //   final provider = context.read<CategoryProvider>();
-
-  //   if (_selectedCategoryId == category.id) {
-  //     setState(() => _selectedCategoryId = null);
-  //     provider.clearSubcategories();
-  //     return;
-  //   }
-
-  //   setState(() => _selectedCategoryId = category.id);
-  //   // Use local data instead of network call
-  //   provider.selectCategoryById(category.id);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -150,7 +124,7 @@ class _CategorySectionState extends State<CategorySection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 15,),
+          SizedBox(height: 15),
           _sectionHeader(
             'Category',
             context,
@@ -268,44 +242,54 @@ class _CategorySectionState extends State<CategorySection> {
         itemBuilder: (context, index) {
           final sub = subs[index];
 
-          return Column(
-            children: [
-              Container(
-                width: 64,
-                height: 64,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.grey.shade200),
-                ),
-                child: _buildSubcategoryImage(sub),
-              ),
-              const SizedBox(height: 6),
-              SizedBox(
-                width: 64,
-                child: Text(
-                  sub.name,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubcategoryProductsScreen(
+                    subcategoryId: sub.id,
+                    subcategoryName: sub.name,
+                    subcategoryImage: sub.image,
                   ),
                 ),
-              ),
-            ],
+              );
+            },
+            child: Column(
+              children: [
+                Container(
+                  width: 64,
+                  height: 64,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey.shade200),
+                  ),
+                  child: _buildSubcategoryImage(sub),
+                ),
+                const SizedBox(height: 6),
+                SizedBox(
+                  width: 64,
+                  child: Text(
+                    sub.name,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
     );
 
-
-
-
     ///// This SingleChildScrollView is the used code////////////
-
 
     // return SingleChildScrollView(
     //   scrollDirection: Axis.horizontal,
@@ -434,14 +418,27 @@ class _CategorySectionState extends State<CategorySection> {
                 children: subs.map((sub) {
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Chip(
-                      label: Text(
-                        sub.name,
-                        style: const TextStyle(fontSize: 12),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SubcategoryProductsScreen(
+                              subcategoryId: sub.id,
+                              subcategoryName: sub.name,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Chip(
+                        label: Text(
+                          sub.name,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                        backgroundColor: Colors.grey.shade100,
+                        side: BorderSide(color: Colors.grey.shade300),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                       ),
-                      backgroundColor: Colors.grey.shade100,
-                      side: BorderSide(color: Colors.grey.shade300),
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
                     ),
                   );
                 }).toList(),
