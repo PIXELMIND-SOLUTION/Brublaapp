@@ -168,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  RecommendedRow(items: _recommended),
+                  // RecommendedRow(items: _recommended),
+
+                  const RecommendedRow(),
                   const BrublaverseSection(),
                   const UpcomingDropSection(),
                   MostSalesSection(items: _mostSales),

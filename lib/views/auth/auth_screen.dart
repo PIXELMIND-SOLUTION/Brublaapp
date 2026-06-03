@@ -973,19 +973,7 @@
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
 ////////////////////////////////////// New code for logic changed///////////////////
-
 
 import 'package:brublaapp/provider/dessigner/designer_provider.dart';
 import 'package:brublaapp/provider/navbar/navbar_provider.dart';
@@ -1015,7 +1003,8 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   final TextEditingController _otpController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _registerMobileController = TextEditingController();
+  final TextEditingController _registerMobileController =
+      TextEditingController();
   final TextEditingController _registerOtpController = TextEditingController();
   final TextEditingController _newUserOtpController = TextEditingController();
 
@@ -1045,7 +1034,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     );
 
     _sheetSlideAnimation = Tween<double>(begin: 80, end: 0).animate(
-      CurvedAnimation(parent: _sheetEntranceController, curve: Curves.easeOutCubic),
+      CurvedAnimation(
+        parent: _sheetEntranceController,
+        curve: Curves.easeOutCubic,
+      ),
     );
 
     _sheetFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -1099,7 +1091,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         break;
       case 'Designer':
         destination = ChangeNotifierProvider(
-              create: (_) => StylistNavbarProvider(),
+          create: (_) => StylistNavbarProvider(),
           child: const StylistNavbarScreen(),
           // create: (_) => DesignerNavbarProvider(),
           // child: const TailorNavbarScreen(),
@@ -1107,7 +1099,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         break;
       case 'Stylist':
         destination = ChangeNotifierProvider(
-             create: (_) => DesignerNavbarProvider(),
+          create: (_) => DesignerNavbarProvider(),
           child: const TailorNavbarScreen(),
           // create: (_) => StylistNavbarProvider(),
           // child: const StylistNavbarScreen(),
@@ -1185,56 +1177,57 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     setState(() => _currentStep = AuthStep.register);
   }
 
-Future<void> _handleRegister() async {
-  final name = _nameController.text.trim();
-  final mobile = _registerMobileController.text.trim();
-  final email = _emailController.text.trim();
-  final category = _selectedCategory;
-  final otp = _newUserOtpController.text.trim(); 
+  Future<void> _handleRegister() async {
+    final name = _nameController.text.trim();
+    final mobile = _registerMobileController.text.trim();
+    final email = _emailController.text.trim();
+    final category = _selectedCategory;
+    final otp = _newUserOtpController.text.trim();
 
-  if (name.isEmpty) {
-    _showSnack('Enter your name');
-    return;
+    if (name.isEmpty) {
+      _showSnack('Enter your name');
+      return;
+    }
+    if (mobile.isEmpty || mobile.length < 10) {
+      _showSnack('Enter a valid mobile number');
+      return;
+    }
+    if (email.isNotEmpty && !email.contains('@')) {
+      _showSnack('Enter a valid email address');
+      return;
+    }
+    if (category == null) {
+      _showSnack('Please select a category');
+      return;
+    }
+
+    final auth = context.read<AuthProvider>();
+
+    await auth.register(
+      name: name,
+      mobile: mobile,
+      email: email,
+      role: category,
+    );
+
+    if (!mounted) return;
+
+    if (auth.state == AuthState.error) {
+      _showSnack(auth.errorMessage ?? 'Registration failed');
+      return;
+    }
+
+    await auth.verifyRegisterOtp(otp);
+
+    if (!mounted) return;
+
+    if (auth.state == AuthState.authenticated) {
+      _navigateByCategory(category);
+    } else if (auth.state == AuthState.error) {
+      _showSnack(auth.errorMessage ?? 'OTP verification failed');
+    }
   }
-  if (mobile.isEmpty || mobile.length < 10) {
-    _showSnack('Enter a valid mobile number');
-    return;
-  }
-  if (email.isNotEmpty && !email.contains('@')) {
-    _showSnack('Enter a valid email address');
-    return;
-  }
-  if (category == null) {
-    _showSnack('Please select a category');
-    return;
-  }
 
-  final auth = context.read<AuthProvider>();
-
-  await auth.register(
-    name: name,
-    mobile: mobile,
-    email: email,
-    role: category,
-  );
-
-  if (!mounted) return;
-
-  if (auth.state == AuthState.error) {
-    _showSnack(auth.errorMessage ?? 'Registration failed');
-    return;
-  }
-
-  await auth.verifyRegisterOtp(otp);
-
-  if (!mounted) return;
-
-  if (auth.state == AuthState.authenticated) {
-    _navigateByCategory(category);
-  } else if (auth.state == AuthState.error) {
-    _showSnack(auth.errorMessage ?? 'OTP verification failed');
-  }
-}
   Future<void> _handleVerifyRegisterOtp() async {
     final otp = _registerOtpController.text.trim();
     if (otp.isEmpty || otp.length < 4) {
@@ -1282,7 +1275,11 @@ Future<void> _handleRegister() async {
     );
   }
 
-  Widget _primaryButton(String label, VoidCallback? onTap, {bool isBlack = true}) {
+  Widget _primaryButton(
+    String label,
+    VoidCallback? onTap, {
+    bool isBlack = true,
+  }) {
     return AnimatedBuilder(
       animation: _pulseController,
       builder: (context, child) => Transform.scale(
@@ -1294,15 +1291,20 @@ Future<void> _handleRegister() async {
         height: 52,
         child: ElevatedButton(
           onPressed: onTap,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-            elevation: 0,
-            shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          ).copyWith(
-            overlayColor: WidgetStateProperty.all(Colors.white.withOpacity(0.08)),
-          ),
+          style:
+              ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ).copyWith(
+                overlayColor: WidgetStateProperty.all(
+                  Colors.white.withOpacity(0.08),
+                ),
+              ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -1333,7 +1335,9 @@ Future<void> _handleRegister() async {
         onPressed: null,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black54,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1341,12 +1345,19 @@ Future<void> _handleRegister() async {
             const SizedBox(
               width: 18,
               height: 18,
-              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(width: 12),
             Text(
               label,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -1359,7 +1370,10 @@ Future<void> _handleRegister() async {
       width: 40,
       height: 4,
       margin: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(color: Colors.grey[300], borderRadius: BorderRadius.circular(2)),
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadius.circular(2),
+      ),
     ),
   );
 
@@ -1371,7 +1385,13 @@ Future<void> _handleRegister() async {
       decoration: BoxDecoration(
         color: _black,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.18), blurRadius: 12, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.18),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Icon(icon, color: const Color(0xFFC8A96E), size: 24),
     ),
@@ -1388,7 +1408,11 @@ Future<void> _handleRegister() async {
       ),
       child: const Text(
         'Resend OTP',
-        style: TextStyle(color: Color(0xFF555555), fontSize: 13, fontWeight: FontWeight.w500),
+        style: TextStyle(
+          color: Color(0xFF555555),
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     ),
   );
@@ -1404,7 +1428,11 @@ Future<void> _handleRegister() async {
         const Center(
           child: Text(
             'Happy Shopping',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1423,7 +1451,9 @@ Future<void> _handleRegister() async {
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10),
           ],
-          decoration: _inputDecoration('Mobile Number').copyWith(counterText: ''),
+          decoration: _inputDecoration(
+            'Mobile Number',
+          ).copyWith(counterText: ''),
         ),
         const SizedBox(height: 16),
         loading
@@ -1454,7 +1484,11 @@ Future<void> _handleRegister() async {
         const Center(
           child: Text(
             'Verify OTP',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1473,7 +1507,9 @@ Future<void> _handleRegister() async {
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10),
           ],
-          decoration: _inputDecoration('Mobile Number').copyWith(counterText: ''),
+          decoration: _inputDecoration(
+            'Mobile Number',
+          ).copyWith(counterText: ''),
         ),
         const SizedBox(height: 12),
         TextField(
@@ -1481,14 +1517,22 @@ Future<void> _handleRegister() async {
           keyboardType: TextInputType.number,
           maxLength: 4,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: 12),
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 12,
+          ),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(4),
           ],
           decoration: _inputDecoration('- - - -').copyWith(
             counterText: '',
-            hintStyle: const TextStyle(color: _hintGrey, fontSize: 22, letterSpacing: 12),
+            hintStyle: const TextStyle(
+              color: _hintGrey,
+              fontSize: 22,
+              letterSpacing: 12,
+            ),
           ),
         ),
         _resendRow(),
@@ -1503,7 +1547,10 @@ Future<void> _handleRegister() async {
               context.read<AuthProvider>().reset();
               setState(() => _currentStep = AuthStep.requestOtp);
             },
-            child: const Text('← Back', style: TextStyle(color: Color(0xFF888888), fontSize: 13)),
+            child: const Text(
+              '← Back',
+              style: TextStyle(color: Color(0xFF888888), fontSize: 13),
+            ),
           ),
         ),
       ],
@@ -1521,7 +1568,11 @@ Future<void> _handleRegister() async {
         const Center(
           child: Text(
             'Verify Mobile',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1538,14 +1589,22 @@ Future<void> _handleRegister() async {
           keyboardType: TextInputType.number,
           maxLength: 4,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, letterSpacing: 14),
+          style: const TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 14,
+          ),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(4),
           ],
           decoration: _inputDecoration('- - - -').copyWith(
             counterText: '',
-            hintStyle: const TextStyle(color: _hintGrey, fontSize: 28, letterSpacing: 14),
+            hintStyle: const TextStyle(
+              color: _hintGrey,
+              fontSize: 28,
+              letterSpacing: 14,
+            ),
           ),
         ),
         _resendRow(),
@@ -1560,7 +1619,10 @@ Future<void> _handleRegister() async {
               _newUserOtpController.clear();
               setState(() => _currentStep = AuthStep.requestOtp);
             },
-            child: const Text('← Back', style: TextStyle(color: Color(0xFF888888), fontSize: 13)),
+            child: const Text(
+              '← Back',
+              style: TextStyle(color: Color(0xFF888888), fontSize: 13),
+            ),
           ),
         ),
       ],
@@ -1579,14 +1641,25 @@ Future<void> _handleRegister() async {
             width: 44,
             height: 44,
             margin: const EdgeInsets.only(bottom: 14),
-            decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(12)),
-            child: const Icon(Icons.person_add_rounded, color: Colors.white, size: 22),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.person_add_rounded,
+              color: Colors.white,
+              size: 22,
+            ),
           ),
         ),
         const Center(
           child: Text(
             'Create Account',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1610,7 +1683,9 @@ Future<void> _handleRegister() async {
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(10),
           ],
-          decoration: _inputDecoration('Mobile Number').copyWith(counterText: ''),
+          decoration: _inputDecoration(
+            'Mobile Number',
+          ).copyWith(counterText: ''),
         ),
         const SizedBox(height: 12),
         TextField(
@@ -1621,9 +1696,15 @@ Future<void> _handleRegister() async {
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
           value: _selectedCategory,
-          hint: const Text('Category', style: TextStyle(color: _hintGrey, fontSize: 14)),
+          hint: const Text(
+            'Category',
+            style: TextStyle(color: _hintGrey, fontSize: 14),
+          ),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 14,
+            ),
             filled: true,
             fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
@@ -1637,7 +1718,12 @@ Future<void> _handleRegister() async {
           ),
           icon: const Icon(Icons.keyboard_arrow_down_rounded, color: _hintGrey),
           items: _categories
-              .map((c) => DropdownMenuItem(value: c, child: Text(c, style: const TextStyle(fontSize: 14))))
+              .map(
+                (c) => DropdownMenuItem(
+                  value: c,
+                  child: Text(c, style: const TextStyle(fontSize: 14)),
+                ),
+              )
               .toList(),
           onChanged: (val) => setState(() => _selectedCategory = val),
         ),
@@ -1673,7 +1759,11 @@ Future<void> _handleRegister() async {
         const Center(
           child: Text(
             'Verify Your Number',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A1A1A)),
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1A1A1A),
+            ),
           ),
         ),
         const SizedBox(height: 6),
@@ -1689,14 +1779,22 @@ Future<void> _handleRegister() async {
           keyboardType: TextInputType.number,
           maxLength: 4,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: 10),
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 10,
+          ),
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
             LengthLimitingTextInputFormatter(4),
           ],
           decoration: _inputDecoration('- - - -').copyWith(
             counterText: '',
-            hintStyle: const TextStyle(color: _hintGrey, fontSize: 22, letterSpacing: 10),
+            hintStyle: const TextStyle(
+              color: _hintGrey,
+              fontSize: 22,
+              letterSpacing: 10,
+            ),
           ),
         ),
         _resendRow(),
@@ -1712,12 +1810,19 @@ Future<void> _handleRegister() async {
             ),
             child: Row(
               children: [
-                const Icon(Icons.check_circle_outline_rounded, color: Color(0xFF16A34A), size: 16),
+                const Icon(
+                  Icons.check_circle_outline_rounded,
+                  color: Color(0xFF16A34A),
+                  size: 16,
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     auth.successMessage!,
-                    style: const TextStyle(color: Color(0xFF15803D), fontSize: 13),
+                    style: const TextStyle(
+                      color: Color(0xFF15803D),
+                      fontSize: 13,
+                    ),
                   ),
                 ),
               ],
@@ -1733,7 +1838,10 @@ Future<void> _handleRegister() async {
               context.read<AuthProvider>().reset();
               setState(() => _currentStep = AuthStep.register);
             },
-            child: const Text('← Edit Details', style: TextStyle(color: Color(0xFF888888), fontSize: 13)),
+            child: const Text(
+              '← Edit Details',
+              style: TextStyle(color: Color(0xFF888888), fontSize: 13),
+            ),
           ),
         ),
       ],
@@ -1753,10 +1861,10 @@ Future<void> _handleRegister() async {
       child: KeyedSubtree(
         key: ValueKey(_currentStep),
         child: switch (_currentStep) {
-          AuthStep.requestOtp     => _buildRequestOtpSheet(auth),
-          AuthStep.verifyOtp      => _buildVerifyOtpSheet(auth),
-          AuthStep.newUserOtp     => _buildNewUserOtpSheet(auth),  
-          AuthStep.register       => _buildRegisterSheet(auth),
+          AuthStep.requestOtp => _buildRequestOtpSheet(auth),
+          AuthStep.verifyOtp => _buildVerifyOtpSheet(auth),
+          AuthStep.newUserOtp => _buildNewUserOtpSheet(auth),
+          AuthStep.register => _buildRegisterSheet(auth),
           AuthStep.registerVerifyOtp => _buildRegisterVerifyOtpSheet(auth),
         },
       ),
@@ -1774,7 +1882,17 @@ Future<void> _handleRegister() async {
         builder: (context, auth, _) {
           return Stack(
             children: [
-              Positioned.fill(
+              // Positioned.fill(
+              //   child: Image.asset(
+              //     'assets/themeimage.png',
+              //     fit: BoxFit.contain,
+              //     alignment: Alignment.topCenter,
+              //   ),
+              // ),
+              Positioned(
+                top: 47,
+                left: 0,
+                right: 0,
                 child: Image.asset(
                   'assets/themeimage.png',
                   fit: BoxFit.contain,
@@ -1812,9 +1930,15 @@ Future<void> _handleRegister() async {
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(24),
+                      ),
                       boxShadow: [
-                        BoxShadow(color: Color(0x22000000), blurRadius: 28, offset: Offset(0, -6)),
+                        BoxShadow(
+                          color: Color(0x22000000),
+                          blurRadius: 28,
+                          offset: Offset(0, -6),
+                        ),
                       ],
                     ),
                     padding: const EdgeInsets.fromLTRB(24, 8, 24, 36),

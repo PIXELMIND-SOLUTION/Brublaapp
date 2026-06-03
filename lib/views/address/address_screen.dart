@@ -1,4 +1,3 @@
-
 // ignore_for_file: dangling_library_doc_comments, deprecated_member_use
 
 import 'package:brublaapp/provider/address/address_provider.dart';
@@ -236,7 +235,7 @@ class _AddressScreenState extends State<AddressScreen>
                                     surface: _surface,
                                     success: _success,
                                     isLoading: provider.isLoading,
-                                    selectionMode: widget.selectionMode, 
+                                    selectionMode: widget.selectionMode,
                                     onSelect: () =>
                                         Navigator.pop(context, address),
                                     onEdit: () => _openEditForm(address),
@@ -291,38 +290,70 @@ class _AddressScreenState extends State<AddressScreen>
     );
   }
 
+  // Widget _buildAppBar() {
+  //   return SliverAppBar(
+  //     backgroundColor: _bg,
+  //     surfaceTintColor: const Color.fromARGB(0, 255, 255, 255),
+  //     elevation: 0,
+  //     pinned: true,
+  //     expandedHeight: 100,
+  //     leading: Padding(
+  //       padding: const EdgeInsets.only(left: 8),
+  //       child: IconButton(
+  //         icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+  //         color: const Color.fromARGB(255, 255, 252, 250),
+  //         onPressed: () => Navigator.of(context).maybePop(),
+  //       ),
+  //     ),
+  //     flexibleSpace: FlexibleSpaceBar(
+  //       titlePadding: const EdgeInsets.only(left: 20, bottom: 16),
+  //       title: const Text(
+  //         'Delivery Address',
+  //         style: TextStyle(
+  //           fontFamily: 'Georgia',
+  //           color: Color.fromARGB(255, 255, 253, 251),
+  //           fontSize: 22,
+  //           fontWeight: FontWeight.bold,
+  //           letterSpacing: -0.5,
+  //         ),
+  //       ),
+  //       background: Container(color: const Color.fromARGB(255, 0, 0, 0)),
+  //     ),
+  //     bottom: PreferredSize(
+  //       preferredSize: const Size.fromHeight(1),
+  //       child: Container(height: 1, color: _border),
+  //     ),
+  //   );
+  // }
+
   Widget _buildAppBar() {
     return SliverAppBar(
-      backgroundColor: _bg,
-      surfaceTintColor: const Color.fromARGB(0, 255, 255, 255),
+      backgroundColor: Colors.black,
+      surfaceTintColor: Colors.black,
       elevation: 0,
-      pinned: true,
-      expandedHeight: 100,
       leading: Padding(
         padding: const EdgeInsets.only(left: 8),
         child: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          color: const Color.fromARGB(255, 255, 252, 250),
+          color: Colors.white,
           onPressed: () => Navigator.of(context).maybePop(),
         ),
       ),
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(left: 20, bottom: 16),
-        title: const Text(
-          'Delivery Address',
-          style: TextStyle(
-            fontFamily: 'Georgia',
-            color: Color.fromARGB(255, 255, 253, 251),
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            letterSpacing: -0.5,
-          ),
+
+      title: const Text(
+        'Delivery Address',
+        style: TextStyle(
+          fontFamily: 'Georgia',
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.3,
         ),
-        background: Container(color: const Color.fromARGB(255, 0, 0, 0)),
       ),
+      centerTitle: true,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
-        child: Container(height: 1, color: _border),
+        child: Container(height: 1, color: Colors.grey.shade800),
       ),
     );
   }
@@ -889,8 +920,37 @@ class _UseMyLocationButton extends StatelessWidget {
                     ),
             ),
             const SizedBox(width: 12),
+
+            // Expanded(
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text(
+            //         isLocating
+            //             ? 'Detecting location...'
+            //             : 'Use My Current Location',
+            //         style: TextStyle(
+            //           fontSize: 14,
+            //           fontWeight: FontWeight.w700,
+            //           color: isLocating ? muted : ink,
+            //         ),
+            //       ),
+            //       const SizedBox(height: 2),
+            //       Text(
+            //         isLocating
+            //             ? 'Fetching address details'
+            //             : 'Auto-fill address, city & PIN code',
+            //         style: TextStyle(
+            //           fontSize: 11.5,
+            //           color: accent.withOpacity(isLocating ? 0.5 : 0.8),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -901,16 +961,6 @@ class _UseMyLocationButton extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
                       color: isLocating ? muted : ink,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    isLocating
-                        ? 'Fetching address details'
-                        : 'Auto-fill address, city & PIN code',
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      color: accent.withOpacity(isLocating ? 0.5 : 0.8),
                     ),
                   ),
                 ],

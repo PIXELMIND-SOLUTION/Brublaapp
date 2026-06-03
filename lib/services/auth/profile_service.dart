@@ -17,7 +17,7 @@ class UserProfileService {
   static Options _authOptions(String token) => Options(
     headers: {ApiConstants.authorization: '${ApiConstants.bearer} $token'},
   );
-
+      
   static Future<UserProfileModel?> fetchUser({
     required String userId,
     required String token,

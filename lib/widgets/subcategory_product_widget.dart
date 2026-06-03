@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:brublaapp/views/details/single_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -203,13 +204,90 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
     }
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: const Color(0xFFF8F8F8),
+  //     body: CustomScrollView(
+  //       slivers: [
+  //         // _buildSliverAppBar(context),
+  //         if (_isLoading)
+  //           const SliverFillRemaining(
+  //             child: Center(child: CircularProgressIndicator()),
+  //           )
+  //         else if (_errorMessage != null)
+  //           SliverFillRemaining(child: _buildErrorState())
+  //         else if (_data != null && _data!.products.isEmpty)
+  //           const SliverFillRemaining(
+  //             child: Center(
+  //               child: Text(
+  //                 'No products found',
+  //                 style: TextStyle(color: Colors.grey, fontSize: 14),
+  //               ),
+  //             ),
+  //           )
+  //         else ...[
+  //           _buildProductCount(),
+  //           _isGridView ? _buildGridView() : _buildListView(),
+  //           const SliverPadding(padding: EdgeInsets.only(bottom: 24)),
+  //         ],
+  //       ],
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.5,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+            size: 18,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        centerTitle: true,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // if (_data?.categoryName.isNotEmpty ?? false)
+            //   Text(
+            //     _data!.categoryName,
+            //     style: TextStyle(
+            //       fontSize: 11,
+            //       color: Colors.grey.shade500,
+            //       fontWeight: FontWeight.w500,
+            //     ),
+            //   ),
+            Text(
+              _data?.subcategoryName ?? widget.subcategoryName,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -0.3,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
+              color: Colors.black,
+            ),
+            onPressed: () => setState(() => _isGridView = !_isGridView),
+          ),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
-          _buildSliverAppBar(context),
           if (_isLoading)
             const SliverFillRemaining(
               child: Center(child: CircularProgressIndicator()),
@@ -235,103 +313,103 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
     );
   }
 
-  Widget _buildSliverAppBar(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 160,
-      pinned: true,
-      backgroundColor: Colors.white,
-      elevation: 0,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.black,
-          size: 18,
-        ),
-        onPressed: () => Navigator.pop(context),
-      ),
-      actions: [
-        IconButton(
-          icon: Icon(
-            _isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
-            color: Colors.black,
-          ),
-          onPressed: () => setState(() => _isGridView = !_isGridView),
-        ),
-        // IconButton(
-        //   icon: const Icon(Icons.tune_rounded, color: Colors.black),
-        //   onPressed: () {},
-        // ),
-      ],
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(left: 56, bottom: 14),
-        title: Text(
-          _data?.subcategoryName ?? widget.subcategoryName,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            letterSpacing: -0.3,
-          ),
-        ),
-        background: _buildAppBarBackground(),
-      ),
-    );
-  }
+  // Widget _buildSliverAppBar(BuildContext context) {
+  //   return SliverAppBar(
+  //     expandedHeight: 160,
+  //     pinned: true,
+  //     backgroundColor: Colors.white,
+  //     elevation: 0,
+  //     leading: IconButton(
+  //       icon: const Icon(
+  //         Icons.arrow_back_ios_new,
+  //         color: Colors.black,
+  //         size: 18,
+  //       ),
+  //       onPressed: () => Navigator.pop(context),
+  //     ),
+  //     actions: [
+  //       IconButton(
+  //         icon: Icon(
+  //           _isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
+  //           color: Colors.black,
+  //         ),
+  //         onPressed: () => setState(() => _isGridView = !_isGridView),
+  //       ),
+  //       // IconButton(
+  //       //   icon: const Icon(Icons.tune_rounded, color: Colors.black),
+  //       //   onPressed: () {},
+  //       // ),
+  //     ],
+  //     flexibleSpace: FlexibleSpaceBar(
+  //       titlePadding: const EdgeInsets.only(left: 56, bottom: 14),
+  //       title: Text(
+  //         _data?.subcategoryName ?? widget.subcategoryName,
+  //         style: const TextStyle(
+  //           color: Colors.black,
+  //           fontSize: 16,
+  //           fontWeight: FontWeight.w700,
+  //           letterSpacing: -0.3,
+  //         ),
+  //       ),
+  //       background: _buildAppBarBackground(),
+  //     ),
+  //   );
+  // }
 
-  Widget _buildAppBarBackground() {
-    return Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Positioned(
-            right: -20,
-            top: -20,
-            child: Container(
-              width: 160,
-              height: 160,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey.shade100,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 56,
-            bottom: 42,
-            child: Row(
-              children: [
-                Text(
-                  _data?.categoryName ?? '',
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Colors.grey.shade500,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                if (_data?.categoryName.isNotEmpty ?? false)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Icon(
-                      Icons.chevron_right,
-                      size: 12,
-                      color: Colors.grey.shade400,
-                    ),
-                  ),
-                Text(
-                  _data?.subcategoryName ?? widget.subcategoryName,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildAppBarBackground() {
+  //   return Container(
+  //     color: Colors.white,
+  //     child: Stack(
+  //       children: [
+  //         Positioned(
+  //           right: -20,
+  //           top: -20,
+  //           child: Container(
+  //             width: 160,
+  //             height: 160,
+  //             decoration: BoxDecoration(
+  //               shape: BoxShape.circle,
+  //               color: Colors.grey.shade100,
+  //             ),
+  //           ),
+  //         ),
+  //         Positioned(
+  //           left: 56,
+  //           bottom: 42,
+  //           child: Row(
+  //             children: [
+  //               Text(
+  //                 _data?.categoryName ?? '',
+  //                 style: TextStyle(
+  //                   fontSize: 11,
+  //                   color: Colors.grey.shade500,
+  //                   fontWeight: FontWeight.w500,
+  //                 ),
+  //               ),
+  //               if (_data?.categoryName.isNotEmpty ?? false)
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(horizontal: 4),
+  //                   child: Icon(
+  //                     Icons.chevron_right,
+  //                     size: 12,
+  //                     color: Colors.grey.shade400,
+  //                   ),
+  //                 ),
+  //               Text(
+  //                 _data?.subcategoryName ?? widget.subcategoryName,
+  //                 style: const TextStyle(
+  //                   fontSize: 11,
+  //                   color: Colors.black54,
+  //                   fontWeight: FontWeight.w600,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildProductCount() {
     return SliverToBoxAdapter(
@@ -454,11 +532,12 @@ class _ProductGridCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-
-
-        /////////////// Navigate to product detail screen//////////
-
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SingleDetailScreen(productId: product.id),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -545,7 +624,12 @@ class _ProductListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: navigate to product detail
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SingleDetailScreen(productId: product.id),
+          ),
+        );
       },
       child: Container(
         height: 130,

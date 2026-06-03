@@ -2,7 +2,8 @@ import 'package:brublaapp/views/details/single_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
+  final String?product;
+  const DetailScreen({super.key,this.product});
 
   @override
   Widget build(BuildContext context) {
