@@ -269,7 +269,7 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
               _data?.subcategoryName ?? widget.subcategoryName,
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 20,
                 fontWeight: FontWeight.w700,
                 letterSpacing: -0.3,
               ),
@@ -426,27 +426,27 @@ class _SubcategoryProductsScreenState extends State<SubcategoryProductsScreen> {
                 color: Colors.black87,
               ),
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.sort_rounded,
-                    size: 16,
-                    color: Colors.black54,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    'Sort',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey.shade600,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Row(
+            //     children: [
+            //       const Icon(
+            //         Icons.sort_rounded,
+            //         size: 16,
+            //         color: Colors.black54,
+            //       ),
+            //       const SizedBox(width: 4),
+            //       Text(
+            //         'Sort',
+            //         style: TextStyle(
+            //           fontSize: 13,
+            //           color: Colors.grey.shade600,
+            //           fontWeight: FontWeight.w500,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),
